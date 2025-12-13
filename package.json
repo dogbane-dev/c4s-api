@@ -2,9 +2,9 @@
 	"name": "c4s-api",
 	"version": "0.1.0",
 	"description": "Unofficial api client, types, and open-api schema for Clips4Sale adult video web store",
-	"homepage": "https://github.com/kwerdna19/c4s-api#readme",
+	"homepage": "https://github.com/dogbane-dev/c4s-api#readme",
 	"bugs": {
-		"url": "https://github.com/kwerdna19/c4s-api/issues"
+		"url": "https://github.com/dogbane-dev/c4s-api/issues"
 	},
 	"license": "MIT",
 	"files": [
@@ -12,7 +12,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kwerdna19/c4s-api.git"
+		"url": "git+https://github.com/dogbane-dev/c4s-api.git"
 	},
 	"scripts": {
 		"build": "bunup",
