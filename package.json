@@ -1,6 +1,6 @@
 {
 	"name": "c4s-api",
-	"version": "0.2.5",
+	"version": "0.2.6",
 	"description": "Unofficial api client, types, and open-api schema for Clips4Sale adult video web store",
 	"homepage": "https://github.com/dogbane-dev/c4s-api#readme",
 	"bugs": {
