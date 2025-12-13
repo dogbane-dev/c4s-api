@@ -25,8 +25,8 @@
 		"test:coverage": "bun test --coverage",
 		"test:watch": "bun test --watch",
 		"type-check": "tsc --noEmit",
-		"generate:schema": "bun -e \"Bun.write('./public/schema.json',JSON.stringify((await import('./src/open-api/schema.ts')).schema,null,2))\"",
-		"generate:types": "openapi-typescript ./public/schema.json -o ./src/open-api/paths.generated.ts",
+		"generate:schema": "bun -e \"Bun.write('./docs/schema.json',JSON.stringify((await import('./src/open-api/schema.ts')).schema,null,2))\"",
+		"generate:types": "openapi-typescript ./docs/schema.json -o ./src/open-api/paths.generated.ts",
 		"generate": "bun run generate:schema && bun run generate:types"
 	},
 	"devDependencies": {
