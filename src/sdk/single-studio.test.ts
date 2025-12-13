@@ -19,9 +19,12 @@ describe('single studio', () => {
 		).toBeTrue()
 
 		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const studio = parseResult.data!
-		expect(studio).toBeDefined()
-		expect(studio).toMatchSnapshot()
+		const { followersCount, ...staticDetails } = parseResult.data!
+
+		expect(followersCount).toBeNumber()
+
+		expect(staticDetails).toBeDefined()
+		expect(staticDetails).toMatchSnapshot()
 	})
 
 	it('fetches without slug provided', async () => {
@@ -37,9 +40,12 @@ describe('single studio', () => {
 		).toBeTrue()
 
 		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const studio = parseResult.data!
-		expect(studio).toBeDefined()
-		expect(studio).toMatchSnapshot()
+		const { followersCount, ...staticDetails } = parseResult.data!
+
+		expect(followersCount).toBeNumber()
+
+		expect(staticDetails).toBeDefined()
+		expect(staticDetails).toMatchSnapshot()
 	})
 
 	it('throws error if studio is not found', () => {
