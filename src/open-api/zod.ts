@@ -70,19 +70,18 @@ const RecommendationStudioSchema = z.object({
 })
 type RecommendationStudio = z.infer<typeof RecommendationStudioSchema>
 
-const StudioCategorySchema = z.object({
+const CategoryInfoSchema = z.object({
 	id: z.number(),
 	name: z.string(),
 	translations: z.null(),
 	link: z.string(),
 	search_link: z.string(),
-	store_link: z.null(),
+	store_link: z.string().nullable(),
 	clean_name: z.string(),
 	total_clips: z.null(),
 	thumb: z.null(),
 	pill: z.null(),
 })
-type StudioCategory = z.infer<typeof StudioCategorySchema>
 
 const ClipStudioSchema = z.object({
 	id: z.number(),
@@ -243,7 +242,7 @@ export const SingleClipResponseSchema = z.object({
 	clip: ClipSchema,
 	followersCount: z.number(),
 	clipsCount: z.number(),
-	studioCategories: z.array(StudioCategorySchema),
+	studioCategories: z.array(CategoryInfoSchema),
 	nextLink: z.string(),
 	prevLink: z.string(),
 	meta: SingleClipMetaSchema,
@@ -335,7 +334,7 @@ export const StudioClipSchema = z.object({
 	duration: z.number(),
 	suggestedClipUrl: z.string(),
 	previewLink: z.string(),
-	previewUrl: z.union([z.null(), z.string()]),
+	previewUrl: z.string().nullable(),
 	srcSet: z.string(),
 	responsiveSrcset: z.array(SrcsetSchema),
 	customPreview: z.boolean(),
@@ -369,7 +368,7 @@ export const StudioClipSchema = z.object({
 	description_sanitized: z.string(),
 	translations: z.null(),
 	studio: StudioSchema,
-	gifPreviewUrl: z.union([z.null(), z.string()]),
+	gifPreviewUrl: z.string().nullable(),
 	discounted_price: z.null(),
 	onSale: z.null(),
 	isAudio: z.boolean(),
@@ -559,3 +558,252 @@ export const StudioClipSearchResponseSchema =
 export type StudioClipSearchResponse = z.infer<
 	typeof StudioClipSearchResponseSchema
 >
+
+// -----
+
+export const MetaDataSchema = z.object({
+	meta_title: z.null(),
+	meta_description: z.null(),
+	header_one: z.null(),
+	header_two: z.null(),
+	header_three: z.null(),
+})
+export type MetaData = z.infer<typeof MetaDataSchema>
+
+export const CategoryInfoMetaSchema = z.object({
+	title: z.string(),
+	keywords: z.string(),
+	description: z.string(),
+	author: z.string(),
+	robots: z.null(),
+	copyright: z.string(),
+	engine: z.string(),
+	revision: z.string(),
+	image: z.null(),
+	image_alt: z.null(),
+	location: z.null(),
+	og_description: z.null(),
+	og_url: z.null(),
+	twitter_site: z.null(),
+	twitter_card: z.null(),
+})
+export type CategoryInfoMeta = z.infer<typeof CategoryInfoMetaSchema>
+
+export const StoreSchema = z.object({
+	storeId: z.number(),
+	avatarSrc: z.string(),
+	avatarLink: z.string(),
+	storeName: z.string(),
+	storeLink: z.string(),
+	storeCategory: z.string(),
+	storeCategoryLink: z.string(),
+	storeFilteredByCategoryLink: z.string(),
+	latestClipPreview: z.string(),
+	latestClipPreviewLink: z.string(),
+	latestClipCategory: z.string(),
+	latestClipCategoryId: z.number(),
+	latestClipUpdate: z.string(),
+	totalClips: z.number(),
+})
+export type Store = z.infer<typeof StoreSchema>
+
+export const CategoryClipSchema = z.object({
+	clipId: z.number(),
+	producer: z.number(),
+	bannerLink: z.string(),
+	title: z.string(),
+	description: z.null(),
+	translations: z.null(),
+	categoryId: z.number(),
+	categoryName: z.string(),
+	categoryLink: z.string(),
+	duration: z.number(),
+	suggestedClipUrl: z.string(),
+	previewLink: z.string(),
+	srcSet: z.string(),
+	previewUrl: z.string(),
+	customPreview: z.boolean(),
+	customPreviewUrl: z.string(),
+	studioTitle: z.string(),
+	studioLink: z.string(),
+	price: z.number(),
+	discounted_price: z.null(),
+	queryId: z.string(),
+	isSuggestedWishlist: z.boolean(),
+	onSale: z.null(),
+})
+export type CategoryClip = z.infer<typeof CategoryClipSchema>
+
+export const RelatedCategorySchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	categoryLink: z.string(),
+	thumb: z.string(),
+	totalClips: z.number(),
+})
+export type RelatedCategory = z.infer<typeof RelatedCategorySchema>
+
+export const OutsideOrientationSchema = z.object({
+	stores: z.number(),
+	clips: z.number(),
+})
+export type OutsideOrientation = z.infer<typeof OutsideOrientationSchema>
+
+export const TrendingRetroClipSchema = z.object({
+	clipId: z.number(),
+	producer: z.number(),
+	bannerLink: z.string(),
+	title: z.string(),
+	description: z.null(),
+	translations: z.null(),
+	categoryId: z.number(),
+	categoryName: z.string(),
+	categoryLink: z.string(),
+	duration: z.number(),
+	suggestedClipUrl: z.string(),
+	previewLink: z.string(),
+	srcSet: z.string(),
+	previewUrl: z.string(),
+	customPreview: z.boolean(),
+	customPreviewUrl: z.string().nullable(),
+	studioTitle: z.string(),
+	studioLink: z.string(),
+	price: z.number(),
+	discounted_price: z.null(),
+	queryId: z.string(),
+	isSuggestedWishlist: z.boolean(),
+	onSale: z.null(),
+})
+export type TrendingRetroClip = z.infer<typeof TrendingRetroClipSchema>
+
+export const TopSchema = z.object({
+	content: z.string(),
+	font_size: z.string(),
+	font_color: z.string(),
+	is_html: z.boolean(),
+	category: CategoryInfoSchema,
+	meta_data: MetaDataSchema,
+})
+export type Top = z.infer<typeof TopSchema>
+
+export const TotalsSchema = z.object({
+	stores: z.number(),
+	clips: z.number(),
+	outside_orientation: OutsideOrientationSchema,
+})
+export type Totals = z.infer<typeof TotalsSchema>
+
+export const DescriptionSchema = z.object({
+	top: TopSchema,
+	bottom: z.null(),
+})
+export type Description = z.infer<typeof DescriptionSchema>
+
+export const CategoryInfoResponseSchema = z.object({
+	meta: CategoryInfoMetaSchema,
+	totals: TotalsSchema,
+	description: DescriptionSchema,
+	category: CategoryInfoSchema,
+	topStores: z.array(StoreSchema),
+	newStores: z.array(StoreSchema),
+	relatedCategories: z.array(RelatedCategorySchema),
+	recentlyAddedCategoryClips: z.array(CategoryClipSchema),
+	trendingRetroClips: z.array(TrendingRetroClipSchema),
+	recentlyAddedRelatedClips: z.array(CategoryClipSchema),
+	topClips: z.array(CategoryClipSchema),
+	id: z.string(),
+	canonical: CanonicalSchema,
+	selectedOrientations: z.array(z.number()),
+	isContentPreferenceLGBT: z.boolean(),
+	contentPreferencePills: z.array(z.string()),
+	categoryAvailablePreferencePills: z.array(z.number()),
+	isAgeVerificationRequired: z.boolean(),
+	hrefLang: CanonicalSchema,
+})
+export type CategoryInfoResponse = z.infer<typeof CategoryInfoResponseSchema>
+
+export const ThumbsSchema = z.object({
+	square_sm: z.string(),
+	square_md: z.string(),
+	rect_sm: z.string(),
+	rect_md: z.string(),
+	rect_lrg: z.string(),
+	rect_ex_lrg: z.string(),
+})
+export type Thumbs = z.infer<typeof ThumbsSchema>
+
+export const LastClipSchema = z.object({
+	id: z.number(),
+	added_at: z.string(),
+	category: CategorySchema,
+	thumbs: ThumbsSchema,
+})
+export type LastClip = z.infer<typeof LastClipSchema>
+
+export const SeeMoreExtraStoreSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	slug: z.string(),
+	avatar: z.string(),
+	avatar_thumbs: AvatarThumbsSchema,
+	banner: z.null(),
+	banner_thumbs: z.null(),
+	total_clips: z.number(),
+	last_clip: LastClipSchema,
+	most_recent_clip_id: z.null(),
+	link: z.string(),
+	category: CategoryInfoSchema,
+})
+export type SeeMoreExtraStore = z.infer<typeof SeeMoreExtraStoreSchema>
+
+export const SeeMoreExtraClipSchema = z.object({
+	id: z.number(),
+	title: z.string(),
+	slug: z.string(),
+	link: z.string(),
+	related_categories: z.null(),
+	related_keywords: z.null(),
+	description: z.null(),
+	description_sanitized: z.null(),
+	translations: z.null(),
+	added_at: z.string(),
+	price: z.number(),
+	discounted_price: z.null(),
+	format: z.null(),
+	screen: z.null(),
+	resolution: z.null(),
+	length: z.number(),
+	suggested_clip_url: z.string(),
+	size: z.null(),
+	studio: StudioSchema,
+	category: CategoryInfoSchema,
+	thumb: z.string(),
+	thumbs: ThumbsSchema,
+	mediabook_url: z.null(),
+	mediabook_quality: z.null(),
+	video_preview_link: z.string(),
+	cdn_previewlg_link: z.string(),
+	cdn_preview_link: z.string(),
+	checkout_link: z.string(),
+	next_link: z.null(),
+	prev_link: z.null(),
+	show_click_for_preview: z.boolean(),
+	webm_preview_link: z.string().nullable(),
+	gif_preview_link: z.string().nullable(),
+	download: z.null(),
+	is_encoded: z.null(),
+	player: z.null(),
+	orientation: z.null(),
+	performers: z.union([z.array(PerformerSchema), z.null()]),
+	archived: z.boolean(),
+	on_sale: z.null(),
+})
+export type SeeMoreExtraClip = z.infer<typeof SeeMoreExtraClipSchema>
+
+export const SeeMoreResponseSchema = z.object({
+	seeMoreExtra: z.union([
+		z.array(SeeMoreExtraStoreSchema),
+		z.array(SeeMoreExtraClipSchema),
+	]),
+})
+export type SeeMoreResponse = z.infer<typeof SeeMoreResponseSchema>

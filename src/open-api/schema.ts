@@ -3,14 +3,12 @@
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import {
+	CategoryInfoResponseSchema,
+	SeeMoreResponseSchema,
 	SingleClipResponseSchema,
 	SingleStudioResponseSchema,
 	StudioClipSearchResponseSchema,
 } from './zod'
-
-// TODO add examples, better notes & descriptions to all schemas
-// TODO update README
-// TODO official way to add something about response parsing to swagger ?
 
 const clipId = z.number().int().min(1).max(999_999_999).meta({
 	description: 'A unique identifier for a clip',
@@ -68,7 +66,7 @@ const onlyClips = z.literal('true').optional().meta({
 	example: 'true',
 })
 
-const category = z.number().int().min(0).max(9_999).meta({
+const studioClipSearchCategory = z.number().int().min(0).max(9_999).meta({
 	description:
 		'The category ID to filter the search by. Setting the value to 0 will filter by all categories.',
 	example: 0,
@@ -76,11 +74,45 @@ const category = z.number().int().min(0).max(9_999).meta({
 
 const studioClipSearchTerm = z.string().meta({
 	description:
-		"Search term to filter clip results by. Must start with a '/' character to account for optional path parameter.",
-	example: '/ballgag',
+		"Search term to filter clip results by. If not provided url should omit '/search/' path param.",
+	example: 'ball gag',
 })
 
-// ?onlyClips=true&storeSimilarClips=false&_data=routes%2F($lang).studio.$id_.$studioSlug.$
+const category = z.number().int().min(0).max(9_999).meta({
+	description: 'C4S category ID',
+	example: '4 (Bondage)',
+})
+
+const SEXUAL_PREFERENCES = {
+	1: 'Straight',
+	2: 'Gay',
+	3: 'Lesbian',
+	4: 'Bisexual',
+	5: 'Trans',
+}
+
+const sexualPrefHelpText = Object.entries(SEXUAL_PREFERENCES)
+	.map(([key, value]) => `${value} (ID: ${key})`)
+	.join(', ')
+
+const sexualPreferenceOption = z.array(z.number().int().min(1).max(5)).meta({
+	description: `Sexual preference option(s) joined by underscores. ${sexualPrefHelpText}`,
+	example: '1_2_3_5',
+})
+
+const seeMorePage = z.number().int().min(2).max(3).meta({
+	description: 'See more category info page number.',
+})
+
+const seeMoreSection = z
+	.enum([
+		'top-stores-see-more',
+		'top-clips-see-more',
+		'recently-added-related-clips-see-more',
+	])
+	.meta({
+		description: 'Determines what data type is returned',
+	})
 
 const schema = createDocument({
 	openapi: '3.1.0',
@@ -189,7 +221,7 @@ const schema = createDocument({
 							page,
 							sort: studioClipSearchSort,
 							search: studioClipSearchTerm,
-							category,
+							category: studioClipSearchCategory,
 						}),
 						query: z.object({
 							_data: dataParam('routes/($lang).studio.$id_.$studioSlug.$'),
@@ -215,6 +247,56 @@ const schema = createDocument({
 					},
 				},
 			},
+		'/{language}/clips/category/{category}': {
+			get: {
+				summary: 'Get category details',
+				description:
+					'Get all category details by ID including top stores and clips, as well as new and trending clips',
+				requestParams: {
+					path: z.object({
+						language,
+						category,
+					}),
+					query: z.object({
+						pill: sexualPreferenceOption,
+						_data: dataParam('routes/($lang).clips.category.$id.($catName)'),
+					}),
+				},
+				responses: {
+					'200': {
+						description: '200 OK',
+						content: {
+							'application/json': { schema: CategoryInfoResponseSchema },
+						},
+					},
+				},
+			},
+		},
+		'/clips/category/seeMore': {
+			get: {
+				summary: 'Get additional category details',
+				description:
+					'Get additional category details for a category not returned by category details endpoint. Based on section parameter will return subsequent pages of top stores, top clips, or recently added related clips for this category.',
+				requestParams: {
+					query: z.object({
+						section: seeMoreSection,
+						lng: language.optional(),
+						id: category,
+						page: seeMorePage,
+						pill: sexualPreferenceOption,
+						_data: dataParam('routes/clips.category.seeMore'),
+					}),
+				},
+				responses: {
+					'200': {
+						description: '200 OK',
+						content: {
+							'application/json': { schema: SeeMoreResponseSchema },
+						},
+					},
+				},
+			},
+		},
 	},
 })
 

@@ -229,7 +229,7 @@ export interface paths {
 								translations: null
 								link: string
 								search_link: string
-								store_link: null
+								store_link: string | null
 								clean_name: string
 								total_clips: null
 								thumb: null
@@ -647,7 +647,7 @@ export interface paths {
 						| 'top_selling'
 						| 'featured'
 						| 'longest'
-					/** @description Search term to filter clip results by. Must start with a '/' character to account for optional path parameter. */
+					/** @description Search term to filter clip results by. If not provided url should omit '/search/' path param. */
 					search: string
 					/** @description The category ID to filter the search by. Setting the value to 0 will filter by all categories. */
 					category: number
@@ -904,6 +904,453 @@ export interface paths {
 						[name: string]: unknown
 					}
 					content?: never
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/{language}/clips/category/{category}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get category details
+		 * @description Get all category details by ID including top stores and clips, as well as new and trending clips
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5) */
+					pill: number[]
+					/** @description Data loader param. Must be set to "routes/($lang).clips.category.$id.($catName)" */
+					_data: 'routes/($lang).clips.category.$id.($catName)'
+				}
+				header?: never
+				path: {
+					/** @description The language of the clip details */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description C4S category ID */
+					category: number
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							meta: {
+								title: string
+								keywords: string
+								description: string
+								author: string
+								robots: null
+								copyright: string
+								engine: string
+								revision: string
+								image: null
+								image_alt: null
+								location: null
+								og_description: null
+								og_url: null
+								twitter_site: null
+								twitter_card: null
+							}
+							totals: {
+								stores: number
+								clips: number
+								outside_orientation: {
+									stores: number
+									clips: number
+								}
+							}
+							description: {
+								top: {
+									content: string
+									font_size: string
+									font_color: string
+									is_html: boolean
+									category: {
+										id: number
+										name: string
+										translations: null
+										link: string
+										search_link: string
+										store_link: string | null
+										clean_name: string
+										total_clips: null
+										thumb: null
+										pill: null
+									}
+									meta_data: {
+										meta_title: null
+										meta_description: null
+										header_one: null
+										header_two: null
+										header_three: null
+									}
+								}
+								bottom: null
+							}
+							category: {
+								id: number
+								name: string
+								translations: null
+								link: string
+								search_link: string
+								store_link: string | null
+								clean_name: string
+								total_clips: null
+								thumb: null
+								pill: null
+							}
+							topStores: {
+								storeId: number
+								avatarSrc: string
+								avatarLink: string
+								storeName: string
+								storeLink: string
+								storeCategory: string
+								storeCategoryLink: string
+								storeFilteredByCategoryLink: string
+								latestClipPreview: string
+								latestClipPreviewLink: string
+								latestClipCategory: string
+								latestClipCategoryId: number
+								latestClipUpdate: string
+								totalClips: number
+							}[]
+							newStores: {
+								storeId: number
+								avatarSrc: string
+								avatarLink: string
+								storeName: string
+								storeLink: string
+								storeCategory: string
+								storeCategoryLink: string
+								storeFilteredByCategoryLink: string
+								latestClipPreview: string
+								latestClipPreviewLink: string
+								latestClipCategory: string
+								latestClipCategoryId: number
+								latestClipUpdate: string
+								totalClips: number
+							}[]
+							relatedCategories: {
+								id: number
+								name: string
+								categoryLink: string
+								thumb: string
+								totalClips: number
+							}[]
+							recentlyAddedCategoryClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: null
+							}[]
+							trendingRetroClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: null
+							}[]
+							recentlyAddedRelatedClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: null
+							}[]
+							topClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: null
+							}[]
+							id: string
+							canonical: {
+								href: string
+							}
+							selectedOrientations: number[]
+							isContentPreferenceLGBT: boolean
+							contentPreferencePills: string[]
+							categoryAvailablePreferencePills: number[]
+							isAgeVerificationRequired: boolean
+							hrefLang: {
+								href: string
+							}
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/clips/category/seeMore': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get additional category details
+		 * @description Get additional category details for a category not returned by category details endpoint. Based on section parameter will return subsequent pages of top stores, top clips, or recently added related clips for this category.
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Determines what data type is returned */
+					section:
+						| 'top-stores-see-more'
+						| 'top-clips-see-more'
+						| 'recently-added-related-clips-see-more'
+					lng?: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description C4S category ID */
+					id: number
+					/** @description See more category info page number. */
+					page: number
+					/** @description Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5) */
+					pill: number[]
+					/** @description Data loader param. Must be set to "routes/clips.category.seeMore" */
+					_data: 'routes/clips.category.seeMore'
+				}
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							seeMoreExtra:
+								| {
+										id: number
+										name: string
+										slug: string
+										avatar: string
+										avatar_thumbs: {
+											avatar_sm: string
+											avatar_md: string
+										}
+										banner: null
+										banner_thumbs: null
+										total_clips: number
+										last_clip: {
+											id: number
+											added_at: string
+											category: {
+												id: number
+												name: string
+												link: string
+											}
+											thumbs: {
+												square_sm: string
+												square_md: string
+												rect_sm: string
+												rect_md: string
+												rect_lrg: string
+												rect_ex_lrg: string
+											}
+										}
+										most_recent_clip_id: null
+										link: string
+										category: {
+											id: number
+											name: string
+											translations: null
+											link: string
+											search_link: string
+											store_link: string | null
+											clean_name: string
+											total_clips: null
+											thumb: null
+											pill: null
+										}
+								  }[]
+								| {
+										id: number
+										title: string
+										slug: string
+										link: string
+										related_categories: null
+										related_keywords: null
+										description: null
+										description_sanitized: null
+										translations: null
+										added_at: string
+										price: number
+										discounted_price: null
+										format: null
+										screen: null
+										resolution: null
+										length: number
+										suggested_clip_url: string
+										size: null
+										studio: {
+											id: number
+											name: string
+											slug: string
+											avatar: null
+											avatar_thumbs: null
+											banner: null
+											banner_thumbs: null
+											total_clips: null
+											last_clip: null
+											most_recent_clip_id: null
+											link: string
+											category: null
+										}
+										category: {
+											id: number
+											name: string
+											translations: null
+											link: string
+											search_link: string
+											store_link: string | null
+											clean_name: string
+											total_clips: null
+											thumb: null
+											pill: null
+										}
+										thumb: string
+										thumbs: {
+											square_sm: string
+											square_md: string
+											rect_sm: string
+											rect_md: string
+											rect_lrg: string
+											rect_ex_lrg: string
+										}
+										mediabook_url: null
+										mediabook_quality: null
+										video_preview_link: string
+										cdn_previewlg_link: string
+										cdn_preview_link: string
+										checkout_link: string
+										next_link: null
+										prev_link: null
+										show_click_for_preview: boolean
+										webm_preview_link: string | null
+										gif_preview_link: string | null
+										download: null
+										is_encoded: null
+										player: null
+										orientation: null
+										performers:
+											| {
+													id: number
+													stage_name: string
+													total_clips: null
+													avatars: null
+													created_at: null
+											  }[]
+											| null
+										archived: boolean
+										on_sale: null
+								  }[]
+						}
+					}
 				}
 			}
 		}

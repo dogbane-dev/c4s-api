@@ -874,7 +874,14 @@
 														"type": "string"
 													},
 													"store_link": {
-														"type": "null"
+														"anyOf": [
+															{
+																"type": "string"
+															},
+															{
+																"type": "null"
+															}
+														]
 													},
 													"clean_name": {
 														"type": "string"
@@ -2394,12 +2401,12 @@
 						"in": "path",
 						"name": "search",
 						"schema": {
-							"description": "Search term to filter clip results by. Must start with a '/' character to account for optional path parameter.",
-							"example": "/ballgag",
+							"description": "Search term to filter clip results by. If not provided url should omit '/search/' path param.",
+							"example": "ball gag",
 							"type": "string"
 						},
 						"required": true,
-						"description": "Search term to filter clip results by. Must start with a '/' character to account for optional path parameter."
+						"description": "Search term to filter clip results by. If not provided url should omit '/search/' path param."
 					},
 					{
 						"in": "path",
@@ -3392,6 +3399,1646 @@
 							}
 						},
 						"content": {}
+					}
+				}
+			}
+		},
+		"/{language}/clips/category/{category}": {
+			"get": {
+				"summary": "Get category details",
+				"description": "Get all category details by ID including top stores and clips, as well as new and trending clips",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "language",
+						"schema": {
+							"description": "The language of the clip details",
+							"example": "en",
+							"type": "string",
+							"enum": ["en", "fr", "de", "pt", "es", "it"]
+						},
+						"required": true,
+						"description": "The language of the clip details"
+					},
+					{
+						"in": "path",
+						"name": "category",
+						"schema": {
+							"description": "C4S category ID",
+							"example": "4 (Bondage)",
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 9999
+						},
+						"required": true,
+						"description": "C4S category ID"
+					},
+					{
+						"in": "query",
+						"name": "pill",
+						"schema": {
+							"description": "Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5)",
+							"example": "1_2_3_5",
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"minimum": 1,
+								"maximum": 5
+							}
+						},
+						"required": true,
+						"description": "Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5)"
+					},
+					{
+						"in": "query",
+						"name": "_data",
+						"schema": {
+							"description": "Data loader param. Must be set to \"routes/($lang).clips.category.$id.($catName)\"",
+							"example": "routes/($lang).clips.category.$id.($catName)",
+							"type": "string",
+							"const": "routes/($lang).clips.category.$id.($catName)"
+						},
+						"required": true,
+						"description": "Data loader param. Must be set to \"routes/($lang).clips.category.$id.($catName)\""
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "200 OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"meta": {
+											"type": "object",
+											"properties": {
+												"title": {
+													"type": "string"
+												},
+												"keywords": {
+													"type": "string"
+												},
+												"description": {
+													"type": "string"
+												},
+												"author": {
+													"type": "string"
+												},
+												"robots": {
+													"type": "null"
+												},
+												"copyright": {
+													"type": "string"
+												},
+												"engine": {
+													"type": "string"
+												},
+												"revision": {
+													"type": "string"
+												},
+												"image": {
+													"type": "null"
+												},
+												"image_alt": {
+													"type": "null"
+												},
+												"location": {
+													"type": "null"
+												},
+												"og_description": {
+													"type": "null"
+												},
+												"og_url": {
+													"type": "null"
+												},
+												"twitter_site": {
+													"type": "null"
+												},
+												"twitter_card": {
+													"type": "null"
+												}
+											},
+											"required": [
+												"title",
+												"keywords",
+												"description",
+												"author",
+												"robots",
+												"copyright",
+												"engine",
+												"revision",
+												"image",
+												"image_alt",
+												"location",
+												"og_description",
+												"og_url",
+												"twitter_site",
+												"twitter_card"
+											],
+											"additionalProperties": false
+										},
+										"totals": {
+											"type": "object",
+											"properties": {
+												"stores": {
+													"type": "number"
+												},
+												"clips": {
+													"type": "number"
+												},
+												"outside_orientation": {
+													"type": "object",
+													"properties": {
+														"stores": {
+															"type": "number"
+														},
+														"clips": {
+															"type": "number"
+														}
+													},
+													"required": ["stores", "clips"],
+													"additionalProperties": false
+												}
+											},
+											"required": ["stores", "clips", "outside_orientation"],
+											"additionalProperties": false
+										},
+										"description": {
+											"type": "object",
+											"properties": {
+												"top": {
+													"type": "object",
+													"properties": {
+														"content": {
+															"type": "string"
+														},
+														"font_size": {
+															"type": "string"
+														},
+														"font_color": {
+															"type": "string"
+														},
+														"is_html": {
+															"type": "boolean"
+														},
+														"category": {
+															"type": "object",
+															"properties": {
+																"id": {
+																	"type": "number"
+																},
+																"name": {
+																	"type": "string"
+																},
+																"translations": {
+																	"type": "null"
+																},
+																"link": {
+																	"type": "string"
+																},
+																"search_link": {
+																	"type": "string"
+																},
+																"store_link": {
+																	"anyOf": [
+																		{
+																			"type": "string"
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
+																},
+																"clean_name": {
+																	"type": "string"
+																},
+																"total_clips": {
+																	"type": "null"
+																},
+																"thumb": {
+																	"type": "null"
+																},
+																"pill": {
+																	"type": "null"
+																}
+															},
+															"required": [
+																"id",
+																"name",
+																"translations",
+																"link",
+																"search_link",
+																"store_link",
+																"clean_name",
+																"total_clips",
+																"thumb",
+																"pill"
+															],
+															"additionalProperties": false
+														},
+														"meta_data": {
+															"type": "object",
+															"properties": {
+																"meta_title": {
+																	"type": "null"
+																},
+																"meta_description": {
+																	"type": "null"
+																},
+																"header_one": {
+																	"type": "null"
+																},
+																"header_two": {
+																	"type": "null"
+																},
+																"header_three": {
+																	"type": "null"
+																}
+															},
+															"required": [
+																"meta_title",
+																"meta_description",
+																"header_one",
+																"header_two",
+																"header_three"
+															],
+															"additionalProperties": false
+														}
+													},
+													"required": [
+														"content",
+														"font_size",
+														"font_color",
+														"is_html",
+														"category",
+														"meta_data"
+													],
+													"additionalProperties": false
+												},
+												"bottom": {
+													"type": "null"
+												}
+											},
+											"required": ["top", "bottom"],
+											"additionalProperties": false
+										},
+										"category": {
+											"type": "object",
+											"properties": {
+												"id": {
+													"type": "number"
+												},
+												"name": {
+													"type": "string"
+												},
+												"translations": {
+													"type": "null"
+												},
+												"link": {
+													"type": "string"
+												},
+												"search_link": {
+													"type": "string"
+												},
+												"store_link": {
+													"anyOf": [
+														{
+															"type": "string"
+														},
+														{
+															"type": "null"
+														}
+													]
+												},
+												"clean_name": {
+													"type": "string"
+												},
+												"total_clips": {
+													"type": "null"
+												},
+												"thumb": {
+													"type": "null"
+												},
+												"pill": {
+													"type": "null"
+												}
+											},
+											"required": [
+												"id",
+												"name",
+												"translations",
+												"link",
+												"search_link",
+												"store_link",
+												"clean_name",
+												"total_clips",
+												"thumb",
+												"pill"
+											],
+											"additionalProperties": false
+										},
+										"topStores": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"storeId": {
+														"type": "number"
+													},
+													"avatarSrc": {
+														"type": "string"
+													},
+													"avatarLink": {
+														"type": "string"
+													},
+													"storeName": {
+														"type": "string"
+													},
+													"storeLink": {
+														"type": "string"
+													},
+													"storeCategory": {
+														"type": "string"
+													},
+													"storeCategoryLink": {
+														"type": "string"
+													},
+													"storeFilteredByCategoryLink": {
+														"type": "string"
+													},
+													"latestClipPreview": {
+														"type": "string"
+													},
+													"latestClipPreviewLink": {
+														"type": "string"
+													},
+													"latestClipCategory": {
+														"type": "string"
+													},
+													"latestClipCategoryId": {
+														"type": "number"
+													},
+													"latestClipUpdate": {
+														"type": "string"
+													},
+													"totalClips": {
+														"type": "number"
+													}
+												},
+												"required": [
+													"storeId",
+													"avatarSrc",
+													"avatarLink",
+													"storeName",
+													"storeLink",
+													"storeCategory",
+													"storeCategoryLink",
+													"storeFilteredByCategoryLink",
+													"latestClipPreview",
+													"latestClipPreviewLink",
+													"latestClipCategory",
+													"latestClipCategoryId",
+													"latestClipUpdate",
+													"totalClips"
+												],
+												"additionalProperties": false
+											}
+										},
+										"newStores": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"storeId": {
+														"type": "number"
+													},
+													"avatarSrc": {
+														"type": "string"
+													},
+													"avatarLink": {
+														"type": "string"
+													},
+													"storeName": {
+														"type": "string"
+													},
+													"storeLink": {
+														"type": "string"
+													},
+													"storeCategory": {
+														"type": "string"
+													},
+													"storeCategoryLink": {
+														"type": "string"
+													},
+													"storeFilteredByCategoryLink": {
+														"type": "string"
+													},
+													"latestClipPreview": {
+														"type": "string"
+													},
+													"latestClipPreviewLink": {
+														"type": "string"
+													},
+													"latestClipCategory": {
+														"type": "string"
+													},
+													"latestClipCategoryId": {
+														"type": "number"
+													},
+													"latestClipUpdate": {
+														"type": "string"
+													},
+													"totalClips": {
+														"type": "number"
+													}
+												},
+												"required": [
+													"storeId",
+													"avatarSrc",
+													"avatarLink",
+													"storeName",
+													"storeLink",
+													"storeCategory",
+													"storeCategoryLink",
+													"storeFilteredByCategoryLink",
+													"latestClipPreview",
+													"latestClipPreviewLink",
+													"latestClipCategory",
+													"latestClipCategoryId",
+													"latestClipUpdate",
+													"totalClips"
+												],
+												"additionalProperties": false
+											}
+										},
+										"relatedCategories": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"id": {
+														"type": "number"
+													},
+													"name": {
+														"type": "string"
+													},
+													"categoryLink": {
+														"type": "string"
+													},
+													"thumb": {
+														"type": "string"
+													},
+													"totalClips": {
+														"type": "number"
+													}
+												},
+												"required": [
+													"id",
+													"name",
+													"categoryLink",
+													"thumb",
+													"totalClips"
+												],
+												"additionalProperties": false
+											}
+										},
+										"recentlyAddedCategoryClips": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"clipId": {
+														"type": "number"
+													},
+													"producer": {
+														"type": "number"
+													},
+													"bannerLink": {
+														"type": "string"
+													},
+													"title": {
+														"type": "string"
+													},
+													"description": {
+														"type": "null"
+													},
+													"translations": {
+														"type": "null"
+													},
+													"categoryId": {
+														"type": "number"
+													},
+													"categoryName": {
+														"type": "string"
+													},
+													"categoryLink": {
+														"type": "string"
+													},
+													"duration": {
+														"type": "number"
+													},
+													"suggestedClipUrl": {
+														"type": "string"
+													},
+													"previewLink": {
+														"type": "string"
+													},
+													"srcSet": {
+														"type": "string"
+													},
+													"previewUrl": {
+														"type": "string"
+													},
+													"customPreview": {
+														"type": "boolean"
+													},
+													"customPreviewUrl": {
+														"type": "string"
+													},
+													"studioTitle": {
+														"type": "string"
+													},
+													"studioLink": {
+														"type": "string"
+													},
+													"price": {
+														"type": "number"
+													},
+													"discounted_price": {
+														"type": "null"
+													},
+													"queryId": {
+														"type": "string"
+													},
+													"isSuggestedWishlist": {
+														"type": "boolean"
+													},
+													"onSale": {
+														"type": "null"
+													}
+												},
+												"required": [
+													"clipId",
+													"producer",
+													"bannerLink",
+													"title",
+													"description",
+													"translations",
+													"categoryId",
+													"categoryName",
+													"categoryLink",
+													"duration",
+													"suggestedClipUrl",
+													"previewLink",
+													"srcSet",
+													"previewUrl",
+													"customPreview",
+													"customPreviewUrl",
+													"studioTitle",
+													"studioLink",
+													"price",
+													"discounted_price",
+													"queryId",
+													"isSuggestedWishlist",
+													"onSale"
+												],
+												"additionalProperties": false
+											}
+										},
+										"trendingRetroClips": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"clipId": {
+														"type": "number"
+													},
+													"producer": {
+														"type": "number"
+													},
+													"bannerLink": {
+														"type": "string"
+													},
+													"title": {
+														"type": "string"
+													},
+													"description": {
+														"type": "null"
+													},
+													"translations": {
+														"type": "null"
+													},
+													"categoryId": {
+														"type": "number"
+													},
+													"categoryName": {
+														"type": "string"
+													},
+													"categoryLink": {
+														"type": "string"
+													},
+													"duration": {
+														"type": "number"
+													},
+													"suggestedClipUrl": {
+														"type": "string"
+													},
+													"previewLink": {
+														"type": "string"
+													},
+													"srcSet": {
+														"type": "string"
+													},
+													"previewUrl": {
+														"type": "string"
+													},
+													"customPreview": {
+														"type": "boolean"
+													},
+													"customPreviewUrl": {
+														"anyOf": [
+															{
+																"type": "string"
+															},
+															{
+																"type": "null"
+															}
+														]
+													},
+													"studioTitle": {
+														"type": "string"
+													},
+													"studioLink": {
+														"type": "string"
+													},
+													"price": {
+														"type": "number"
+													},
+													"discounted_price": {
+														"type": "null"
+													},
+													"queryId": {
+														"type": "string"
+													},
+													"isSuggestedWishlist": {
+														"type": "boolean"
+													},
+													"onSale": {
+														"type": "null"
+													}
+												},
+												"required": [
+													"clipId",
+													"producer",
+													"bannerLink",
+													"title",
+													"description",
+													"translations",
+													"categoryId",
+													"categoryName",
+													"categoryLink",
+													"duration",
+													"suggestedClipUrl",
+													"previewLink",
+													"srcSet",
+													"previewUrl",
+													"customPreview",
+													"customPreviewUrl",
+													"studioTitle",
+													"studioLink",
+													"price",
+													"discounted_price",
+													"queryId",
+													"isSuggestedWishlist",
+													"onSale"
+												],
+												"additionalProperties": false
+											}
+										},
+										"recentlyAddedRelatedClips": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"clipId": {
+														"type": "number"
+													},
+													"producer": {
+														"type": "number"
+													},
+													"bannerLink": {
+														"type": "string"
+													},
+													"title": {
+														"type": "string"
+													},
+													"description": {
+														"type": "null"
+													},
+													"translations": {
+														"type": "null"
+													},
+													"categoryId": {
+														"type": "number"
+													},
+													"categoryName": {
+														"type": "string"
+													},
+													"categoryLink": {
+														"type": "string"
+													},
+													"duration": {
+														"type": "number"
+													},
+													"suggestedClipUrl": {
+														"type": "string"
+													},
+													"previewLink": {
+														"type": "string"
+													},
+													"srcSet": {
+														"type": "string"
+													},
+													"previewUrl": {
+														"type": "string"
+													},
+													"customPreview": {
+														"type": "boolean"
+													},
+													"customPreviewUrl": {
+														"type": "string"
+													},
+													"studioTitle": {
+														"type": "string"
+													},
+													"studioLink": {
+														"type": "string"
+													},
+													"price": {
+														"type": "number"
+													},
+													"discounted_price": {
+														"type": "null"
+													},
+													"queryId": {
+														"type": "string"
+													},
+													"isSuggestedWishlist": {
+														"type": "boolean"
+													},
+													"onSale": {
+														"type": "null"
+													}
+												},
+												"required": [
+													"clipId",
+													"producer",
+													"bannerLink",
+													"title",
+													"description",
+													"translations",
+													"categoryId",
+													"categoryName",
+													"categoryLink",
+													"duration",
+													"suggestedClipUrl",
+													"previewLink",
+													"srcSet",
+													"previewUrl",
+													"customPreview",
+													"customPreviewUrl",
+													"studioTitle",
+													"studioLink",
+													"price",
+													"discounted_price",
+													"queryId",
+													"isSuggestedWishlist",
+													"onSale"
+												],
+												"additionalProperties": false
+											}
+										},
+										"topClips": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"clipId": {
+														"type": "number"
+													},
+													"producer": {
+														"type": "number"
+													},
+													"bannerLink": {
+														"type": "string"
+													},
+													"title": {
+														"type": "string"
+													},
+													"description": {
+														"type": "null"
+													},
+													"translations": {
+														"type": "null"
+													},
+													"categoryId": {
+														"type": "number"
+													},
+													"categoryName": {
+														"type": "string"
+													},
+													"categoryLink": {
+														"type": "string"
+													},
+													"duration": {
+														"type": "number"
+													},
+													"suggestedClipUrl": {
+														"type": "string"
+													},
+													"previewLink": {
+														"type": "string"
+													},
+													"srcSet": {
+														"type": "string"
+													},
+													"previewUrl": {
+														"type": "string"
+													},
+													"customPreview": {
+														"type": "boolean"
+													},
+													"customPreviewUrl": {
+														"type": "string"
+													},
+													"studioTitle": {
+														"type": "string"
+													},
+													"studioLink": {
+														"type": "string"
+													},
+													"price": {
+														"type": "number"
+													},
+													"discounted_price": {
+														"type": "null"
+													},
+													"queryId": {
+														"type": "string"
+													},
+													"isSuggestedWishlist": {
+														"type": "boolean"
+													},
+													"onSale": {
+														"type": "null"
+													}
+												},
+												"required": [
+													"clipId",
+													"producer",
+													"bannerLink",
+													"title",
+													"description",
+													"translations",
+													"categoryId",
+													"categoryName",
+													"categoryLink",
+													"duration",
+													"suggestedClipUrl",
+													"previewLink",
+													"srcSet",
+													"previewUrl",
+													"customPreview",
+													"customPreviewUrl",
+													"studioTitle",
+													"studioLink",
+													"price",
+													"discounted_price",
+													"queryId",
+													"isSuggestedWishlist",
+													"onSale"
+												],
+												"additionalProperties": false
+											}
+										},
+										"id": {
+											"type": "string"
+										},
+										"canonical": {
+											"type": "object",
+											"properties": {
+												"href": {
+													"type": "string"
+												}
+											},
+											"required": ["href"],
+											"additionalProperties": false
+										},
+										"selectedOrientations": {
+											"type": "array",
+											"items": {
+												"type": "number"
+											}
+										},
+										"isContentPreferenceLGBT": {
+											"type": "boolean"
+										},
+										"contentPreferencePills": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"categoryAvailablePreferencePills": {
+											"type": "array",
+											"items": {
+												"type": "number"
+											}
+										},
+										"isAgeVerificationRequired": {
+											"type": "boolean"
+										},
+										"hrefLang": {
+											"type": "object",
+											"properties": {
+												"href": {
+													"type": "string"
+												}
+											},
+											"required": ["href"],
+											"additionalProperties": false
+										}
+									},
+									"required": [
+										"meta",
+										"totals",
+										"description",
+										"category",
+										"topStores",
+										"newStores",
+										"relatedCategories",
+										"recentlyAddedCategoryClips",
+										"trendingRetroClips",
+										"recentlyAddedRelatedClips",
+										"topClips",
+										"id",
+										"canonical",
+										"selectedOrientations",
+										"isContentPreferenceLGBT",
+										"contentPreferencePills",
+										"categoryAvailablePreferencePills",
+										"isAgeVerificationRequired",
+										"hrefLang"
+									],
+									"additionalProperties": false
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/clips/category/seeMore": {
+			"get": {
+				"summary": "Get additional category details",
+				"description": "Get additional category details for a category not returned by category details endpoint. Based on section parameter will return subsequent pages of top stores, top clips, or recently added related clips for this category.",
+				"parameters": [
+					{
+						"in": "query",
+						"name": "section",
+						"schema": {
+							"description": "Determines what data type is returned",
+							"type": "string",
+							"enum": [
+								"top-stores-see-more",
+								"top-clips-see-more",
+								"recently-added-related-clips-see-more"
+							]
+						},
+						"required": true,
+						"description": "Determines what data type is returned"
+					},
+					{
+						"in": "query",
+						"name": "lng",
+						"schema": {
+							"description": "The language of the clip details",
+							"example": "en",
+							"type": "string",
+							"enum": ["en", "fr", "de", "pt", "es", "it"]
+						}
+					},
+					{
+						"in": "query",
+						"name": "id",
+						"schema": {
+							"description": "C4S category ID",
+							"example": "4 (Bondage)",
+							"type": "integer",
+							"minimum": 0,
+							"maximum": 9999
+						},
+						"required": true,
+						"description": "C4S category ID"
+					},
+					{
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"description": "See more category info page number.",
+							"type": "integer",
+							"minimum": 2,
+							"maximum": 3
+						},
+						"required": true,
+						"description": "See more category info page number."
+					},
+					{
+						"in": "query",
+						"name": "pill",
+						"schema": {
+							"description": "Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5)",
+							"example": "1_2_3_5",
+							"type": "array",
+							"items": {
+								"type": "integer",
+								"minimum": 1,
+								"maximum": 5
+							}
+						},
+						"required": true,
+						"description": "Sexual preference option(s) joined by underscores. Straight (ID: 1), Gay (ID: 2), Lesbian (ID: 3), Bisexual (ID: 4), Trans (ID: 5)"
+					},
+					{
+						"in": "query",
+						"name": "_data",
+						"schema": {
+							"description": "Data loader param. Must be set to \"routes/clips.category.seeMore\"",
+							"example": "routes/clips.category.seeMore",
+							"type": "string",
+							"const": "routes/clips.category.seeMore"
+						},
+						"required": true,
+						"description": "Data loader param. Must be set to \"routes/clips.category.seeMore\""
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "200 OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"seeMoreExtra": {
+											"anyOf": [
+												{
+													"type": "array",
+													"items": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "number"
+															},
+															"name": {
+																"type": "string"
+															},
+															"slug": {
+																"type": "string"
+															},
+															"avatar": {
+																"type": "string"
+															},
+															"avatar_thumbs": {
+																"type": "object",
+																"properties": {
+																	"avatar_sm": {
+																		"type": "string"
+																	},
+																	"avatar_md": {
+																		"type": "string"
+																	}
+																},
+																"required": ["avatar_sm", "avatar_md"],
+																"additionalProperties": false
+															},
+															"banner": {
+																"type": "null"
+															},
+															"banner_thumbs": {
+																"type": "null"
+															},
+															"total_clips": {
+																"type": "number"
+															},
+															"last_clip": {
+																"type": "object",
+																"properties": {
+																	"id": {
+																		"type": "number"
+																	},
+																	"added_at": {
+																		"type": "string"
+																	},
+																	"category": {
+																		"type": "object",
+																		"properties": {
+																			"id": {
+																				"type": "number"
+																			},
+																			"name": {
+																				"type": "string"
+																			},
+																			"link": {
+																				"type": "string"
+																			}
+																		},
+																		"required": ["id", "name", "link"],
+																		"additionalProperties": false
+																	},
+																	"thumbs": {
+																		"type": "object",
+																		"properties": {
+																			"square_sm": {
+																				"type": "string"
+																			},
+																			"square_md": {
+																				"type": "string"
+																			},
+																			"rect_sm": {
+																				"type": "string"
+																			},
+																			"rect_md": {
+																				"type": "string"
+																			},
+																			"rect_lrg": {
+																				"type": "string"
+																			},
+																			"rect_ex_lrg": {
+																				"type": "string"
+																			}
+																		},
+																		"required": [
+																			"square_sm",
+																			"square_md",
+																			"rect_sm",
+																			"rect_md",
+																			"rect_lrg",
+																			"rect_ex_lrg"
+																		],
+																		"additionalProperties": false
+																	}
+																},
+																"required": [
+																	"id",
+																	"added_at",
+																	"category",
+																	"thumbs"
+																],
+																"additionalProperties": false
+															},
+															"most_recent_clip_id": {
+																"type": "null"
+															},
+															"link": {
+																"type": "string"
+															},
+															"category": {
+																"type": "object",
+																"properties": {
+																	"id": {
+																		"type": "number"
+																	},
+																	"name": {
+																		"type": "string"
+																	},
+																	"translations": {
+																		"type": "null"
+																	},
+																	"link": {
+																		"type": "string"
+																	},
+																	"search_link": {
+																		"type": "string"
+																	},
+																	"store_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"clean_name": {
+																		"type": "string"
+																	},
+																	"total_clips": {
+																		"type": "null"
+																	},
+																	"thumb": {
+																		"type": "null"
+																	},
+																	"pill": {
+																		"type": "null"
+																	}
+																},
+																"required": [
+																	"id",
+																	"name",
+																	"translations",
+																	"link",
+																	"search_link",
+																	"store_link",
+																	"clean_name",
+																	"total_clips",
+																	"thumb",
+																	"pill"
+																],
+																"additionalProperties": false
+															}
+														},
+														"required": [
+															"id",
+															"name",
+															"slug",
+															"avatar",
+															"avatar_thumbs",
+															"banner",
+															"banner_thumbs",
+															"total_clips",
+															"last_clip",
+															"most_recent_clip_id",
+															"link",
+															"category"
+														],
+														"additionalProperties": false
+													}
+												},
+												{
+													"type": "array",
+													"items": {
+														"type": "object",
+														"properties": {
+															"id": {
+																"type": "number"
+															},
+															"title": {
+																"type": "string"
+															},
+															"slug": {
+																"type": "string"
+															},
+															"link": {
+																"type": "string"
+															},
+															"related_categories": {
+																"type": "null"
+															},
+															"related_keywords": {
+																"type": "null"
+															},
+															"description": {
+																"type": "null"
+															},
+															"description_sanitized": {
+																"type": "null"
+															},
+															"translations": {
+																"type": "null"
+															},
+															"added_at": {
+																"type": "string"
+															},
+															"price": {
+																"type": "number"
+															},
+															"discounted_price": {
+																"type": "null"
+															},
+															"format": {
+																"type": "null"
+															},
+															"screen": {
+																"type": "null"
+															},
+															"resolution": {
+																"type": "null"
+															},
+															"length": {
+																"type": "number"
+															},
+															"suggested_clip_url": {
+																"type": "string"
+															},
+															"size": {
+																"type": "null"
+															},
+															"studio": {
+																"type": "object",
+																"properties": {
+																	"id": {
+																		"type": "number"
+																	},
+																	"name": {
+																		"type": "string"
+																	},
+																	"slug": {
+																		"type": "string"
+																	},
+																	"avatar": {
+																		"type": "null"
+																	},
+																	"avatar_thumbs": {
+																		"type": "null"
+																	},
+																	"banner": {
+																		"type": "null"
+																	},
+																	"banner_thumbs": {
+																		"type": "null"
+																	},
+																	"total_clips": {
+																		"type": "null"
+																	},
+																	"last_clip": {
+																		"type": "null"
+																	},
+																	"most_recent_clip_id": {
+																		"type": "null"
+																	},
+																	"link": {
+																		"type": "string"
+																	},
+																	"category": {
+																		"type": "null"
+																	}
+																},
+																"required": [
+																	"id",
+																	"name",
+																	"slug",
+																	"avatar",
+																	"avatar_thumbs",
+																	"banner",
+																	"banner_thumbs",
+																	"total_clips",
+																	"last_clip",
+																	"most_recent_clip_id",
+																	"link",
+																	"category"
+																],
+																"additionalProperties": false
+															},
+															"category": {
+																"type": "object",
+																"properties": {
+																	"id": {
+																		"type": "number"
+																	},
+																	"name": {
+																		"type": "string"
+																	},
+																	"translations": {
+																		"type": "null"
+																	},
+																	"link": {
+																		"type": "string"
+																	},
+																	"search_link": {
+																		"type": "string"
+																	},
+																	"store_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"clean_name": {
+																		"type": "string"
+																	},
+																	"total_clips": {
+																		"type": "null"
+																	},
+																	"thumb": {
+																		"type": "null"
+																	},
+																	"pill": {
+																		"type": "null"
+																	}
+																},
+																"required": [
+																	"id",
+																	"name",
+																	"translations",
+																	"link",
+																	"search_link",
+																	"store_link",
+																	"clean_name",
+																	"total_clips",
+																	"thumb",
+																	"pill"
+																],
+																"additionalProperties": false
+															},
+															"thumb": {
+																"type": "string"
+															},
+															"thumbs": {
+																"type": "object",
+																"properties": {
+																	"square_sm": {
+																		"type": "string"
+																	},
+																	"square_md": {
+																		"type": "string"
+																	},
+																	"rect_sm": {
+																		"type": "string"
+																	},
+																	"rect_md": {
+																		"type": "string"
+																	},
+																	"rect_lrg": {
+																		"type": "string"
+																	},
+																	"rect_ex_lrg": {
+																		"type": "string"
+																	}
+																},
+																"required": [
+																	"square_sm",
+																	"square_md",
+																	"rect_sm",
+																	"rect_md",
+																	"rect_lrg",
+																	"rect_ex_lrg"
+																],
+																"additionalProperties": false
+															},
+															"mediabook_url": {
+																"type": "null"
+															},
+															"mediabook_quality": {
+																"type": "null"
+															},
+															"video_preview_link": {
+																"type": "string"
+															},
+															"cdn_previewlg_link": {
+																"type": "string"
+															},
+															"cdn_preview_link": {
+																"type": "string"
+															},
+															"checkout_link": {
+																"type": "string"
+															},
+															"next_link": {
+																"type": "null"
+															},
+															"prev_link": {
+																"type": "null"
+															},
+															"show_click_for_preview": {
+																"type": "boolean"
+															},
+															"webm_preview_link": {
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
+															},
+															"gif_preview_link": {
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
+															},
+															"download": {
+																"type": "null"
+															},
+															"is_encoded": {
+																"type": "null"
+															},
+															"player": {
+																"type": "null"
+															},
+															"orientation": {
+																"type": "null"
+															},
+															"performers": {
+																"anyOf": [
+																	{
+																		"type": "array",
+																		"items": {
+																			"type": "object",
+																			"properties": {
+																				"id": {
+																					"type": "number"
+																				},
+																				"stage_name": {
+																					"type": "string"
+																				},
+																				"total_clips": {
+																					"type": "null"
+																				},
+																				"avatars": {
+																					"type": "null"
+																				},
+																				"created_at": {
+																					"type": "null"
+																				}
+																			},
+																			"required": [
+																				"id",
+																				"stage_name",
+																				"total_clips",
+																				"avatars",
+																				"created_at"
+																			],
+																			"additionalProperties": false
+																		}
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
+															},
+															"archived": {
+																"type": "boolean"
+															},
+															"on_sale": {
+																"type": "null"
+															}
+														},
+														"required": [
+															"id",
+															"title",
+															"slug",
+															"link",
+															"related_categories",
+															"related_keywords",
+															"description",
+															"description_sanitized",
+															"translations",
+															"added_at",
+															"price",
+															"discounted_price",
+															"format",
+															"screen",
+															"resolution",
+															"length",
+															"suggested_clip_url",
+															"size",
+															"studio",
+															"category",
+															"thumb",
+															"thumbs",
+															"mediabook_url",
+															"mediabook_quality",
+															"video_preview_link",
+															"cdn_previewlg_link",
+															"cdn_preview_link",
+															"checkout_link",
+															"next_link",
+															"prev_link",
+															"show_click_for_preview",
+															"webm_preview_link",
+															"gif_preview_link",
+															"download",
+															"is_encoded",
+															"player",
+															"orientation",
+															"performers",
+															"archived",
+															"on_sale"
+														],
+														"additionalProperties": false
+													}
+												}
+											]
+										}
+									},
+									"required": ["seeMoreExtra"],
+									"additionalProperties": false
+								}
+							}
+						}
 					}
 				}
 			}
