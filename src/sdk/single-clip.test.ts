@@ -24,8 +24,12 @@ describe('single clip', () => {
 		const clip = parseResult.data!
 		expect(clip).toBeDefined()
 
-		const { recommendationsPromise, ...staticDetails } = clip
+		// reset dynamic data
+		clip.clip.studio.most_recent_clip_id = null
 
+		const { recommendationsPromise, followersCount, ...staticDetails } = clip
+
+		expect(followersCount).toBeNumber()
 		expect(recommendationsPromise.pills).toBeArray()
 		expect(recommendationsPromise.recommendations).toBeArray()
 
@@ -49,8 +53,12 @@ describe('single clip', () => {
 		const clip = parseResult.data!
 		expect(clip).toBeDefined()
 
-		const { recommendationsPromise, ...staticDetails } = clip
+		// reset dynamic data
+		clip.clip.studio.most_recent_clip_id = null
 
+		const { recommendationsPromise, followersCount, ...staticDetails } = clip
+
+		expect(followersCount).toBeNumber()
 		expect(recommendationsPromise.pills).toBeArray()
 		expect(recommendationsPromise.recommendations).toBeArray()
 
