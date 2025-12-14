@@ -1,16 +1,14 @@
-import { client } from '../client'
-
-const result = await client.GET('/{language}/studio/{studioId}/{studioSlug}', {
-	params: {
-		path: {
-			studioId: 220829,
-			studioSlug: 'something-here',
-			language: 'asdasdasd' as 'en',
-		},
-		query: {
-			_data: 'routes/($lang).studio.$id_.$studioSlug.$',
+const res = await fetch(
+	'https://www.clips4sale.com/en/studio/220829/milaamorabondage/Cat0-AllCategories/Page2/C4SSort-recommended/Limit24/?onlyClips=true&storeSimilarClips=false&_data=routes%2F($lang).studio.$id_.$studioSlug.$',
+	{
+		headers: {
+			Referer: 'https://www.clips4sale.com',
 		},
 	},
-})
+)
 
-await Bun.file('./debug.json').write(JSON.stringify(result.data, null, 2))
+const data = await res.json()
+console.log(data?.clips?.length)
+await Bun.file('./debug.json').write(JSON.stringify(data, null, 2))
+
+export {}

@@ -1,6 +1,6 @@
 // Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`single studio fetches with slug provided 1`] = `
+exports[`studio clips fetches with all options provided 1`] = `
 {
   "avatarSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/avatar/avatar_md_20685.jpg",
   "bannerSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_md_28779.jpg",
@@ -25,81 +25,80 @@ exports[`single studio fetches with slug provided 1`] = `
   "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
   "canBeFollowed": true,
   "canonical": {
-    "href": "http://www.clips4sale.com/en/studio/254031/tatti-roana-bondage",
+    "href": "http://www.clips4sale.com/en/studio/254031/tatti-roana-bondage/0/1/recommended/Limit24",
   },
   "categories": [
     {
       "id": 1039,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1039-ballgagged/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1039-ballgagged/Page1/recommended/Limit24",
       "name": "BALLGAGGED",
     },
     {
       "id": 14,
-      "link": "/studio/254031/tatti-roana-bondage/Cat14-blow-jobs/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat14-blow-jobs/Page1/recommended/Limit24",
       "name": "BLOW JOBS",
     },
     {
       "id": 4,
-      "link": "/studio/254031/tatti-roana-bondage/Cat4-bondage/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat4-bondage/Page1/recommended/Limit24",
       "name": "BONDAGE",
     },
     {
       "id": 1017,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1017-bondage-blowjobs/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1017-bondage-blowjobs/Page1/recommended/Limit24",
       "name": "BONDAGE BLOWJOBS",
     },
     {
       "id": 350,
-      "link": "/studio/254031/tatti-roana-bondage/Cat350-brat-girls/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat350-brat-girls/Page1/recommended/Limit24",
       "name": "BRAT GIRLS",
     },
     {
       "id": 1627,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1627-classic-bondage/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1627-classic-bondage/Page1/recommended/Limit24",
       "name": "CLASSIC BONDAGE",
     },
     {
       "id": 183,
-      "link": "/studio/254031/tatti-roana-bondage/Cat183-cuckolding/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat183-cuckolding/Page1/recommended/Limit24",
       "name": "CUCKOLDING",
     },
     {
       "id": 1,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1-foot-fetish/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1-foot-fetish/Page1/recommended/Limit24",
       "name": "FOOT FETISH",
     },
     {
       "id": 1719,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1719-gamer-girls/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1719-gamer-girls/Page1/recommended/Limit24",
       "name": "GAMER GIRLS",
     },
     {
       "id": 981,
-      "link": "/studio/254031/tatti-roana-bondage/Cat981-office-domination/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat981-office-domination/Page1/recommended/Limit24",
       "name": "OFFICE DOMINATION",
     },
     {
       "id": 486,
-      "link": "/studio/254031/tatti-roana-bondage/Cat486-struggling/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat486-struggling/Page1/recommended/Limit24",
       "name": "STRUGGLING",
     },
     {
       "id": 1322,
-      "link": "/studio/254031/tatti-roana-bondage/Cat1322-submissive-slave-training/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat1322-submissive-slave-training/Page1/recommended/Limit24",
       "name": "SUBMISSIVE / SLAVE TRAINING",
     },
     {
       "id": 88,
-      "link": "/studio/254031/tatti-roana-bondage/Cat88-superheroines/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat88-superheroines/Page1/recommended/Limit24",
       "name": "SUPERHEROINES",
     },
     {
       "id": 488,
-      "link": "/studio/254031/tatti-roana-bondage/Cat488-tape-bondage/Page1/recommended/Limit10",
+      "link": "/studio/254031/tatti-roana-bondage/Cat488-tape-bondage/Page1/recommended/Limit24",
       "name": "TAPE BONDAGE",
     },
   ],
-  "categoryId": "",
   "classicWidgetExperimentActive": false,
   "clipsOutsideOrientationCount": 0,
   "clipsSort": "recommended",
@@ -176,12 +175,12 @@ exports[`single studio fetches with slug provided 1`] = `
   "studioSlug": "tatti-roana-bondage",
   "title": "Tatti Roana Bondage",
   "tribute": true,
-  "view": "list",
+  "view": "grid",
   "visibility_mode": "online",
 }
 `;
 
-exports[`single studio fetches without slug provided - handles remix redirect 1`] = `
+exports[`studio clips fetches without slug provided - handles remix redirect 1`] = `
 {
   "avatarSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/avatar/avatar_md_20685.jpg",
   "bannerSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_md_28779.jpg",
@@ -280,7 +279,6 @@ exports[`single studio fetches without slug provided - handles remix redirect 1`
       "name": "TAPE BONDAGE",
     },
   ],
-  "categoryId": "",
   "classicWidgetExperimentActive": false,
   "clipsOutsideOrientationCount": 0,
   "clipsSort": "recommended",

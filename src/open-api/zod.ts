@@ -152,7 +152,7 @@ const RecommendationSchema = z.object({
 	size: z.null(),
 	category_link: z.string(),
 	category_name: z.string(),
-	performers: z.array(PerformerSchema),
+	performers: z.array(PerformerSchema).nullable(),
 	description: z.null(),
 	description_sanitized: z.null(),
 	translations: z.null(),
@@ -209,7 +209,7 @@ const ClipSchema = z.object({
 	category_name: z.string(),
 	related_category_links: z.array(RelatedCategoryLinkSchema),
 	keyword_links: z.array(KeywordLinkSchema),
-	performers: z.array(PerformerSchema),
+	performers: z.array(PerformerSchema).nullable(),
 	description: z.string(),
 	description_sanitized: z.string(),
 	translations: z.null(),
@@ -364,7 +364,7 @@ export const StudioClipSchema = z.object({
 	category_name: z.string(),
 	related_category_links: z.array(RelatedCategoryLinkSchema),
 	keyword_links: z.array(KeywordLinkSchema),
-	performers: z.array(PerformerSchema),
+	performers: z.array(PerformerSchema).nullable(),
 	description: z.string(),
 	description_sanitized: z.string(),
 	translations: z.null(),
@@ -386,12 +386,15 @@ export const OtherStudioSchema = z.object({
 export type OtherStudio = z.infer<typeof OtherStudioSchema>
 
 export const SingleStudioResponseSchema = z.object({
+	onSaleClips: z.array(ClipSchema),
+	clips: z.array(ClipSchema),
+
 	ga_tracking_id: z.null(),
 	avatarSrc: z.string(),
 	bannerSrc: z.string(),
 	store_has_clips: z.boolean(),
 	browseSimilarClipsLink: z.string(),
-	onSaleClips: z.array(z.any()),
+
 	classicWidgetExperimentActive: z.boolean(),
 	similarStoreClips: z.array(z.any()),
 	bannerSrcset: z.array(SrcsetSchema),
@@ -401,7 +404,6 @@ export const SingleStudioResponseSchema = z.object({
 	followersCount: z.number(),
 	title: z.string(),
 	page: z.number(),
-	clips: z.array(ClipSchema),
 	studioId: z.string(),
 	studioSlug: z.string(),
 	view: z.string(),
@@ -452,7 +454,7 @@ export const StudioClipSearchMetaSchema = z.object({
 	twitter_site: z.string(),
 	twitter_card: z.string(),
 	language: z.string(),
-	keyword: z.string(),
+	keyword: z.string().optional(),
 })
 export type StudioSearchMeta = z.infer<typeof StudioClipSearchMetaSchema>
 
@@ -495,7 +497,7 @@ export const StudioSearchClipSchema = z.object({
 	category_name: z.string(),
 	related_category_links: z.array(RelatedCategoryLinkSchema),
 	keyword_links: z.array(KeywordLinkSchema),
-	performers: z.array(PerformerSchema),
+	performers: z.array(PerformerSchema).nullable(),
 	description: z.string(),
 	description_sanitized: z.string(),
 	translations: z.null(),
@@ -505,46 +507,54 @@ export const StudioSearchClipSchema = z.object({
 	onSale: z.null(),
 	isAudio: z.boolean(),
 })
-export type StudioSearchClip = z.infer<typeof ClipSchema>
+export type StudioSearchClip = z.infer<typeof StudioSearchClipSchema>
 
-export const StudioClipSearchResponseSchema = z.object({
-	ga_tracking_id: z.null(),
-	avatarSrc: z.string(),
-	bannerSrc: z.string(),
-	store_has_clips: z.boolean(),
-	browseSimilarClipsLink: z.string(),
-	onSaleClips: z.array(z.any()),
-	classicWidgetExperimentActive: z.boolean(),
-	similarStoreClips: z.array(z.any()),
-	bannerSrcset: z.array(SrcsetSchema),
-	description: z.string(),
-	clipsCount: z.number(),
-	clipsOutsideOrientationCount: z.number(),
-	followersCount: z.number(),
-	title: z.string(),
-	page: z.number(),
-	clips: z.array(ClipSchema),
-	studioId: z.string(),
-	studioSlug: z.string(),
-	view: z.string(),
-	keyword: z.string(),
-	socialLinks: z.array(SocialLinkSchema),
-	donate: z.boolean(),
-	tribute: z.boolean(),
-	canBeFollowed: z.boolean(),
-	categories: z.array(CategorySchema),
-	meta: StudioClipSearchMetaSchema,
-	clipsSort: z.string(),
-	sortOptions: z.array(SortOptionSchema),
-	storeDefaultSorting: z.string(),
-	canonical: CanonicalSchema,
-	selectedOrientations: z.array(z.number()),
-	isContentPreferenceLGBT: z.boolean(),
-	isChatEnabled: z.boolean(),
-	isCreatorOnline: z.boolean(),
-	visibility_mode: z.string(),
-	store_status: z.string(),
+const BaseStudioClipSearchResponseSchema = z.object({
+	clips: z.array(StudioSearchClipSchema),
+	onSaleClips: z.array(StudioSearchClipSchema),
 })
+
+export const StudioClipSearchResponseSchema =
+	BaseStudioClipSearchResponseSchema.and(
+		z
+			.object({
+				ga_tracking_id: z.null(),
+				avatarSrc: z.string(),
+				bannerSrc: z.string(),
+				store_has_clips: z.boolean(),
+				browseSimilarClipsLink: z.string(),
+				classicWidgetExperimentActive: z.boolean(),
+				similarStoreClips: z.array(z.any()),
+				bannerSrcset: z.array(SrcsetSchema),
+				description: z.string(),
+				clipsCount: z.number(),
+				clipsOutsideOrientationCount: z.number(),
+				followersCount: z.number(),
+				title: z.string(),
+				page: z.number(),
+				studioId: z.string(),
+				studioSlug: z.string(),
+				view: z.string(),
+				keyword: z.string(),
+				socialLinks: z.array(SocialLinkSchema),
+				donate: z.boolean(),
+				tribute: z.boolean(),
+				canBeFollowed: z.boolean(),
+				categories: z.array(CategorySchema),
+				meta: StudioClipSearchMetaSchema,
+				clipsSort: z.string(),
+				sortOptions: z.array(SortOptionSchema),
+				storeDefaultSorting: z.string(),
+				canonical: CanonicalSchema,
+				selectedOrientations: z.array(z.number()),
+				isContentPreferenceLGBT: z.boolean(),
+				isChatEnabled: z.boolean(),
+				isCreatorOnline: z.boolean(),
+				visibility_mode: z.string(),
+				store_status: z.string(),
+			})
+			.partial(),
+	)
 
 export type StudioClipSearchResponse = z.infer<
 	typeof StudioClipSearchResponseSchema

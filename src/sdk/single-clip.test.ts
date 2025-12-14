@@ -26,17 +26,24 @@ describe('single clip', () => {
 
 		// reset dynamic data
 		clip.clip.studio.most_recent_clip_id = null
+		clip.clip.studio.total_clips = null
 
-		const { recommendationsPromise, followersCount, ...staticDetails } = clip
+		const {
+			recommendationsPromise,
+			followersCount,
+			clipsCount,
+			...staticDetails
+		} = clip
 
 		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
 		expect(recommendationsPromise.pills).toBeArray()
 		expect(recommendationsPromise.recommendations).toBeArray()
 
 		expect(staticDetails).toMatchSnapshot()
 	})
 
-	it('fetches without slug provided', async () => {
+	it('fetches without slug provided - handles remix redirect', async () => {
 		const result = await getC4SClip({
 			clipId: 29869933,
 			studioId: 254031,
@@ -55,10 +62,17 @@ describe('single clip', () => {
 
 		// reset dynamic data
 		clip.clip.studio.most_recent_clip_id = null
+		clip.clip.studio.total_clips = null
 
-		const { recommendationsPromise, followersCount, ...staticDetails } = clip
+		const {
+			recommendationsPromise,
+			followersCount,
+			clipsCount,
+			...staticDetails
+		} = clip
 
 		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
 		expect(recommendationsPromise.pills).toBeArray()
 		expect(recommendationsPromise.recommendations).toBeArray()
 

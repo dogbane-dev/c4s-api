@@ -18,16 +18,20 @@ describe('single studio', () => {
 			formatZodError('Studio response', parseResult),
 		).toBeTrue()
 
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const { followersCount, ...staticDetails } = parseResult.data!
+		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
+			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
+			parseResult.data!
 
+		expect(clips).toBeArray()
+		expect(onSaleClips).toBeArray()
 		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
 	})
 
-	it('fetches without slug provided', async () => {
+	it('fetches without slug provided - handles remix redirect', async () => {
 		const result = await getC4SStudio({
 			studioId: 254031,
 			language: 'en',
@@ -39,10 +43,14 @@ describe('single studio', () => {
 			formatZodError('Studio response', parseResult),
 		).toBeTrue()
 
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const { followersCount, ...staticDetails } = parseResult.data!
+		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
+			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
+			parseResult.data!
 
+		expect(clips).toBeArray()
+		expect(onSaleClips).toBeArray()
 		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()

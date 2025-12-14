@@ -5,15 +5,20 @@ Unofficial api client, types, and open-api schema for Clips4Sale adult video web
 ## Installation
 
 ```bash
-bun add c4s-api
+npm install c4s-api
 ```
 
 ## Usage
 
 ```typescript
-import { greet } from 'c4s-api';
+import { getC4SClip } from 'c4s-api';
 
-console.log(greet('World')); // Hello, World!
+const clipData = await getC4SClip({
+  clipId: 29869933,
+  studioId: 254031,
+});
+
+console.log(clipData.clip.title); // Tatti Swallows Intruder Cum Then Fucked Again! 4K"
 ```
 
 ## Contributing

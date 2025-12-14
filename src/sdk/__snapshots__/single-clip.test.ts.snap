@@ -179,7 +179,7 @@ exports[`single clip fetches with slug provided 1`] = `
       "most_recent_clip_id": null,
       "name": "Tatti Roana Bondage",
       "slug": "tatti-roana-bondage",
-      "total_clips": 289,
+      "total_clips": null,
     },
     "studioLink": "/studio/254031/tatti-roana-bondage",
     "studioTitle": "Tatti Roana Bondage",
@@ -191,7 +191,6 @@ exports[`single clip fetches with slug provided 1`] = `
   "clipId": "29869933",
   "clipIsUnavailable": false,
   "clipSlug": "tatti-swallows-intruder-cum-then-fucked-again-4k",
-  "clipsCount": 289,
   "ga_tracking_id": null,
   "hideStoreAvatar": false,
   "meta": {
@@ -392,7 +391,7 @@ exports[`single clip fetches with slug provided 1`] = `
 }
 `;
 
-exports[`single clip fetches without slug provided 1`] = `
+exports[`single clip fetches without slug provided - handles remix redirect 1`] = `
 {
   "canonical": {
     "href": "http://www.clips4sale.com/studio/254031/29869933/tatti-swallows-intruder-cum-then-fucked-again-4k",
@@ -571,7 +570,7 @@ exports[`single clip fetches without slug provided 1`] = `
       "most_recent_clip_id": null,
       "name": "Tatti Roana Bondage",
       "slug": "tatti-roana-bondage",
-      "total_clips": 289,
+      "total_clips": null,
     },
     "studioLink": "/studio/254031/tatti-roana-bondage",
     "studioTitle": "Tatti Roana Bondage",
@@ -583,7 +582,6 @@ exports[`single clip fetches without slug provided 1`] = `
   "clipId": "29869933",
   "clipIsUnavailable": false,
   "clipSlug": "tatti-swallows-intruder-cum-then-fucked-again-4k",
-  "clipsCount": 289,
   "ga_tracking_id": null,
   "hideStoreAvatar": false,
   "meta": {
