@@ -7,6 +7,8 @@
 	"paths": {
 		"/{language}/studio/{studioId}/{clipId}/{clipSlug}": {
 			"get": {
+				"description": "Get a single clip details",
+				"summary": "summary here",
 				"parameters": [
 					{
 						"in": "path",
@@ -1047,6 +1049,8 @@
 		},
 		"/{language}/studio/{studioId}/{studioSlug}": {
 			"get": {
+				"description": "Get a single studio's details",
+				"summary": "summary here",
 				"parameters": [
 					{
 						"in": "path",

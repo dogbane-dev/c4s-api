@@ -53,6 +53,8 @@ const schema = createDocument({
 	paths: {
 		'/{language}/studio/{studioId}/{clipId}/{clipSlug}': {
 			get: {
+				description: 'Get a single clip details',
+				summary: 'summary here',
 				requestParams: {
 					path: z.object({
 						studioId,
@@ -94,6 +96,8 @@ const schema = createDocument({
 		},
 		'/{language}/studio/{studioId}/{studioSlug}': {
 			get: {
+				description: "Get a single studio's details",
+				summary: 'summary here',
 				requestParams: {
 					path: z.object({
 						studioId,
