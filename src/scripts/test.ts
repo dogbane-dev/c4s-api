@@ -5,7 +5,7 @@ const result = await client.GET('/{language}/studio/{studioId}/{studioSlug}', {
 		path: {
 			studioId: 220829,
 			studioSlug: 'something-here',
-			language: 'en',
+			language: 'asdasdasd' as 'en',
 		},
 		query: {
 			_data: 'routes/($lang).studio.$id_.$studioSlug.$',

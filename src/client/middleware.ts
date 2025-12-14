@@ -36,8 +36,10 @@ export const remixRedirectHandler: Middleware = {
 }
 
 export const remixParseHandler: Middleware = {
-	async onResponse({ response }) {
+	async onResponse({ response, schemaPath }) {
 		if (!response.body) return
+
+		console.log(schemaPath, response.status, response.statusText)
 
 		const contentType = response.headers.get('content-type')
 

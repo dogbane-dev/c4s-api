@@ -4,14 +4,15 @@ import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import { SingleClipResponseSchema, SingleStudioResponseSchema } from './zod'
 
-// TODO add open add examples
+// TODO add examples, better notes & descriptions
+// way to add something about response parsing ?
 
-const clipId = z.number().int().meta({
+const clipId = z.number().int().min(1).max(999_999_999).meta({
 	description: 'A unique identifier for a clip',
 	example: 32348811,
 })
 
-const studioId = z.number().int().meta({
+const studioId = z.number().int().min(1).max(999_999_999).meta({
 	description: 'A unique identifier for a studio',
 	example: 220829,
 })
@@ -53,8 +54,8 @@ const schema = createDocument({
 	paths: {
 		'/{language}/studio/{studioId}/{clipId}/{clipSlug}': {
 			get: {
-				description: 'Get a single clip details',
-				summary: 'summary here',
+				summary: 'Get clip',
+				description: "Get a single clip's full details",
 				requestParams: {
 					path: z.object({
 						studioId,
@@ -96,8 +97,8 @@ const schema = createDocument({
 		},
 		'/{language}/studio/{studioId}/{studioSlug}': {
 			get: {
-				description: "Get a single studio's details",
-				summary: 'summary here',
+				summary: 'Get studio',
+				description: "Get a single studio's full details",
 				requestParams: {
 					path: z.object({
 						studioId,

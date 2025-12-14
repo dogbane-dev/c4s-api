@@ -1,11 +1,22 @@
 import { parseDeferredReadableStream } from '@remix-run/react/dist/data'
 
 export const parseRemixBody = async <T>(
-	body: ReadableStream,
+	body: ReadableStream | string,
 	abort?: AbortSignal,
 ): Promise<T> => {
 	const abortSignal = abort ?? new AbortController().signal
-	const deferredData = await parseDeferredReadableStream(body)
+
+	const stream =
+		typeof body === 'string'
+			? new ReadableStream({
+					start: (c) => {
+						c.enqueue(new TextEncoder().encode(body))
+						c.close()
+					},
+				})
+			: body
+
+	const deferredData = await parseDeferredReadableStream(stream)
 	await deferredData.resolveData(abortSignal)
 	return deferredData.unwrappedData as T
 }
