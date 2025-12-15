@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/correctness/noUnusedVariables: semi-generated schemas from quicktype */
+/** biome-ignore-all lint/correctness/noUnusedVariables: semi-generated schemas from quick-type */
 import * as z from 'zod'
 
 const CanonicalSchema = z.object({
@@ -361,7 +361,7 @@ export const StudioClipSchema = z.object({
 	studioLink: z.string(),
 	price: z.number(),
 	dateDisplay: z.string(),
-	searchQueryId: z.string(),
+	searchQueryId: z.string().optional(),
 	scroll_page: z.number(),
 	screen_size: z.string(),
 	id: z.number(),
@@ -465,8 +465,8 @@ export type BaseCategory = z.infer<typeof BaseCategorySchema>
 
 export const StudioClipSearchMetaSchema = z.object({
 	title: z.string(),
-	keywords: z.null(),
-	description: z.string(),
+	keywords: z.string().nullable(),
+	description: z.string().nullable(),
 	author: z.string(),
 	robots: z.null(),
 	copyright: z.string(),
@@ -503,7 +503,7 @@ export const StudioSearchClipSchema = z.object({
 	studioLink: z.string(),
 	price: z.number(),
 	dateDisplay: z.string(),
-	searchQueryId: z.string(),
+	searchQueryId: z.string().optional(),
 	scroll_page: z.number(),
 	screen_size: z.string(),
 	id: z.number(),
@@ -551,6 +551,7 @@ const BaseStudioClipSearchResponseSchema = z.object({
 
 export const StudioClipSearchResponseSchema =
 	BaseStudioClipSearchResponseSchema.and(
+		// these fields are all optional because when onlyClips is true, the response will not include studio details
 		z
 			.object({
 				ga_tracking_id: z.string().nullable(),
@@ -561,7 +562,7 @@ export const StudioClipSearchResponseSchema =
 				classicWidgetExperimentActive: z.boolean(),
 				similarStoreClips: z.array(z.any()),
 				bannerSrcset: z.array(SrcsetSchema),
-				description: z.string(),
+				description: z.string().nullable(),
 				clipsCount: z.number(),
 				clipsOutsideOrientationCount: z.number(),
 				followersCount: z.number(),
@@ -571,7 +572,7 @@ export const StudioClipSearchResponseSchema =
 				studioSlug: z.string(),
 				view: z.string(),
 				keyword: z.string(),
-				socialLinks: z.array(SocialLinkSchema),
+				socialLinks: z.array(SocialLinkSchema).nullable(),
 				donate: z.boolean(),
 				tribute: z.boolean(),
 				canBeFollowed: z.boolean(),

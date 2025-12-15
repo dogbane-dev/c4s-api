@@ -1,5 +1,5 @@
 import { client } from '../client'
-import type { paths } from '../open-api/paths.generated'
+import type { paths } from '../client/paths.generated'
 
 type GetC4SCategoriesData =
 	paths['/clips/ajax/categoriesdropdown']['get']['responses']['200']['content']['application/json']
@@ -21,12 +21,8 @@ type C4SCategory = GetC4SCategoriesData['categories'][number]
 const getC4SCategoryByName = async (
 	name: string,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const res = await client.GET('/clips/ajax/categoriesdropdown')
-	if (!res.data) throw new Error('No data')
-	if (res.data.code !== 'ok' || !res.data.success) {
-		throw new Error('Failed to fetch categories')
-	}
-	const c = res.data.categories.find((c) => c.name === name)
+	const { categories } = await getC4SCategories()
+	const c = categories.find((c) => c.name === name)
 	if (!c) {
 		throw new Error(`Category ${name} not found`)
 	}
@@ -36,14 +32,10 @@ const getC4SCategoryByName = async (
 const getC4SCategoryById = async (
 	id: number,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const res = await client.GET('/clips/ajax/categoriesdropdown')
-	if (!res.data) throw new Error('No data')
-	if (res.data.code !== 'ok' || !res.data.success) {
-		throw new Error('Failed to fetch categories')
-	}
-	const c = res.data.categories.find((c) => c.id === id)
+	const { categories } = await getC4SCategories()
+	const c = categories.find((c) => c.id === id)
 	if (!c) {
-		throw new Error(`Category ${name} not found`)
+		throw new Error(`Category with ID=${id} not found`)
 	}
 	return c
 }

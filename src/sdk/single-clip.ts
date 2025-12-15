@@ -1,6 +1,6 @@
 import type { SetOptional } from 'type-fest'
 import { client } from '../client'
-import type { paths } from '../open-api/paths.generated'
+import type { paths } from '../client/paths.generated'
 
 type GetC4SClipParams = SetOptional<
 	paths['/{language}/studio/{studioId}/{clipId}/{clipSlug}']['get']['parameters']['path'],

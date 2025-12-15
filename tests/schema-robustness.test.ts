@@ -1,79 +1,101 @@
-// import {
-// 	SingleClipResponseSchema,
-// 	SingleStudioResponseSchema,
-// } from '../src/open-api/zod'
-// import {
-// 	type GetC4SClipParams,
-// 	type GetC4SStudioParams,
-// 	getC4SCategoryDetails,
-// 	getC4SClip,
-// 	getC4SStudio,
-// } from '../src/sdk'
-// import { formatZodError } from '../src/testing/utils'
+import { describe, expect, it } from 'bun:test'
+import {
+	SingleClipResponseSchema,
+	SingleStudioResponseSchema,
+	StudioClipSearchResponseSchema,
+} from '../src/open-api/zod'
+import {
+	type GetC4SClipParams,
+	type GetC4SStudioParams,
+	getC4SCategoryDetails,
+	getC4SClip,
+	getC4SStudio,
+	getC4SStudioClips,
+} from '../src/sdk'
+import { formatZodError } from '../src/testing/utils'
 
-// const getAndValidateStudio = async (p: GetC4SStudioParams) => {
-// 	const studio = await getC4SStudio(p)
+const getAndValidateStudio = async (p: GetC4SStudioParams) => {
+	const studio = await getC4SStudio(p)
+	const parseResult = SingleStudioResponseSchema.safeParse(studio)
+	expect(parseResult.success, formatZodError('Studio', parseResult)).toBeTrue()
+}
 
-// 	const parseResult = SingleStudioResponseSchema.safeParse(studio)
-// 	if (!parseResult.success) {
-// 		throw new Error(formatZodError('Studio', parseResult))
-// 	}
-// 	return parseResult.data
-// }
+const getAndValidateClip = async (p: GetC4SClipParams) => {
+	const clip = await getC4SClip(p)
+	const parseResult = SingleClipResponseSchema.safeParse(clip)
+	expect(parseResult.success, formatZodError('Clip', parseResult)).toBeTrue()
+}
 
-// const getAndValidateClip = async (p: GetC4SClipParams) => {
-// 	const clip = await getC4SClip(p)
-// 	const parseResult = SingleClipResponseSchema.safeParse(clip)
-// 	if (!parseResult.success) {
-// 		throw new Error(formatZodError('Clip', parseResult))
-// 	}
-// 	return parseResult.data
-// }
+describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
+	'schema robustness',
+	async () => {
+		const { topStores } = await getC4SCategoryDetails({
+			category: 4,
+		})
 
-// const { topStores } = await getC4SCategoryDetails({
-// 	category: 4,
-// })
+		describe('get studio matches schema - for all top studios', async () => {
+			for (let i = 0; i < topStores.length; i++) {
+				const store = topStores[i]
+				const slug = store.storeLink.split('/').at(3)
+				expect(slug).toBeString()
+				expect(store.storeName).toBeString()
+				expect(store.storeId).toBeNumber()
 
-// const startAtStore = 0
+				it(`#${i + 1}. ${store.storeName} (ID = ${store.storeId})`, async () => {
+					await getAndValidateStudio({
+						studioId: store.storeId,
+						studioSlug: slug,
+						language: 'en',
+					})
+				})
+			}
+		})
 
-// for (let i = startAtStore; i < topStores.length; i++) {
-// 	const store = topStores[i]
-// 	const slug = store.storeLink.split('/').at(3)
-// 	if (!slug) continue
-// 	console.log(`(#${i + 1}) [${store.storeId}] ${store.storeName}`)
+		const randomStore = topStores.at(
+			Math.floor(Math.random() * topStores.length),
+		)
 
-// 	const studio = await getAndValidateStudio({
-// 		studioId: store.storeId,
-// 		studioSlug: slug,
-// 		language: 'en',
-// 	})
+		describe(`get clip matches schema - for first 20 clips from ${randomStore?.storeName}`, async () => {
+			expect(randomStore).toBeDefined()
+			// biome-ignore lint/style/noNonNullAssertion: asserted above
+			const store = randomStore!
 
-// 	// const parseResult = SingleStudioResponseSchema.safeParse(studio)
+			const slug = store.storeLink.split('/').at(3)
+			expect(slug).toBeString()
+			expect(store.storeName).toBeString()
+			expect(store.storeId).toBeNumber()
 
-// 	// if (!parseResult.success) {
-// 	// 	console.error(formatZodError('Single Studio', parseResult))
-// 	// 	break
-// 	// }
+			const studioClipsResult = await getC4SStudioClips({
+				page: 1,
+				studioId: store.storeId,
+				studioSlug: slug,
+				language: 'en',
+				sort: 'added_at',
+			})
+			const parsedStudioClipsResult =
+				StudioClipSearchResponseSchema.safeParse(studioClipsResult)
+			expect(
+				parsedStudioClipsResult.success,
+				formatZodError('Studio clip search response', parsedStudioClipsResult),
+			).toBeTrue()
 
-// 	for (let j = 0; j < studio.clips.length; j++) {
-// 		const clip = studio.clips[j]
-// 		const clipSlug = clip.bannerLink.split('/').at(4)
+			// biome-ignore lint/style/noNonNullAssertion: asserted above
+			const { clips } = parsedStudioClipsResult.data!
 
-// 		console.log(
-// 			`  (#${i + 1}-${j + 1}) [${clip.id}] ${clip.title.slice(0, 50)}`,
-// 		)
+			for (let i = 0; i < clips.length; i++) {
+				const clip = clips[i]
 
-// 		await getAndValidateClip({
-// 			clipId: clip.id,
-// 			studioId: store.storeId,
-// 			language: 'en',
-// 			clipSlug: clipSlug,
-// 		})
-// 	}
-// }
-
-// describe('categories', () => {
-// 	it('fetches', async () => {
-
-// 	})
-// })
+				it(`#${i + 1}. ${clip.title.slice(0, 30).padEnd(30)} (ID = ${clip.id})`, async () => {
+					const clipSlug = clip.bannerLink.split('/').at(4)
+					expect(clipSlug).toBeString()
+					await getAndValidateClip({
+						clipId: clip.id,
+						studioId: store.storeId,
+						clipSlug: clipSlug as string,
+						language: 'en',
+					})
+				})
+			}
+		})
+	},
+)

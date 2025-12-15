@@ -32,8 +32,6 @@ MIT
 
 ## TODO
 
-- bigger zod schema tester which scrapes c4s and ensures robust schemas
-  - turn file into a real test suite
 - add example responses, better notes & descriptions to all endpoints & schemas
 - further flesh out README
 - document required response parsing for remix stream endpoints

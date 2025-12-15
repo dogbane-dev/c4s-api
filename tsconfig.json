@@ -23,12 +23,12 @@
 		"noPropertyAccessFromIndexSignature": false
 	},
 
-	"include": ["src/**/*", "tests/**/*"],
+	"include": ["src/**/*"],
 	"exclude": [
 		"node_modules",
 		"dist",
 		"bunup.config.ts",
-		"./src/open-api/schema.ts",
-		"./src/open-api/zod.ts"
+		"src/**/*.test.ts",
+		"src/open-api"
 	]
 }
