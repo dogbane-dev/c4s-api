@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import {
+	CategoriesResponseSchema,
 	CategoryInfoResponseSchema,
 	SeeMoreResponseSchema,
 	SingleClipResponseSchema,
@@ -292,6 +293,20 @@ const schema = createDocument({
 						description: '200 OK',
 						content: {
 							'application/json': { schema: SeeMoreResponseSchema },
+						},
+					},
+				},
+			},
+		},
+		'/clips/ajax/categoriesdropdown': {
+			get: {
+				summary: 'Get list of categories',
+				description: 'Get full list of categories and recommendations',
+				responses: {
+					'200': {
+						description: '200 OK',
+						content: {
+							'application/json': { schema: CategoriesResponseSchema },
 						},
 					},
 				},

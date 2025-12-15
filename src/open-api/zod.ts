@@ -39,7 +39,7 @@ const SingleClipMetaSchema = z.object({
 	image: z.string(),
 	image_alt: z.string(),
 	location: z.string(),
-	og_description: z.string(),
+	og_description: z.string().nullable(),
 	og_url: z.string(),
 	twitter_site: z.string(),
 	twitter_card: z.string(),
@@ -124,7 +124,7 @@ const RecommendationSchema = z.object({
 	duration: z.number(),
 	suggestedClipUrl: z.string(),
 	previewLink: z.string(),
-	previewUrl: z.null(),
+	previewUrl: z.string().nullable(),
 	srcSet: z.string(),
 	responsiveSrcset: z.array(SrcsetSchema),
 	customPreview: z.boolean(),
@@ -152,13 +152,22 @@ const RecommendationSchema = z.object({
 	category_link: z.string(),
 	category_name: z.string(),
 	performers: z.array(PerformerSchema).nullable(),
-	description: z.null(),
-	description_sanitized: z.null(),
+	description: z.string().nullable(),
+	description_sanitized: z.string().nullable(),
 	translations: z.null(),
 	studio: RecommendationStudioSchema,
-	gifPreviewUrl: z.null(),
-	discounted_price: z.null(),
-	onSale: z.null(),
+	gifPreviewUrl: z.string().nullable(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
+	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
 type Recommendation = z.infer<typeof RecommendationSchema>
@@ -180,11 +189,11 @@ const ClipSchema = z.object({
 	duration: z.number(),
 	suggestedClipUrl: z.string(),
 	previewLink: z.string(),
-	previewUrl: z.null(),
+	previewUrl: z.string().nullable(),
 	srcSet: z.string(),
 	responsiveSrcset: z.array(SrcsetSchema),
 	customPreview: z.boolean(),
-	customPreviewUrl: z.string(),
+	customPreviewUrl: z.string().nullable(),
 	studioTitle: z.string(),
 	studioLink: z.string(),
 	price: z.number(),
@@ -206,16 +215,25 @@ const ClipSchema = z.object({
 	size: z.number(),
 	category_link: z.string(),
 	category_name: z.string(),
-	related_category_links: z.array(RelatedCategoryLinkSchema),
+	related_category_links: z.array(RelatedCategoryLinkSchema).optional(),
 	keyword_links: z.array(KeywordLinkSchema),
 	performers: z.array(PerformerSchema).nullable(),
-	description: z.string(),
-	description_sanitized: z.string(),
+	description: z.string().nullable(),
+	description_sanitized: z.string().nullable(),
 	translations: z.null(),
 	studio: ClipStudioSchema,
-	gifPreviewUrl: z.null(),
-	discounted_price: z.null(),
-	onSale: z.null(),
+	gifPreviewUrl: z.string().nullable(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
+	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
 type Clip = z.infer<typeof ClipSchema>
@@ -230,7 +248,7 @@ export const SingleClipResponseSchema = z.object({
 	studioId: z.string(),
 	clipId: z.string(),
 	clipSlug: z.string(),
-	ga_tracking_id: z.null(),
+	ga_tracking_id: z.string().nullable(),
 	recommendationsPromise: RecommendationsPromiseSchema,
 	clipIsUnavailable: z.boolean(),
 	visibility_mode: z.string(),
@@ -244,7 +262,7 @@ export const SingleClipResponseSchema = z.object({
 	clipsCount: z.number(),
 	studioCategories: z.array(CategoryInfoSchema),
 	nextLink: z.string(),
-	prevLink: z.string(),
+	prevLink: z.string().nullable(),
 	meta: SingleClipMetaSchema,
 	canonical: CanonicalSchema,
 })
@@ -280,7 +298,7 @@ export type Studio = z.infer<typeof StudioSchema>
 export const SingleStudioMetaSchema = z.object({
 	title: z.string(),
 	keywords: z.string().nullable(),
-	description: z.string(),
+	description: z.string().nullable(),
 	author: z.string(),
 	robots: z.null(),
 	copyright: z.string(),
@@ -289,7 +307,7 @@ export const SingleStudioMetaSchema = z.object({
 	image: z.string(),
 	image_alt: z.string(),
 	location: z.string(),
-	og_description: z.string(),
+	og_description: z.string().nullable().nullable(),
 	og_url: z.string(),
 	twitter_site: z.string(),
 	twitter_card: z.string(),
@@ -338,7 +356,7 @@ export const StudioClipSchema = z.object({
 	srcSet: z.string(),
 	responsiveSrcset: z.array(SrcsetSchema),
 	customPreview: z.boolean(),
-	customPreviewUrl: z.string(),
+	customPreviewUrl: z.string().nullable(),
 	studioTitle: z.string(),
 	studioLink: z.string(),
 	price: z.number(),
@@ -361,16 +379,25 @@ export const StudioClipSchema = z.object({
 	size: z.number(),
 	category_link: z.string(),
 	category_name: z.string(),
-	related_category_links: z.array(RelatedCategoryLinkSchema),
+	related_category_links: z.array(RelatedCategoryLinkSchema).optional(),
 	keyword_links: z.array(KeywordLinkSchema),
 	performers: z.array(PerformerSchema).nullable(),
-	description: z.string(),
-	description_sanitized: z.string(),
+	description: z.string().nullable(),
+	description_sanitized: z.string().nullable(),
 	translations: z.null(),
 	studio: StudioSchema,
 	gifPreviewUrl: z.string().nullable(),
-	discounted_price: z.null(),
-	onSale: z.null(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
+	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
 export type StudioClip = z.infer<typeof StudioClipSchema>
@@ -388,16 +415,16 @@ export const SingleStudioResponseSchema = z.object({
 	onSaleClips: z.array(ClipSchema),
 	clips: z.array(ClipSchema),
 
-	ga_tracking_id: z.null(),
+	ga_tracking_id: z.string().nullable(),
 	avatarSrc: z.string(),
-	bannerSrc: z.string(),
+	bannerSrc: z.string().optional(),
 	store_has_clips: z.boolean(),
 	browseSimilarClipsLink: z.string(),
 
 	classicWidgetExperimentActive: z.boolean(),
 	similarStoreClips: z.array(z.any()),
 	bannerSrcset: z.array(SrcsetSchema),
-	description: z.string(),
+	description: z.string().nullable(),
 	clipsCount: z.number(),
 	clipsOutsideOrientationCount: z.number(),
 	followersCount: z.number(),
@@ -407,7 +434,7 @@ export const SingleStudioResponseSchema = z.object({
 	studioSlug: z.string(),
 	view: z.string(),
 	categoryId: z.string(),
-	socialLinks: z.array(SocialLinkSchema),
+	socialLinks: z.array(SocialLinkSchema).nullable(),
 	donate: z.boolean(),
 	tribute: z.boolean(),
 	canBeFollowed: z.boolean(),
@@ -429,12 +456,12 @@ export type SingleStudioResponse = z.infer<typeof SingleStudioResponseSchema>
 
 // ------------
 
-export const CategorySchema = z.object({
+export const BaseCategorySchema = z.object({
 	id: z.number(),
 	name: z.string(),
 	link: z.string(),
 })
-export type Category = z.infer<typeof CategorySchema>
+export type BaseCategory = z.infer<typeof BaseCategorySchema>
 
 export const StudioClipSearchMetaSchema = z.object({
 	title: z.string(),
@@ -448,7 +475,7 @@ export const StudioClipSearchMetaSchema = z.object({
 	image: z.string(),
 	image_alt: z.string(),
 	location: z.string(),
-	og_description: z.string(),
+	og_description: z.string().nullable(),
 	og_url: z.string(),
 	twitter_site: z.string(),
 	twitter_card: z.string(),
@@ -467,11 +494,11 @@ export const StudioSearchClipSchema = z.object({
 	duration: z.number(),
 	suggestedClipUrl: z.string(),
 	previewLink: z.string(),
-	previewUrl: z.null(),
+	previewUrl: z.string().nullable(),
 	srcSet: z.string(),
 	responsiveSrcset: z.array(SrcsetSchema),
 	customPreview: z.boolean(),
-	customPreviewUrl: z.string(),
+	customPreviewUrl: z.string().nullable(),
 	studioTitle: z.string(),
 	studioLink: z.string(),
 	price: z.number(),
@@ -494,16 +521,25 @@ export const StudioSearchClipSchema = z.object({
 	size: z.number(),
 	category_link: z.string(),
 	category_name: z.string(),
-	related_category_links: z.array(RelatedCategoryLinkSchema),
+	related_category_links: z.array(RelatedCategoryLinkSchema).optional(),
 	keyword_links: z.array(KeywordLinkSchema),
 	performers: z.array(PerformerSchema).nullable(),
-	description: z.string(),
-	description_sanitized: z.string(),
+	description: z.string().nullable(),
+	description_sanitized: z.string().nullable(),
 	translations: z.null(),
 	studio: StudioSchema,
-	gifPreviewUrl: z.null(),
-	discounted_price: z.null(),
-	onSale: z.null(),
+	gifPreviewUrl: z.string().nullable(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
+	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
 export type StudioSearchClip = z.infer<typeof StudioSearchClipSchema>
@@ -517,7 +553,7 @@ export const StudioClipSearchResponseSchema =
 	BaseStudioClipSearchResponseSchema.and(
 		z
 			.object({
-				ga_tracking_id: z.null(),
+				ga_tracking_id: z.string().nullable(),
 				avatarSrc: z.string(),
 				bannerSrc: z.string(),
 				store_has_clips: z.boolean(),
@@ -539,7 +575,7 @@ export const StudioClipSearchResponseSchema =
 				donate: z.boolean(),
 				tribute: z.boolean(),
 				canBeFollowed: z.boolean(),
-				categories: z.array(CategorySchema),
+				categories: z.array(BaseCategorySchema),
 				meta: StudioClipSearchMetaSchema,
 				clipsSort: z.string(),
 				sortOptions: z.array(SortOptionSchema),
@@ -562,8 +598,8 @@ export type StudioClipSearchResponse = z.infer<
 // -----
 
 export const MetaDataSchema = z.object({
-	meta_title: z.null(),
-	meta_description: z.null(),
+	meta_title: z.string().nullable(),
+	meta_description: z.string().nullable(),
 	header_one: z.null(),
 	header_two: z.null(),
 	header_three: z.null(),
@@ -582,7 +618,7 @@ export const CategoryInfoMetaSchema = z.object({
 	image: z.null(),
 	image_alt: z.null(),
 	location: z.null(),
-	og_description: z.null(),
+	og_description: z.string().nullable().nullable(),
 	og_url: z.null(),
 	twitter_site: z.null(),
 	twitter_card: z.null(),
@@ -612,7 +648,7 @@ export const CategoryClipSchema = z.object({
 	producer: z.number(),
 	bannerLink: z.string(),
 	title: z.string(),
-	description: z.null(),
+	description: z.string().nullable(),
 	translations: z.null(),
 	categoryId: z.number(),
 	categoryName: z.string(),
@@ -623,14 +659,23 @@ export const CategoryClipSchema = z.object({
 	srcSet: z.string(),
 	previewUrl: z.string(),
 	customPreview: z.boolean(),
-	customPreviewUrl: z.string(),
+	customPreviewUrl: z.string().nullable(),
 	studioTitle: z.string(),
 	studioLink: z.string(),
 	price: z.number(),
-	discounted_price: z.null(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
 	queryId: z.string(),
 	isSuggestedWishlist: z.boolean(),
-	onSale: z.null(),
+	onSale: z.boolean().nullable(),
 })
 export type CategoryClip = z.infer<typeof CategoryClipSchema>
 
@@ -654,7 +699,7 @@ export const TrendingRetroClipSchema = z.object({
 	producer: z.number(),
 	bannerLink: z.string(),
 	title: z.string(),
-	description: z.null(),
+	description: z.string().nullable(),
 	translations: z.null(),
 	categoryId: z.number(),
 	categoryName: z.string(),
@@ -669,10 +714,19 @@ export const TrendingRetroClipSchema = z.object({
 	studioTitle: z.string(),
 	studioLink: z.string(),
 	price: z.number(),
-	discounted_price: z.null(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
 	queryId: z.string(),
 	isSuggestedWishlist: z.boolean(),
-	onSale: z.null(),
+	onSale: z.boolean().nullable(),
 })
 export type TrendingRetroClip = z.infer<typeof TrendingRetroClipSchema>
 
@@ -735,7 +789,7 @@ export type Thumbs = z.infer<typeof ThumbsSchema>
 export const LastClipSchema = z.object({
 	id: z.number(),
 	added_at: z.string(),
-	category: CategorySchema,
+	category: BaseCategorySchema,
 	thumbs: ThumbsSchema,
 })
 export type LastClip = z.infer<typeof LastClipSchema>
@@ -763,12 +817,21 @@ export const SeeMoreExtraClipSchema = z.object({
 	link: z.string(),
 	related_categories: z.null(),
 	related_keywords: z.null(),
-	description: z.null(),
-	description_sanitized: z.null(),
+	description: z.string().nullable(),
+	description_sanitized: z.string().nullable(),
 	translations: z.null(),
 	added_at: z.string(),
 	price: z.number(),
-	discounted_price: z.null(),
+	discounted_price: z
+		.object({
+			name: z.string().nullable(),
+			id: z.null(),
+			sale_type: z.string(),
+			percent: z.number(),
+			tiers: z.null(),
+			discount: z.number(),
+		})
+		.nullable(),
 	format: z.null(),
 	screen: z.null(),
 	resolution: z.null(),
@@ -807,3 +870,20 @@ export const SeeMoreResponseSchema = z.object({
 	]),
 })
 export type SeeMoreResponse = z.infer<typeof SeeMoreResponseSchema>
+
+export const CategorySchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	link: z.string(),
+	search_link: z.string(),
+	pill: z.number().nullable(),
+})
+export type Category = z.infer<typeof CategorySchema>
+
+export const CategoriesResponseSchema = z.object({
+	success: z.boolean(),
+	code: z.string(),
+	categories: z.array(CategorySchema),
+	recommendations: z.array(CategorySchema),
+})
+export type CategoeriesResponse = z.infer<typeof CategoriesResponseSchema>

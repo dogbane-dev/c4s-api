@@ -33,6 +33,7 @@ MIT
 ## TODO
 
 - bigger zod schema tester which scrapes c4s and ensures robust schemas
+  - turn file into a real test suite
 - add example responses, better notes & descriptions to all endpoints & schemas
 - further flesh out README
 - document required response parsing for remix stream endpoints
@@ -41,6 +42,7 @@ MIT
   - instead of using en as default, we should omit language (and therefore use regional default)
 - refactor sdk methods to have more readable input args (jsdoc?), does not need to conform to open api spec necessarily since type safety will be ensured regardless
   - rename category additional details to something else
+  - higher level - get ALL ___ methods
 - Put badge somewhere on readme that can reflect status of tests passing - therefore showing types are still up to date
-  - run tests on some kind of schedule ? 
+  - run tests on some kind of schedule ?
   

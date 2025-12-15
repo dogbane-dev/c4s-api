@@ -28,6 +28,7 @@ describe('category details', () => {
 			trendingRetroClips,
 			recentlyAddedCategoryClips,
 			recentlyAddedRelatedClips,
+			relatedCategories,
 			totals,
 			...staticDetails
 		} = category
@@ -38,6 +39,7 @@ describe('category details', () => {
 		expect(trendingRetroClips).toBeArray()
 		expect(recentlyAddedCategoryClips).toBeArray()
 		expect(recentlyAddedRelatedClips).toBeArray()
+		expect(relatedCategories).toBeArray()
 		expect(totals.clips).toBeNumber()
 		expect(totals.stores).toBeNumber()
 

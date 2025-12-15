@@ -1,3 +1,4 @@
+export * from './categories'
 export * from './category-additional-details'
 export * from './category-details'
 export * from './config'
