@@ -21,6 +21,11 @@ const clipData = await getC4SClip({
 console.log(clipData.clip.title); // Tatti Swallows Intruder Cum Then Fucked Again! 4K"
 ```
 
+## Swagger Docs
+
+https://c4s-api.netlify.app/
+
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
