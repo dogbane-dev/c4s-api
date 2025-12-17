@@ -25,6 +25,7 @@
 		"test:coverage": "bun test --coverage",
 		"test:watch": "bun test --watch",
 		"test:robust": "ROBUST_TESTS=true bun test schema-robustness.test.ts",
+		"test:all": "ROBUST_TESTS=true bun test",
 		"type-check": "tsc --noEmit",
 		"generate:schema": "bun -e \"Bun.write('./docs/schema.json',JSON.stringify((await import('./src/open-api/schema.ts')).schema,null,2))\"",
 		"generate:types": "openapi-typescript ./docs/schema.json -o ./src/client/paths.generated.ts",

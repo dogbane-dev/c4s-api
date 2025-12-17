@@ -795,7 +795,7 @@ export const LastClipSchema = z.object({
 })
 export type LastClip = z.infer<typeof LastClipSchema>
 
-export const SeeMoreExtraStoreSchema = z.object({
+export const CategorySeeMoreExtraStoreSchema = z.object({
 	id: z.number(),
 	name: z.string(),
 	slug: z.string(),
@@ -809,9 +809,11 @@ export const SeeMoreExtraStoreSchema = z.object({
 	link: z.string(),
 	category: CategoryInfoSchema,
 })
-export type SeeMoreExtraStore = z.infer<typeof SeeMoreExtraStoreSchema>
+export type CategorySeeMoreExtraStore = z.infer<
+	typeof CategorySeeMoreExtraStoreSchema
+>
 
-export const SeeMoreExtraClipSchema = z.object({
+export const CategorySeeMoreExtraClipSchema = z.object({
 	id: z.number(),
 	title: z.string(),
 	slug: z.string(),
@@ -862,15 +864,19 @@ export const SeeMoreExtraClipSchema = z.object({
 	archived: z.boolean(),
 	on_sale: z.null(),
 })
-export type SeeMoreExtraClip = z.infer<typeof SeeMoreExtraClipSchema>
+export type CategorySeeMoreExtraClip = z.infer<
+	typeof CategorySeeMoreExtraClipSchema
+>
 
-export const SeeMoreResponseSchema = z.object({
+export const CategorySeeMoreResponseSchema = z.object({
 	seeMoreExtra: z.union([
-		z.array(SeeMoreExtraStoreSchema),
-		z.array(SeeMoreExtraClipSchema),
+		z.array(CategorySeeMoreExtraStoreSchema),
+		z.array(CategorySeeMoreExtraClipSchema),
 	]),
 })
-export type SeeMoreResponse = z.infer<typeof SeeMoreResponseSchema>
+export type CategorySeeMoreResponse = z.infer<
+	typeof CategorySeeMoreResponseSchema
+>
 
 export const CategorySchema = z.object({
 	id: z.number(),

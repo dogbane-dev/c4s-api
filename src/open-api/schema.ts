@@ -102,7 +102,7 @@ const sexualPreferenceOption = z.array(z.number().int().min(1).max(5)).meta({
 })
 
 const seeMorePage = z.number().int().min(2).max(3).meta({
-	description: 'See more category info page number.',
+	description: 'See more category info page number. Can only be 2 or 3.',
 })
 
 const seeMoreSection = z
