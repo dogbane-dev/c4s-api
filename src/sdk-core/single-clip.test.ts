@@ -7,10 +7,10 @@ import { getC4SClip } from './single-clip'
 describe('single clip', () => {
 	it('fetches with slug provided', async () => {
 		const result = await getC4SClip({
-			clipId: 29869933,
+			id: 29869933,
 			studioId: 254031,
 			language: 'en',
-			clipSlug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+			slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
 		})
 
 		const parseResult = SingleClipResponseSchema.safeParse(result)
@@ -45,7 +45,7 @@ describe('single clip', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const result = await getC4SClip({
-			clipId: 29869933,
+			id: 29869933,
 			studioId: 254031,
 			language: 'en',
 		})
@@ -82,8 +82,8 @@ describe('single clip', () => {
 	it('throws error if clip is not found', () => {
 		expect(() =>
 			getC4SClip({
-				clipId: 123,
-				clipSlug: 'not-real',
+				id: 123,
+				slug: 'not-real',
 				studioId: 254031,
 				language: 'en',
 			}),
@@ -93,10 +93,10 @@ describe('single clip', () => {
 	it('throws error if studio is not found', () => {
 		expect(() =>
 			getC4SClip({
-				clipId: 29869933,
+				id: 29869933,
 				studioId: 1, // not right / real
 				language: 'en',
-				clipSlug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+				slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
 			}),
 		).toThrowError(C4SStudioNotFoundError)
 	})

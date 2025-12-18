@@ -7,7 +7,7 @@ describe('category details', () => {
 	it('fetches', async () => {
 		const result = await getC4SCategoryDetails({
 			language: 'en',
-			category: 4,
+			id: 4,
 		})
 
 		const parseResult = CategoryInfoResponseSchema.safeParse(result)

@@ -5,6 +5,7 @@ import {
 	StudioClipSearchResponseSchema,
 } from '../src/open-api/zod'
 import {
+	type GetC4SCategoryDetailsData,
 	type GetC4SClipParams,
 	type GetC4SStudioParams,
 	getC4SCategoryDetails,
@@ -26,14 +27,22 @@ const getAndValidateClip = async (p: GetC4SClipParams) => {
 	expect(parseResult.success, formatZodError('Clip', parseResult)).toBeTrue()
 }
 
+const getTopStores = async () => {
+	const { topStores } = await getC4SCategoryDetails({
+		id: 4,
+	})
+	return topStores
+}
+
 describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 	'schema robustness',
 	async () => {
-		const { topStores } = await getC4SCategoryDetails({
-			category: 4,
-		})
+		let topStores: GetC4SCategoryDetailsData['topStores']
 
 		describe('get studio matches schema - for all top studios', async () => {
+			if (!topStores) {
+				topStores = await getTopStores()
+			}
 			for (let i = 0; i < topStores.length; i++) {
 				const store = topStores[i]
 				const slug = store.storeLink.split('/').at(3)
@@ -43,19 +52,22 @@ describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 
 				it(`#${i + 1}. ${store.storeName} (ID = ${store.storeId})`, async () => {
 					await getAndValidateStudio({
-						studioId: store.storeId,
-						studioSlug: slug,
+						id: store.storeId,
+						slug: slug,
 						language: 'en',
 					})
 				})
 			}
 		})
 
-		const randomStore = topStores.at(
-			Math.floor(Math.random() * topStores.length),
-		)
+		describe('get clip matches schema - for first 20 clips from random store', async () => {
+			if (!topStores) {
+				topStores = await getTopStores()
+			}
+			const randomStore = topStores.at(
+				Math.floor(Math.random() * topStores.length),
+			)
 
-		describe(`get clip matches schema - for first 20 clips from ${randomStore?.storeName}`, async () => {
 			expect(randomStore).toBeDefined()
 			// biome-ignore lint/style/noNonNullAssertion: asserted above
 			const store = randomStore!
@@ -67,8 +79,8 @@ describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 
 			const studioClipsResult = await getC4SStudioClips({
 				page: 1,
-				studioId: store.storeId,
-				studioSlug: slug,
+				id: store.storeId,
+				slug: slug,
 				language: 'en',
 				sort: 'added_at',
 			})
@@ -89,9 +101,9 @@ describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 					const clipSlug = clip.bannerLink.split('/').at(4)
 					expect(clipSlug).toBeString()
 					await getAndValidateClip({
-						clipId: clip.id,
+						id: clip.id,
 						studioId: store.storeId,
-						clipSlug: clipSlug as string,
+						slug: clipSlug,
 						language: 'en',
 					})
 				})

@@ -1,19 +1,17 @@
-import type { SetOptional } from 'type-fest'
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
-import { DEFAULT_PREFERENCES } from './config'
+import {
+	type Language,
+	parseSexualPreferences,
+	type SexualPreference,
+} from '../shared/utils'
+import { DEFAULT_LANGUAGE, DEFAULT_SEXUAL_PREFERENCES } from './config'
 
-type GetC4SCategoryDetailsParams = SetOptional<
-	paths['/{language}/clips/category/{category}']['get']['parameters']['path'],
-	'language'
-> &
-	SetOptional<
-		Omit<
-			paths['/{language}/clips/category/{category}']['get']['parameters']['query'],
-			'_data'
-		>,
-		'pill'
-	>
+type GetC4SCategoryDetailsParams = {
+	id: number
+	language?: Language
+	sexualPreferences?: SexualPreference[]
+}
 
 type GetC4SCategoryDetailsData =
 	paths['/{language}/clips/category/{category}']['get']['responses']['200']['content']['application/json']
@@ -21,17 +19,17 @@ type GetC4SCategoryDetailsData =
 const getC4SCategoryDetails = async (
 	params: GetC4SCategoryDetailsParams,
 ): Promise<GetC4SCategoryDetailsData> => {
-	const { pill, ...pathParams } = params
-
 	const res = await client.GET('/{language}/clips/category/{category}', {
 		params: {
 			path: {
-				...pathParams,
-				language: pathParams.language ?? 'en',
+				category: params.id,
+				language: params.language ?? DEFAULT_LANGUAGE,
 			},
 			query: {
 				_data: 'routes/($lang).clips.category.$id.($catName)',
-				pill: pill ?? DEFAULT_PREFERENCES,
+				pill: params.sexualPreferences
+					? parseSexualPreferences(params.sexualPreferences)
+					: DEFAULT_SEXUAL_PREFERENCES,
 			},
 		},
 	})

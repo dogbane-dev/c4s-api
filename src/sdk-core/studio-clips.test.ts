@@ -6,12 +6,12 @@ import { getC4SStudioClips } from './studio-clips'
 describe('studio clips', () => {
 	it('fetches with all options provided', async () => {
 		const result = await getC4SStudioClips({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
-			studioSlug: 'tatti-roana-bondage',
+			slug: 'tatti-roana-bondage',
 			page: 1,
 			sort: 'recommended',
-			category: 0,
+			categoryId: 0,
 		})
 
 		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
@@ -36,12 +36,12 @@ describe('studio clips', () => {
 
 	it('fetches only clips with all options provided', async () => {
 		const result = await getC4SStudioClips({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
-			studioSlug: 'tatti-roana-bondage',
+			slug: 'tatti-roana-bondage',
 			page: 1,
 			sort: 'recommended',
-			category: 0,
+			categoryId: 0,
 			onlyClips: true,
 		})
 
@@ -65,11 +65,11 @@ describe('studio clips', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const result = await getC4SStudioClips({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
 			page: 1,
 			sort: 'recommended',
-			category: 0,
+			categoryId: 0,
 		})
 
 		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
@@ -96,12 +96,12 @@ describe('studio clips', () => {
 		const SEARCH = 'ball gag'
 
 		const result = await getC4SStudioClips({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
-			studioSlug: 'tatti-roana-bondage',
+			slug: 'tatti-roana-bondage',
 			page: 1,
 			sort: 'recommended',
-			category: 0,
+			categoryId: 0,
 			search: SEARCH,
 		})
 

@@ -1,11 +1,14 @@
-import type { SetOptional } from 'type-fest'
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
+import type { Language } from '../shared/utils'
+import { DEFAULT_LANGUAGE } from './config'
 
-type GetC4SClipParams = SetOptional<
-	paths['/{language}/studio/{studioId}/{clipId}/{clipSlug}']['get']['parameters']['path'],
-	'clipSlug' | 'language'
->
+type GetC4SClipParams = {
+	id: number
+	studioId: number
+	slug?: string
+	language?: Language
+}
 
 type GetC4SClipData =
 	paths['/{language}/studio/{studioId}/{clipId}/{clipSlug}']['get']['responses']['200']['content']['text/remix-deferred']
@@ -18,10 +21,11 @@ const getC4SClip = async (
 		{
 			params: {
 				path: {
-					...params,
+					clipId: params.id,
+					studioId: params.studioId,
 					// if slug is not passed in, client will handle making request based on redirect
-					clipSlug: params.clipSlug ?? 'x',
-					language: params.language ?? 'en',
+					clipSlug: params.slug ?? 'x',
+					language: params.language ?? DEFAULT_LANGUAGE,
 				},
 				query: {
 					_data: 'routes/($lang).studio.$id_.$clipId.$clipSlug',

@@ -1,11 +1,13 @@
-import type { SetOptional } from 'type-fest'
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
+import type { Language } from '../shared/utils'
+import { DEFAULT_LANGUAGE } from './config'
 
-type GetC4SStudioParams = SetOptional<
-	paths['/{language}/studio/{studioId}/{studioSlug}']['get']['parameters']['path'],
-	'studioSlug' | 'language'
->
+type GetC4SStudioParams = {
+	id: number
+	slug?: string
+	language?: Language
+}
 
 type GetC4SStudioData =
 	paths['/{language}/studio/{studioId}/{studioSlug}']['get']['responses']['200']['content']['text/remix-deferred']
@@ -16,10 +18,10 @@ const getC4SStudio = async (
 	const res = await client.GET('/{language}/studio/{studioId}/{studioSlug}', {
 		params: {
 			path: {
-				...params,
+				studioId: params.id,
 				// if slug is not passed in, client will handle making request based on redirect
-				studioSlug: params.studioSlug ?? 'x',
-				language: params.language ?? 'en',
+				studioSlug: params.slug ?? 'x',
+				language: params.language ?? DEFAULT_LANGUAGE,
 			},
 			query: {
 				_data: 'routes/($lang).studio.$id_.$studioSlug.$',

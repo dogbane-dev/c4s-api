@@ -7,9 +7,9 @@ import { getC4SStudio } from './single-studio'
 describe('single studio', () => {
 	it('fetches with slug provided', async () => {
 		const result = await getC4SStudio({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
-			studioSlug: 'tatti-roana-bondage',
+			slug: 'tatti-roana-bondage',
 		})
 		const parseResult = SingleStudioResponseSchema.safeParse(result)
 
@@ -33,7 +33,7 @@ describe('single studio', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const result = await getC4SStudio({
-			studioId: 254031,
+			id: 254031,
 			language: 'en',
 		})
 		const parseResult = SingleStudioResponseSchema.safeParse(result)
@@ -59,9 +59,9 @@ describe('single studio', () => {
 	it('throws error if studio is not found', () => {
 		expect(() =>
 			getC4SStudio({
-				studioId: 1, // not right / real
+				id: 1, // not right / real
+				slug: 'tatti-roana-bondage',
 				language: 'en',
-				studioSlug: 'tatti-roana-bondage',
 			}),
 		).toThrowError(C4SStudioNotFoundError)
 	})

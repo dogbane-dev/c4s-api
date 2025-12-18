@@ -3,9 +3,15 @@
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import {
+	LANGUAGES,
+	SEXUAL_PREFERENCE_MAP,
+	STUDIO_CLIPS_PER_PAGE,
+	STUDIO_SEARCH_SORTS,
+} from '../shared/utils'
+import {
 	CategoriesResponseSchema,
 	CategoryInfoResponseSchema,
-	SeeMoreResponseSchema,
+	CategorySeeMoreResponseSchema,
 	SingleClipResponseSchema,
 	SingleStudioResponseSchema,
 	StudioClipSearchResponseSchema,
@@ -31,7 +37,7 @@ const studioSlug = z.string().meta({
 	example: 'something-here',
 })
 
-const language = z.enum(['en', 'fr', 'de', 'pt', 'es', 'it']).meta({
+const language = z.enum(LANGUAGES).meta({
 	description: 'The language of the clip details',
 	example: 'en',
 })
@@ -42,19 +48,10 @@ const dataParam = <T extends string>(value: T) =>
 		example: value,
 	})
 
-const studioClipSearchSort = z
-	.enum([
-		'recommended',
-		'added_at',
-		'most_popular',
-		'top_selling',
-		'featured',
-		'longest',
-	])
-	.meta({
-		description: 'The sort order of the clip search results',
-		example: 'recommended',
-	})
+const studioClipSearchSort = z.enum(STUDIO_SEARCH_SORTS).meta({
+	description: 'The sort order of the clip search results',
+	example: 'recommended',
+})
 
 const page = z.number().int().min(1).max(999_999).meta({
 	description: 'Page number',
@@ -84,15 +81,7 @@ const category = z.number().int().min(0).max(9_999).meta({
 	example: '4 (Bondage)',
 })
 
-const SEXUAL_PREFERENCES = {
-	1: 'Straight',
-	2: 'Gay',
-	3: 'Lesbian',
-	4: 'Bisexual',
-	5: 'Trans',
-}
-
-const sexualPrefHelpText = Object.entries(SEXUAL_PREFERENCES)
+const sexualPrefHelpText = Object.entries(SEXUAL_PREFERENCE_MAP)
 	.map(([key, value]) => `${value} (ID: ${key})`)
 	.join(', ')
 
@@ -212,8 +201,7 @@ const schema = createDocument({
 			{
 				get: {
 					summary: 'Get studio clips',
-					description:
-						"Get a paginated list of a studio's clips. Page size is fixed at 20, changing limit in url will not have any effect.",
+					description: `Get a paginated list of a studio's clips. Page size is fixed at ${STUDIO_CLIPS_PER_PAGE}, changing limit in url will not have any effect.`,
 					requestParams: {
 						path: z.object({
 							studioId,
@@ -292,7 +280,7 @@ const schema = createDocument({
 					'200': {
 						description: '200 OK',
 						content: {
-							'application/json': { schema: SeeMoreResponseSchema },
+							'application/json': { schema: CategorySeeMoreResponseSchema },
 						},
 					},
 				},
