@@ -51,13 +51,13 @@
 						"in": "path",
 						"name": "language",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]
 						},
 						"required": true,
-						"description": "The language of the clip details"
+						"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request."
 					},
 					{
 						"in": "query",
@@ -1284,13 +1284,13 @@
 						"in": "path",
 						"name": "language",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]
 						},
 						"required": true,
-						"description": "The language of the clip details"
+						"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request."
 					},
 					{
 						"in": "query",
@@ -2749,13 +2749,13 @@
 						"in": "path",
 						"name": "language",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]
 						},
 						"required": true,
-						"description": "The language of the clip details"
+						"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request."
 					},
 					{
 						"in": "path",
@@ -4012,13 +4012,13 @@
 						"in": "path",
 						"name": "language",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]
 						},
 						"required": true,
-						"description": "The language of the clip details"
+						"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request."
 					},
 					{
 						"in": "path",
@@ -5285,7 +5285,7 @@
 						"in": "query",
 						"name": "section",
 						"schema": {
-							"description": "Determines what data type is returned",
+							"description": "Determines what type of data is returned",
 							"type": "string",
 							"enum": [
 								"top-stores-see-more",
@@ -5294,13 +5294,13 @@
 							]
 						},
 						"required": true,
-						"description": "Determines what data type is returned"
+						"description": "Determines what type of data is returned"
 					},
 					{
 						"in": "query",
 						"name": "lng",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]
@@ -5823,7 +5823,14 @@
 																"type": "null"
 															},
 															"video_preview_link": {
-																"type": "string"
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
 															},
 															"cdn_previewlg_link": {
 																"type": "string"
@@ -5986,7 +5993,7 @@
 						"in": "query",
 						"name": "lng",
 						"schema": {
-							"description": "The language of the clip details",
+							"description": "The language of the returned data. If omitted, the language will be automatically determined by location of the request.",
 							"example": "en",
 							"type": "string",
 							"enum": ["en", "fr", "de", "pt", "es", "it"]

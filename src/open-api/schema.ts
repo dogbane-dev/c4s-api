@@ -38,7 +38,8 @@ const studioSlug = z.string().meta({
 })
 
 const language = z.enum(LANGUAGES).meta({
-	description: 'The language of the clip details',
+	description:
+		'The language of the returned data. If omitted, the language will be automatically determined by location of the request.',
 	example: 'en',
 })
 
@@ -101,7 +102,7 @@ const seeMoreSection = z
 		'recently-added-related-clips-see-more',
 	])
 	.meta({
-		description: 'Determines what data type is returned',
+		description: 'Determines what type of data is returned',
 	})
 
 const schema = createDocument({

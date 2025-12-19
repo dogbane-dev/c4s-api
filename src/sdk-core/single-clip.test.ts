@@ -79,6 +79,43 @@ describe('single clip', () => {
 		expect(staticDetails).toMatchSnapshot()
 	})
 
+	it('fetches with slug provided without language - handles request rewrite', async () => {
+		const result = await getC4SClip({
+			id: 29869933,
+			studioId: 254031,
+			slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+		})
+
+		const parseResult = SingleClipResponseSchema.safeParse(result)
+
+		expect(
+			parseResult.success,
+			formatZodError('Clip response', parseResult),
+		).toBeTrue()
+
+		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
+		const clip = parseResult.data!
+		expect(clip).toBeDefined()
+
+		// reset dynamic data
+		clip.clip.studio.most_recent_clip_id = null
+		clip.clip.studio.total_clips = null
+
+		const {
+			recommendationsPromise,
+			followersCount,
+			clipsCount,
+			...staticDetails
+		} = clip
+
+		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
+		expect(recommendationsPromise.pills).toBeArray()
+		expect(recommendationsPromise.recommendations).toBeArray()
+
+		expect(staticDetails).toMatchSnapshot()
+	})
+
 	it('throws error if clip is not found', () => {
 		expect(() =>
 			getC4SClip({

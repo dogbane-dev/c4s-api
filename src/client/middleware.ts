@@ -69,11 +69,18 @@ export const remixParseHandler: Middleware = {
 
 export const requestRewriteHandler: Middleware = {
 	async onRequest({ request, schemaPath }) {
-		// handle optional search path param - "/search/" only needed if search term is passed in
-		if (
-			schemaPath ===
-			'/{language}/studio/{studioId}/{studioSlug}/{category}/{page}/{sort}/Limit24/search/{search}'
-		) {
+		// handle optional language path param at start of path - "/en/..." - defaults to region in which request is made
+		if (schemaPath.startsWith('/{language}/')) {
+			const url = new URL(request.url)
+			// language is blank (path name starts with "//")
+			if (url.pathname.match(/^\/\//)) {
+				url.pathname = url.pathname.replace(/^\/\//, '/')
+				return new Request(url.toString(), request)
+			}
+		}
+
+		// handle optional search path param - ".../search/search%20term" only needed if search term is passed in
+		if (schemaPath.endsWith('/search/{search}')) {
 			const url = new URL(request.url)
 			// search is blank
 			if (url.pathname.match(/\/search\/$/)) {

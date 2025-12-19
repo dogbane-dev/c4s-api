@@ -6,14 +6,13 @@ import {
 	parseSexualPreferences,
 	type SexualPreference,
 } from '../shared/utils'
-import { DEFAULT_LANGUAGE, DEFAULT_SEXUAL_PREFERENCES } from './config'
 
 type GetC4SCategorySeeMoreParams = {
 	type: 'top-stores' | 'top-clips' | 'recently-added-related-clips'
 	language?: Language
 	id: number
 	sexualPreferences?: SexualPreference[]
-	page?: number
+	page: number
 }
 
 type GetC4SCategorySeeMoreData =
@@ -35,12 +34,10 @@ const getC4SCategorySeeMore = async (
 		params: {
 			query: {
 				_data: 'routes/clips.category.seeMore',
-				pill: params.sexualPreferences
-					? parseSexualPreferences(params.sexualPreferences)
-					: DEFAULT_SEXUAL_PREFERENCES,
-				lng: params.language ?? DEFAULT_LANGUAGE,
+				pill: parseSexualPreferences(params.sexualPreferences),
+				lng: params.language,
 				id: params.id,
-				page: params.page ?? 2,
+				page: params.page,
 				section: `${params.type}-see-more`,
 			},
 		},

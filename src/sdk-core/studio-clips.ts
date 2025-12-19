@@ -1,7 +1,11 @@
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
-import type { Language, StudioSearchSort } from '../shared/utils'
-import { DEFAULT_LANGUAGE } from './config'
+import {
+	type Language,
+	parseLanguage,
+	parseSlug,
+	type StudioSearchSort,
+} from '../shared/utils'
 
 type GetC4SStudioClipsParams = {
 	id: number
@@ -27,12 +31,12 @@ const getC4SStudioClips = async (
 				path: {
 					studioId: params.id,
 					// if slug is not passed in, client will handle the remix redirect
-					studioSlug: params.slug ?? 'x',
+					studioSlug: parseSlug(params.slug),
 					category: params.categoryId ?? 0,
 					page: params.page ?? 1,
 					search: params.search ?? '',
 					sort: params.sort ?? 'recommended',
-					language: params.language ?? DEFAULT_LANGUAGE,
+					language: parseLanguage(params.language),
 				},
 				query: {
 					_data: 'routes/($lang).studio.$id_.$studioSlug.$',

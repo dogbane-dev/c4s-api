@@ -2,10 +2,10 @@ import { client } from '../client'
 import type { paths } from '../client/paths.generated'
 import {
 	type Language,
+	parseLanguage,
 	parseSexualPreferences,
 	type SexualPreference,
 } from '../shared/utils'
-import { DEFAULT_LANGUAGE, DEFAULT_SEXUAL_PREFERENCES } from './config'
 
 type GetC4SCategoryDetailsParams = {
 	id: number
@@ -23,13 +23,11 @@ const getC4SCategoryDetails = async (
 		params: {
 			path: {
 				category: params.id,
-				language: params.language ?? DEFAULT_LANGUAGE,
+				language: parseLanguage(params.language),
 			},
 			query: {
 				_data: 'routes/($lang).clips.category.$id.($catName)',
-				pill: params.sexualPreferences
-					? parseSexualPreferences(params.sexualPreferences)
-					: DEFAULT_SEXUAL_PREFERENCES,
+				pill: parseSexualPreferences(params.sexualPreferences),
 			},
 		},
 	})

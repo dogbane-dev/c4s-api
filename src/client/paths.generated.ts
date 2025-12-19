@@ -29,7 +29,7 @@ export interface paths {
 					clipId: number
 					/** @description The text identifier slug for a clip */
 					clipSlug: string
-					/** @description The language of the clip details */
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
 					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
 				}
 				cookie?: never
@@ -327,7 +327,7 @@ export interface paths {
 					studioId: number
 					/** @description The text identifier slug for a studio */
 					studioSlug: string
-					/** @description The language of the clip details */
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
 					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
 				}
 				cookie?: never
@@ -665,7 +665,7 @@ export interface paths {
 					studioId: number
 					/** @description The text identifier slug for a studio */
 					studioSlug: string
-					/** @description The language of the clip details */
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
 					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
 					/** @description Page number */
 					page: number
@@ -982,7 +982,7 @@ export interface paths {
 				}
 				header?: never
 				path: {
-					/** @description The language of the clip details */
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
 					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
 					/** @description C4S category ID */
 					category: number
@@ -1269,7 +1269,7 @@ export interface paths {
 		get: {
 			parameters: {
 				query: {
-					/** @description Determines what data type is returned */
+					/** @description Determines what type of data is returned */
 					section:
 						| 'top-stores-see-more'
 						| 'top-clips-see-more'
@@ -1405,7 +1405,7 @@ export interface paths {
 										}
 										mediabook_url: null
 										mediabook_quality: null
-										video_preview_link: string
+										video_preview_link: string | null
 										cdn_previewlg_link: string
 										cdn_preview_link: string
 										checkout_link: string

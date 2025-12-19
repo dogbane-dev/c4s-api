@@ -1,7 +1,6 @@
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
 import type { Language } from '../shared/utils'
-import { DEFAULT_LANGUAGE } from './config'
 
 type GetC4SCategoriesParams = {
 	language?: Language
@@ -16,7 +15,7 @@ const getC4SCategories = async (
 	const res = await client.GET('/clips/ajax/categoriesdropdown', {
 		params: {
 			query: {
-				lng: params?.language ?? DEFAULT_LANGUAGE,
+				lng: params?.language,
 			},
 		},
 	})
@@ -46,8 +45,9 @@ const getC4SCategoryByName = async (
 
 const getC4SCategoryById = async (
 	id: number,
+	language?: Language,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const { categories } = await getC4SCategories()
+	const { categories } = await getC4SCategories({ language })
 	const c = categories.find((c) => c.id === id)
 	if (!c) {
 		throw new Error(`Category with ID=${id} not found`)

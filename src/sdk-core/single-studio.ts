@@ -1,7 +1,6 @@
 import { client } from '../client'
 import type { paths } from '../client/paths.generated'
-import type { Language } from '../shared/utils'
-import { DEFAULT_LANGUAGE } from './config'
+import { type Language, parseLanguage, parseSlug } from '../shared/utils'
 
 type GetC4SStudioParams = {
 	id: number
@@ -19,9 +18,8 @@ const getC4SStudio = async (
 		params: {
 			path: {
 				studioId: params.id,
-				// if slug is not passed in, client will handle making request based on redirect
-				studioSlug: params.slug ?? 'x',
-				language: params.language ?? DEFAULT_LANGUAGE,
+				studioSlug: parseSlug(params.slug),
+				language: parseLanguage(params.language),
 			},
 			query: {
 				_data: 'routes/($lang).studio.$id_.$studioSlug.$',
