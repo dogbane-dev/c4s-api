@@ -62,7 +62,7 @@ const getC4SCategorySeeMoreTopStores = async (
 }
 
 const getC4SCategorySeeMoreTopClips = async (
-	params: Omit<GetC4SCategorySeeMoreParams, 'section'>,
+	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
 	const res = await getC4SCategorySeeMore({
 		...params,
@@ -72,7 +72,7 @@ const getC4SCategorySeeMoreTopClips = async (
 }
 
 const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
-	params: Omit<GetC4SCategorySeeMoreParams, 'section'>,
+	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
 	const res = await getC4SCategorySeeMore({
 		...params,

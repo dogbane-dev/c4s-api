@@ -12,7 +12,7 @@ import {
 	getC4SClip,
 	getC4SStudio,
 	getC4SStudioClips,
-} from '../src/sdk'
+} from '../src/sdk-core'
 import { formatZodError } from '../src/testing/utils'
 
 const getAndValidateStudio = async (p: GetC4SStudioParams) => {

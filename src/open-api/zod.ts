@@ -847,7 +847,7 @@ export const CategorySeeMoreExtraClipSchema = z.object({
 	thumbs: ThumbsSchema,
 	mediabook_url: z.null(),
 	mediabook_quality: z.null(),
-	video_preview_link: z.string(),
+	video_preview_link: z.string().nullable(),
 	cdn_previewlg_link: z.string(),
 	cdn_preview_link: z.string(),
 	checkout_link: z.string(),

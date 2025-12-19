@@ -1,2 +1,4 @@
 export * from './client/utils'
+export * from './sdk-client'
 export * from './sdk-core'
+export * from './sdk-extended'

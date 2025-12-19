@@ -290,6 +290,11 @@ const schema = createDocument({
 			get: {
 				summary: 'Get list of categories',
 				description: 'Get full list of categories and recommendations',
+				requestParams: {
+					query: z.object({
+						lng: language.optional(),
+					}),
+				},
 				responses: {
 					'200': {
 						description: '200 OK',

@@ -59,7 +59,6 @@ const getC4STopClips = async (
 		const result = await getC4SCategorySeeMoreTopClips({
 			id: params.categoryId,
 			page,
-			type: 'top-clips',
 			language: params.language,
 			sexualPreferences: params.sexualPreferences,
 		})
