@@ -5,9 +5,9 @@ import {
 	CategorySeeMoreExtraStoreSchema,
 	CategorySeeMoreResponseSchema,
 } from '../open-api/zod'
+import { INVALID_SEE_MORE_PAGES, VALID_SEE_MORE_PAGES } from '../shared/utils'
 import { formatZodError } from '../testing/utils'
 import { getC4SCategorySeeMore } from './category-see-more'
-import { INVALID_SEE_MORE_PAGES, VALID_SEE_MORE_PAGES } from '../shared/utils'
 
 const variations = [
 	{
@@ -23,8 +23,6 @@ const variations = [
 		schema: CategorySeeMoreExtraClipSchema,
 	},
 ]
-
-
 
 describe('category details', () => {
 	variations.forEach(({ type, schema }) => {
