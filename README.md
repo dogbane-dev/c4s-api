@@ -2,6 +2,8 @@
 
 Unofficial api client, types, and open-api schema for Clips4Sale adult video web store
 
+![Tests](https://github.com/dogbane-dev/c4s-api/actions/workflows/api-tests.yml/badge.svg)
+
 ## Installation
 
 ```bash
