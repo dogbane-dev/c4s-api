@@ -2,7 +2,7 @@
 
 Unofficial api client, types, and open-api schema for Clips4Sale adult video web store
 
-![Tests](https://github.com/dogbane-dev/c4s-api/actions/workflows/api-tests.yml/badge.svg)
+![Api Tests](https://github.com/dogbane-dev/c4s-api/actions/workflows/api-tests.yml/badge.svg)
 
 ## Installation
 
@@ -84,9 +84,6 @@ MIT
 TBD
 
 ## Future Work / Possible Contributions
-
-- Put badge somewhere on readme that can reflect status of tests passing - therefore showing types are still up to date
-  - run tests on some kind of schedule ?
 - add endpoint for generic public search
 - add example responses, better notes & descriptions to all endpoints & schemas
 - document available exports and SDK
