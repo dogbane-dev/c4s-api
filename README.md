@@ -2,7 +2,11 @@
 
 Unofficial api client, types, and open-api schema for Clips4Sale adult video web store
 
+## Status
+
 ![Api Tests](https://github.com/dogbane-dev/c4s-api/actions/workflows/api-tests.yml/badge.svg)
+
+If this is not passing, Clips4Sale's underlying API may have changed and the this library's requests & types may be incorrect.
 
 ## Installation
 
@@ -79,7 +83,7 @@ Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
 
 MIT
 
-## Available Exports
+## Available Methods
 
 TBD
 
