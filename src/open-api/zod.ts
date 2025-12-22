@@ -1,5 +1,12 @@
 /** biome-ignore-all lint/correctness/noUnusedVariables: semi-generated schemas from quick-type */
 import * as z from 'zod'
+import {
+	CLIP_SEARCH_FILTER_DATES,
+	CLIP_SEARCH_FILTER_DURATIONS,
+	CLIP_SEARCH_FILTER_FORMATS,
+	CLIP_SEARCH_FILTER_PRICES,
+	CLIP_SEARCH_FILTER_RESOLUTIONS,
+} from '../shared/utils'
 
 const CanonicalSchema = z.object({
 	href: z.string(),
@@ -894,3 +901,230 @@ export const CategoriesResponseSchema = z.object({
 	recommendations: z.array(CategorySchema),
 })
 export type CategoeriesResponse = z.infer<typeof CategoriesResponseSchema>
+
+// ------------------------------
+
+export const ActiveFiltersSchema = z.object({
+	date: z.literal(CLIP_SEARCH_FILTER_DATES).nullish(),
+	format: z.literal(CLIP_SEARCH_FILTER_FORMATS).nullish(),
+	duration: z.literal(CLIP_SEARCH_FILTER_DURATIONS).nullish(),
+	resolution: z.literal(CLIP_SEARCH_FILTER_RESOLUTIONS).nullish(),
+	price: z.literal(CLIP_SEARCH_FILTER_PRICES).nullish(),
+	content_preference: z.array(z.string().regex(/^[0-9]+$/)).nullish(),
+	category_id: z.array(z.string().regex(/^[0-9]+$/)).optional(),
+})
+export type ActiveFilters = z.infer<typeof ActiveFiltersSchema>
+
+export const SearchRelatedCategorySchema = z.object({
+	category: z.string(),
+	translations: z.null(),
+	link: z.string(),
+})
+export type SearchRelatedCategory = z.infer<typeof SearchRelatedCategorySchema>
+
+export const SearchResultStudioSchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	slug: z.string(),
+	avatar: z.null(),
+	avatar_thumbs: z.null(),
+	banner: z.null(),
+	banner_thumbs: z.null(),
+	total_clips: z.null(),
+	last_clip: z.null(),
+	most_recent_clip_id: z.null(),
+	link: z.string(),
+	category: z.null(),
+})
+export type SearchResultStudio = z.infer<typeof SearchResultStudioSchema>
+
+export const SearchResultCategorySchema = z.object({
+	id: z.number(),
+	name: z.string(),
+	translations: z.null(),
+	link: z.string(),
+	search_link: z.string(),
+	store_link: z.null(),
+	clean_name: z.string(),
+	total_clips: z.null(),
+	thumb: z.null(),
+	pill: z.null(),
+})
+export type SearchResultCategory = z.infer<typeof SearchResultCategorySchema>
+
+export const MetaSchema = z.object({
+	title: z.string(),
+	description: z.string(),
+})
+export type Meta = z.infer<typeof MetaSchema>
+
+export const ClipSearchResponseClipSchema = z.object({
+	clipId: z.string(),
+	producer: z.number(),
+	bannerLink: z.string(),
+	title: z.string(),
+	position: z.number(),
+	categoryId: z.number(),
+	duration: z.number(),
+	suggestedClipUrl: z.string(),
+	previewLink: z.string(),
+	previewUrl: z.union([z.null(), z.string()]),
+	srcSet: z.string(),
+	responsiveSrcset: z.array(SrcsetSchema),
+	customPreview: z.boolean(),
+	customPreviewUrl: z.union([z.null(), z.string()]),
+	studioTitle: z.string(),
+	studioLink: z.string(),
+	price: z.number(),
+	dateDisplay: z.string(),
+	scroll_page: z.number(),
+	screen_size: z.union([z.null(), z.string()]),
+	id: z.number(),
+	checkout_link: z.string(),
+	date_display: z.string(),
+	cdn_preview_link: z.union([z.null(), z.string()]),
+	is_preview_enabled: z.boolean(),
+	cdn_previewlg_link: z.string(),
+	link: z.string(),
+	format: z.string(),
+	resolution_text: z.union([z.null(), z.string()]),
+	resolution: z.union([z.null(), z.string()]),
+	time_minutes: z.number(),
+	size_mb: z.number(),
+	size: z.number(),
+	category_link: z.string(),
+	category_name: z.string(),
+	related_category_links: z.array(SearchRelatedCategorySchema).optional(),
+	keyword_links: z.array(KeywordLinkSchema).optional(),
+	performers: z.union([z.array(PerformerSchema), z.null()]),
+	description: z.union([z.null(), z.string()]),
+	description_sanitized: z.union([z.null(), z.string()]),
+	translations: z.null(),
+	studio: SearchResultStudioSchema,
+	gifPreviewUrl: z.union([z.null(), z.string()]),
+	discounted_price: z.null(),
+	onSale: z.null(),
+	isAudio: z.boolean(),
+})
+export type ClipSearchResponseClip = z.infer<
+	typeof ClipSearchResponseClipSchema
+>
+
+export const DataClipSchema = z.object({
+	id: z.number(),
+	title: z.string(),
+	slug: z.string(),
+	link: z.string(),
+	related_categories: z.array(SearchRelatedCategorySchema).nullish(),
+	related_keywords: z.array(KeywordLinkSchema).nullish(),
+	description: z.union([z.null(), z.string()]),
+	description_sanitized: z.union([z.null(), z.string()]),
+	translations: z.null(),
+	added_at: z.string(),
+	price: z.number(),
+	discounted_price: z.null(),
+	format: z.string(),
+	screen: z.string(),
+	resolution: z.string(),
+	length: z.number(),
+	suggested_clip_url: z.string(),
+	size: z.number(),
+	studio: SearchResultStudioSchema,
+	category: SearchResultCategorySchema,
+	thumb: z.string(),
+	thumbs: ThumbsSchema,
+	mediabook_url: z.union([z.null(), z.string()]),
+	mediabook_quality: z.union([z.null(), z.string()]),
+	video_preview_link: z.string().nullable(),
+	cdn_previewlg_link: z.string(),
+	cdn_preview_link: z.string(),
+	checkout_link: z.string(),
+	next_link: z.null(),
+	prev_link: z.null(),
+	show_click_for_preview: z.boolean(),
+	webm_preview_link: z.string().nullable(),
+	gif_preview_link: z.string().nullable(),
+	download: z.null(),
+	is_encoded: z.null(),
+	player: z.null(),
+	orientation: z.null(),
+	performers: z.array(PerformerSchema).nullable(),
+	archived: z.boolean(),
+	on_sale: z.null(),
+})
+export type DataClip = z.infer<typeof DataClipSchema>
+
+const AvatarSizeSchema = z.object({
+	url: z.string().nullable(),
+})
+
+export const AvatarsSchema = z.object({
+	'18x16': AvatarSizeSchema,
+	'20x20': AvatarSizeSchema,
+	'30x30': AvatarSizeSchema,
+	'52x52': AvatarSizeSchema,
+	'88x88': AvatarSizeSchema,
+	'120x120': AvatarSizeSchema,
+	'188x188': AvatarSizeSchema,
+	original: AvatarSizeSchema,
+})
+export type Avatars = z.infer<typeof AvatarsSchema>
+
+export const PerformerPillElementSchema = z.object({
+	value: z.number(),
+	label: z.string(),
+	type: z.string(),
+	avatars: AvatarsSchema.nullable(),
+	isActive: z.boolean(),
+	avatar: z.string().optional(),
+})
+export type PerformerPillElement = z.infer<typeof PerformerPillElementSchema>
+
+export const PerformerPillSchema = z.object({
+	value: z.number(),
+	label: z.string(),
+	type: z.string(),
+	avatars: AvatarsSchema.nullable(),
+	isActive: z.boolean(),
+})
+export type PerformerPill = z.infer<typeof PerformerPillSchema>
+
+export const SearchDataSchema = z.object({
+	clips: z.array(DataClipSchema),
+	performer: z.null(),
+	pills: z.array(PillSchema).nullable(),
+	performer_pills: z.array(PerformerPillSchema).nullable(),
+	totalClips: z.number(),
+	totalClipPages: z.number(),
+	spellcheck: z.null(),
+	message: z.null(),
+	recommendations: z.null(),
+})
+export type SearchData = z.infer<typeof SearchDataSchema>
+
+export const ClipSearchResponseSchema = z.object({
+	searchQueryId: z.string(),
+	success: z.boolean(),
+	code: z.string(),
+	data: SearchDataSchema,
+	spellcheck: z.null(),
+	pills: z.array(PillSchema).optional(),
+	performerPills: z.array(PerformerPillElementSchema).optional(),
+	totalClipPages: z.number(),
+	clipsPage: z.number(),
+	activeFilters: ActiveFiltersSchema,
+	clipsSort: z.string(),
+	defaultSortFromCookie: z.string(),
+	isActiveExperiment: z.boolean(),
+	experimentId: z.string(),
+	keyword: z.string().optional(),
+	categoryId: z.string(),
+	meta: MetaSchema,
+	clips: z.array(ClipSearchResponseClipSchema),
+	performer: z.null(),
+	canonical: CanonicalSchema,
+	orientation: z.array(z.any()),
+	isShowSavedSearchHint: z.boolean(),
+	isPerformerSearch: z.boolean(),
+})
+export type ClipSearchResponse = z.infer<typeof ClipSearchResponseSchema>

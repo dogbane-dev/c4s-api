@@ -1,3 +1,4 @@
+import type { C4SClient } from '../client'
 import {
 	type GetC4SCategoryDetailsData,
 	getC4SCategoryDetails,
@@ -20,40 +21,29 @@ type GetC4STopStudiosData = Array<
 
 const getC4STopStudios = async (
 	params: GetC4STopStudiosParams,
+	client?: C4SClient,
 ): Promise<GetC4STopStudiosData> => {
-	const details = await getC4SCategoryDetails({
-		id: params.categoryId,
-		language: params.language,
-		sexualPreferences: params.sexualPreferences,
-	})
-
-	let topStores: GetC4STopStudiosData = details.topStores.map((r) => ({
-		// clipId: r.clipId,
-		// title: r.title,
-		// producer: r.producer,
-		// bannerLink: r.bannerLink,
-		// description: r.description,
-		// translations: r.translations,
-		// categoryId: r.categoryId,
-		// categoryName: r.categoryName,
-		// categoryLink: r.categoryLink,
-		// duration: r.duration,
-		// suggestedClipUrl: r.suggestedClipUrl,
-		// previewLink: r.previewLink,
-		// customPreviewUrl: r.customPreviewUrl,
-		// studioTitle: r.studioTitle,
-		// studioLink: r.studioLink,
-		// price: r.price,
-		...r,
-	}))
-
-	for (const page of VALID_SEE_MORE_PAGES) {
-		const result = await getC4SCategorySeeMoreTopStores({
+	const details = await getC4SCategoryDetails(
+		{
 			id: params.categoryId,
-			page,
 			language: params.language,
 			sexualPreferences: params.sexualPreferences,
-		})
+		},
+		client,
+	)
+
+	let topStores: GetC4STopStudiosData = details.topStores
+
+	for (const page of VALID_SEE_MORE_PAGES) {
+		const result = await getC4SCategorySeeMoreTopStores(
+			{
+				id: params.categoryId,
+				page,
+				language: params.language,
+				sexualPreferences: params.sexualPreferences,
+			},
+			client,
+		)
 
 		const mapped: GetC4STopStudiosData = result.map((r) => {
 			const storeCatLink = `${r.link}/Cat${r.category.id}-${r.category.name.toUpperCase()}/Page1/C4SSort-recommended/Limit24`

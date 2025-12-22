@@ -1,4 +1,4 @@
-import { client } from '../client'
+import { type C4SClient, getClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
 	type Language,
@@ -23,8 +23,11 @@ type GetC4SStudioClipsData =
 
 const getC4SStudioClips = async (
 	params: GetC4SStudioClipsParams,
+	client?: C4SClient,
 ): Promise<GetC4SStudioClipsData> => {
-	const res = await client.GET(
+	const c = getClient(client)
+
+	const res = await c.GET(
 		'/{language}/studio/{studioId}/{studioSlug}/{category}/{page}/{sort}/Limit24/search/{search}',
 		{
 			params: {

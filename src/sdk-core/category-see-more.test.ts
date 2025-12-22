@@ -6,7 +6,7 @@ import {
 	CategorySeeMoreResponseSchema,
 } from '../open-api/zod'
 import { INVALID_SEE_MORE_PAGES, VALID_SEE_MORE_PAGES } from '../shared/utils'
-import { formatZodError } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SCategorySeeMore } from './category-see-more'
 
 const variations = [
@@ -29,54 +29,61 @@ describe('category details', () => {
 		describe(`get ${type}`, () => {
 			VALID_SEE_MORE_PAGES.forEach((page) => {
 				it(`fetches page ${page} (valid)`, async () => {
-					const result = await getC4SCategorySeeMore({
-						id: 4,
-						page,
-						type,
-						language: 'en',
-					})
+					const mockClient = getMockClient()
+					const result = await getC4SCategorySeeMore(
+						{
+							id: 4,
+							page,
+							type,
+							language: 'en',
+						},
+						mockClient,
+					)
 
 					const responseSchema = z.object({
-						seeMoreExtra: schema.array(),
+						seeMoreExtra: z.array(schema),
 					})
-					const parseResult = responseSchema.safeParse(result)
 
-					expect(
-						parseResult.success,
-						formatZodError('Category see more response', parseResult),
-					).toBeTrue()
-
-					// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-					const category = parseResult.data!
+					const category = expectMatchesSchema(
+						result,
+						responseSchema,
+						'Category see more response',
+					)
 
 					expect(category).toBeDefined()
 					expect(category.seeMoreExtra).toBeArray()
 					expect(
 						CategorySeeMoreResponseSchema.safeParse(category).success,
 					).toBeTrue()
+					expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 				})
 			})
 
 			INVALID_SEE_MORE_PAGES.forEach((page) => {
 				it(`fetches page ${page} (empty)`, async () => {
-					const result = await getC4SCategorySeeMore({
-						id: 4,
-						page,
-						type: 'top-stores',
-						language: 'en',
-					})
+					const mockClient = getMockClient()
+					const result = await getC4SCategorySeeMore(
+						{
+							id: 4,
+							page,
+							type: 'top-stores',
+							language: 'en',
+						},
+						mockClient,
+					)
 
 					const responseSchema = z.object({
-						seeMoreExtra: schema.array(),
+						seeMoreExtra: z.array(schema),
 					})
-					const parseResult = responseSchema.safeParse(result)
 
-					expect(
-						parseResult.success,
-						formatZodError('Category see more response', parseResult),
-					).toBeTrue()
+					const category = expectMatchesSchema(
+						result,
+						responseSchema,
+						'Category see more response',
+					)
 
-					expect(parseResult.data?.seeMoreExtra).toBeArrayOfSize(0)
+					expect(category?.seeMoreExtra).toBeArrayOfSize(0)
+					expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 				})
 			})
 		})

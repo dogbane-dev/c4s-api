@@ -3,6 +3,7 @@
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import {
+	CLIP_SEARCH_SORTS,
 	LANGUAGES,
 	SEXUAL_PREFERENCE_MAP,
 	STUDIO_CLIPS_PER_PAGE,
@@ -12,6 +13,7 @@ import {
 	CategoriesResponseSchema,
 	CategoryInfoResponseSchema,
 	CategorySeeMoreResponseSchema,
+	ClipSearchResponseSchema,
 	SingleClipResponseSchema,
 	SingleStudioResponseSchema,
 	StudioClipSearchResponseSchema,
@@ -56,6 +58,11 @@ const studioClipSearchSort = z.enum(STUDIO_SEARCH_SORTS).meta({
 
 const page = z.number().int().min(1).max(999_999).meta({
 	description: 'Page number',
+	example: 1,
+})
+
+const studioPage = z.number().int().min(1).max(999_999).meta({
+	description: 'Studio page number. Seems to have no effect',
 	example: 1,
 })
 
@@ -104,6 +111,11 @@ const seeMoreSection = z
 	.meta({
 		description: 'Determines what type of data is returned',
 	})
+
+const clipSearchTerm = z.string().meta({
+	description: 'Search term to filter clip results by',
+	example: 'ball gag',
+})
 
 const schema = createDocument({
 	openapi: '3.1.0',
@@ -306,6 +318,46 @@ const schema = createDocument({
 				},
 			},
 		},
+		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/{filters}':
+			{
+				get: {
+					summary: 'Search for clips',
+					description: 'Search for clips by term',
+					requestParams: {
+						path: z.object({
+							language,
+							// if search is not provided, url can omit everything. unless past page 1?
+							search: clipSearchTerm,
+							// category goes at end ??? and url changes
+							// categories filter can go at end too ???
+							category,
+							storePage: studioPage,
+							page,
+							// most popular = best match
+							// if sort = bestmatch, the everything after page is omitted, unless there is a filter applied
+							studioSort: z.literal('bestmatch'),
+							categorySort: z.literal('bestmatch'),
+							clipSort: z.enum(CLIP_SEARCH_SORTS),
+
+							filters: z.string().meta({
+								description: 'Search filters',
+								example: 'Elaborate serialized filters. More info TBD',
+							}),
+						}),
+						query: z.object({
+							_data: dataParam('routes/($lang).clips.search.$'),
+						}),
+					},
+					responses: {
+						'200': {
+							description: '200 OK',
+							content: {
+								'application/json': { schema: ClipSearchResponseSchema },
+							},
+						},
+					},
+				},
+			},
 	},
 })
 

@@ -59,3 +59,79 @@ export const VALID_SEE_MORE_PAGES: number[] = [2, 3]
 export const INVALID_SEE_MORE_PAGES: number[] = [1, 4]
 
 export const STUDIO_CLIPS_PER_PAGE = 20 // seems to be hard coded in api and cannot be changed
+
+export const CLIP_SEARCH_SORTS = ['bestmatch', 'mostrecent'] as const
+export type ClipSearchSort = (typeof CLIP_SEARCH_SORTS)[number]
+
+export const CLIP_SEARCH_FILTER_DATES = ['24h', '7d', '30d', '1y'] as const
+export const CLIP_SEARCH_FILTER_FORMATS = ['avi', 'mp4', 'mov', 'wmv'] as const
+export const CLIP_SEARCH_FILTER_RESOLUTIONS = ['4k', 'hd', 'sd'] as const
+export const CLIP_SEARCH_FILTER_PRICES = [
+	'0_10',
+	'10_25',
+	'100+',
+	'25_50',
+	'50_100',
+	'on_sale',
+] as const
+export const CLIP_SEARCH_FILTER_DURATIONS = [
+	'0_5',
+	'5_10',
+	'10_15',
+	'15_30',
+	'30+',
+] as const
+
+export type ClipSearchFilterDate = (typeof CLIP_SEARCH_FILTER_DATES)[number]
+export type ClipSearchFilterFormat = (typeof CLIP_SEARCH_FILTER_FORMATS)[number]
+export type ClipSearchFilterResolution =
+	(typeof CLIP_SEARCH_FILTER_RESOLUTIONS)[number]
+export type ClipSearchFilterPrice = (typeof CLIP_SEARCH_FILTER_PRICES)[number]
+export type ClipSearchFilterDuration =
+	(typeof CLIP_SEARCH_FILTER_DURATIONS)[number]
+
+export type ClipSearchFilter = {
+	past?: ClipSearchFilterDate
+	format?: ClipSearchFilterFormat | ClipSearchFilterFormat[]
+	resolution?: ClipSearchFilterResolution | ClipSearchFilterResolution[]
+	sexualPreferences?: SexualPreference | SexualPreference[]
+	price?: ClipSearchFilterPrice | ClipSearchFilterPrice[]
+	category?: number | number[]
+}
+const filterKeyMap: Record<keyof ClipSearchFilter, string> = {
+	past: 'd',
+	format: 'f',
+	resolution: 'r',
+	sexualPreferences: 'o',
+	price: 'p',
+	category: 'cp',
+}
+
+const FILTER_DELIMITER = '-'
+const FILTER_VALUE_DELIMITER = '_and_'
+
+export const parseClipSearchFilters = (
+	filters: ClipSearchFilter | undefined,
+): string => {
+	if (!filters) return ''
+
+	const filterStrings: string[] = []
+
+	for (const [k, value] of Object.entries(filters)) {
+		const key = k as keyof ClipSearchFilter
+		const filterKey = filterKeyMap[key as keyof ClipSearchFilter]
+		if (!filterKey || !value) continue
+
+		let values: (string | number)[] = Array.isArray(value) ? value : [value]
+		if (key === 'sexualPreferences') {
+			values = parseSexualPreferences(values as SexualPreference[])
+		}
+
+		// categories are joined by underscores for some reason instead of _and_
+		filterStrings.push(
+			`${filterKey}${values.join(key === 'category' ? '_' : FILTER_VALUE_DELIMITER)}`,
+		)
+	}
+
+	return filterStrings.join(FILTER_DELIMITER)
+}

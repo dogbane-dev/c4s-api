@@ -1,27 +1,27 @@
 import { describe, expect, it } from 'bun:test'
 import { C4SClipNotFoundError, C4SStudioNotFoundError } from '../client/utils'
 import { SingleClipResponseSchema } from '../open-api/zod'
-import { formatZodError } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SClip } from './single-clip'
 
 describe('single clip', () => {
 	it('fetches with slug provided', async () => {
-		const result = await getC4SClip({
-			id: 29869933,
-			studioId: 254031,
-			language: 'en',
-			slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SClip(
+			{
+				id: 29869933,
+				studioId: 254031,
+				language: 'en',
+				slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+			},
+			mockClient,
+		)
 
-		const parseResult = SingleClipResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Clip response', parseResult),
-		).toBeTrue()
-
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const clip = parseResult.data!
+		const clip = expectMatchesSchema(
+			result,
+			SingleClipResponseSchema,
+			'Clip response',
+		)
 		expect(clip).toBeDefined()
 
 		// reset dynamic data
@@ -41,23 +41,25 @@ describe('single clip', () => {
 		expect(recommendationsPromise.recommendations).toBeArray()
 
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('fetches without slug provided - handles remix redirect', async () => {
-		const result = await getC4SClip({
-			id: 29869933,
-			studioId: 254031,
-			language: 'en',
-		})
-		const parseResult = SingleClipResponseSchema.safeParse(result)
+		const mockClient = getMockClient()
+		const result = await getC4SClip(
+			{
+				id: 29869933,
+				studioId: 254031,
+				language: 'en',
+			},
+			mockClient,
+		)
 
-		expect(
-			parseResult.success,
-			formatZodError('Clip response', parseResult),
-		).toBeTrue()
-
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const clip = parseResult.data!
+		const clip = expectMatchesSchema(
+			result,
+			SingleClipResponseSchema,
+			'Clip response',
+		)
 		expect(clip).toBeDefined()
 
 		// reset dynamic data
@@ -77,24 +79,25 @@ describe('single clip', () => {
 		expect(recommendationsPromise.recommendations).toBeArray()
 
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(2)
 	})
 
 	it('fetches with slug provided without language - handles request rewrite', async () => {
-		const result = await getC4SClip({
-			id: 29869933,
-			studioId: 254031,
-			slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SClip(
+			{
+				id: 29869933,
+				studioId: 254031,
+				slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+			},
+			mockClient,
+		)
 
-		const parseResult = SingleClipResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Clip response', parseResult),
-		).toBeTrue()
-
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const clip = parseResult.data!
+		const clip = expectMatchesSchema(
+			result,
+			SingleClipResponseSchema,
+			'Clip response',
+		)
 		expect(clip).toBeDefined()
 
 		// reset dynamic data
@@ -114,27 +117,38 @@ describe('single clip', () => {
 		expect(recommendationsPromise.recommendations).toBeArray()
 
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('throws error if clip is not found', () => {
+		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip({
-				id: 123,
-				slug: 'not-real',
-				studioId: 254031,
-				language: 'en',
-			}),
+			getC4SClip(
+				{
+					id: 123,
+					slug: 'not-real',
+					studioId: 254031,
+					language: 'en',
+				},
+				mockClient,
+			),
 		).toThrowError(C4SClipNotFoundError)
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('throws error if studio is not found', () => {
+		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip({
-				id: 29869933,
-				studioId: 1, // not right / real
-				language: 'en',
-				slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
-			}),
+			getC4SClip(
+				{
+					id: 29869933,
+					studioId: 1, // not right / real
+					language: 'en',
+					slug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
+				},
+				mockClient,
+			),
 		).toThrowError(C4SStudioNotFoundError)
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 })

@@ -1,4 +1,5 @@
 import type { MaybePromise } from 'bun'
+import type { C4SClient } from '../client'
 import {
 	type GetC4SStudioClipsData,
 	type GetC4SStudioClipsParams,
@@ -22,16 +23,20 @@ type GetC4SAllStudioClipsData = GetC4SStudioClipsData['clips']
 
 const getC4SAllStudioClips = async (
 	params: GetC4SAllStudioClipsParams,
+	client?: C4SClient,
 ): Promise<GetC4SAllStudioClipsData> => {
 	let page = 1
 	let results = [] as GetC4SStudioClipsData['clips']
 
 	while (true) {
-		const s = await getC4SStudioClips({
-			...params,
-			onlyClips: true,
-			page,
-		})
+		const s = await getC4SStudioClips(
+			{
+				...params,
+				onlyClips: true,
+				page,
+			},
+			client,
+		)
 		if (s.clips.length === 0) break
 
 		results = results.concat(s.clips)
@@ -53,6 +58,3 @@ export {
 	type GetC4SAllStudioClipsParams,
 	type GetC4SAllStudioClipsData,
 }
-
-// TODO
-// make sure totalPage is correct if a category or search is present

@@ -1,4 +1,4 @@
-import { client } from '../client'
+import { type C4SClient, getClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
 	type InferFromField,
@@ -29,8 +29,10 @@ type GetC4SCategorySeeMoreStudio = InferFromField<
 
 const getC4SCategorySeeMore = async (
 	params: GetC4SCategorySeeMoreParams,
+	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreData> => {
-	const res = await client.GET('/clips/category/seeMore', {
+	const c = getClient(client)
+	const res = await c.GET('/clips/category/seeMore', {
 		params: {
 			query: {
 				_data: 'routes/clips.category.seeMore',
@@ -50,31 +52,43 @@ const getC4SCategorySeeMore = async (
 
 const getC4SCategorySeeMoreTopStores = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreStudio[]> => {
-	const res = await getC4SCategorySeeMore({
-		...params,
-		type: 'top-stores',
-	})
+	const res = await getC4SCategorySeeMore(
+		{
+			...params,
+			type: 'top-stores',
+		},
+		client,
+	)
 	return res.seeMoreExtra as GetC4SCategorySeeMoreStudio[]
 }
 
 const getC4SCategorySeeMoreTopClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
-	const res = await getC4SCategorySeeMore({
-		...params,
-		type: 'top-clips',
-	})
+	const res = await getC4SCategorySeeMore(
+		{
+			...params,
+			type: 'top-clips',
+		},
+		client,
+	)
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 
 const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
-	const res = await getC4SCategorySeeMore({
-		...params,
-		type: 'recently-added-related-clips',
-	})
+	const res = await getC4SCategorySeeMore(
+		{
+			...params,
+			type: 'recently-added-related-clips',
+		},
+		client,
+	)
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 

@@ -1,26 +1,29 @@
 import { describe, expect, it } from 'bun:test'
 import { C4SStudioNotFoundError } from '../client/utils'
 import { SingleStudioResponseSchema } from '../open-api/zod'
-import { formatZodError } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SStudio } from './single-studio'
 
 describe('single studio', () => {
 	it('fetches with slug provided', async () => {
-		const result = await getC4SStudio({
-			id: 254031,
-			language: 'en',
-			slug: 'tatti-roana-bondage',
-		})
-		const parseResult = SingleStudioResponseSchema.safeParse(result)
+		const mockClient = getMockClient()
+		const result = await getC4SStudio(
+			{
+				id: 254031,
+				language: 'en',
+				slug: 'tatti-roana-bondage',
+			},
+			mockClient,
+		)
 
-		expect(
-			parseResult.success,
-			formatZodError('Studio response', parseResult),
-		).toBeTrue()
+		const studio = expectMatchesSchema(
+			result,
+			SingleStudioResponseSchema,
+			'Studio response',
+		)
 
 		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+			studio
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
@@ -29,23 +32,26 @@ describe('single studio', () => {
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('fetches without slug provided - handles remix redirect', async () => {
-		const result = await getC4SStudio({
-			id: 254031,
-			language: 'en',
-		})
-		const parseResult = SingleStudioResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Studio response', parseResult),
-		).toBeTrue()
+		const mockClient = getMockClient()
+		const result = await getC4SStudio(
+			{
+				id: 254031,
+				language: 'en',
+			},
+			mockClient,
+		)
+		const studio = expectMatchesSchema(
+			result,
+			SingleStudioResponseSchema,
+			'Studio response',
+		)
 
 		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+			studio
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
@@ -54,15 +60,21 @@ describe('single studio', () => {
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(2)
 	})
 
 	it('throws error if studio is not found', () => {
+		const mockClient = getMockClient()
 		expect(() =>
-			getC4SStudio({
-				id: 1, // not right / real
-				slug: 'tatti-roana-bondage',
-				language: 'en',
-			}),
+			getC4SStudio(
+				{
+					id: 1, // not right / real
+					slug: 'tatti-roana-bondage',
+					language: 'en',
+				},
+				mockClient,
+			),
 		).toThrowError(C4SStudioNotFoundError)
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 })

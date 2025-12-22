@@ -1,4 +1,4 @@
-import { client } from '../client'
+import { type C4SClient, getClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { type Language, parseLanguage, parseSlug } from '../shared/utils'
 
@@ -14,23 +14,23 @@ type GetC4SClipData =
 
 const getC4SClip = async (
 	params: GetC4SClipParams,
+	client?: C4SClient,
 ): Promise<GetC4SClipData> => {
-	const res = await client.GET(
-		'/{language}/studio/{studioId}/{clipId}/{clipSlug}',
-		{
-			params: {
-				path: {
-					clipId: params.id,
-					studioId: params.studioId,
-					clipSlug: parseSlug(params.slug),
-					language: parseLanguage(params.language),
-				},
-				query: {
-					_data: 'routes/($lang).studio.$id_.$clipId.$clipSlug',
-				},
+	const c = getClient(client)
+
+	const res = await c.GET('/{language}/studio/{studioId}/{clipId}/{clipSlug}', {
+		params: {
+			path: {
+				clipId: params.id,
+				studioId: params.studioId,
+				clipSlug: parseSlug(params.slug),
+				language: parseLanguage(params.language),
+			},
+			query: {
+				_data: 'routes/($lang).studio.$id_.$clipId.$clipSlug',
 			},
 		},
-	)
+	})
 
 	if (res.error) throw new Error(res.error.message)
 

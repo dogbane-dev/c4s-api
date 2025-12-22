@@ -1,4 +1,4 @@
-import { client } from '../client'
+import { type C4SClient, getClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import type { Language } from '../shared/utils'
 
@@ -11,8 +11,10 @@ type GetC4SCategoriesData =
 
 const getC4SCategories = async (
 	params?: GetC4SCategoriesParams,
+	client?: C4SClient,
 ): Promise<GetC4SCategoriesData> => {
-	const res = await client.GET('/clips/ajax/categoriesdropdown', {
+	const c = getClient(client)
+	const res = await c.GET('/clips/ajax/categoriesdropdown', {
 		params: {
 			query: {
 				lng: params?.language,
@@ -34,8 +36,9 @@ type C4SCategory = GetC4SCategoriesData['categories'][number]
 const getC4SCategoryByName = async (
 	name: string,
 	language?: Language,
+	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const { categories } = await getC4SCategories({ language })
+	const { categories } = await getC4SCategories({ language }, client)
 	const c = categories.find((c) => c.name === name)
 	if (!c) {
 		throw new Error(`Category ${name} not found`)
@@ -46,8 +49,9 @@ const getC4SCategoryByName = async (
 const getC4SCategoryById = async (
 	id: number,
 	language?: Language,
+	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const { categories } = await getC4SCategories({ language })
+	const { categories } = await getC4SCategories({ language }, client)
 	const c = categories.find((c) => c.id === id)
 	if (!c) {
 		throw new Error(`Category with ID=${id} not found`)

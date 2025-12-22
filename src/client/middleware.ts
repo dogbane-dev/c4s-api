@@ -10,6 +10,7 @@ const handleRedirect = async (
 	schemaPath: string,
 	request: Request,
 	response: Response,
+	fetch: typeof globalThis.fetch,
 ) => {
 	const remixRedirect = response.headers.get('x-remix-redirect')
 	const remixStatus = response.headers.get('x-remix-status')
@@ -43,14 +44,15 @@ const handleRedirect = async (
 
 	const url = new URL(request.url)
 	url.pathname = remixRedirect
-	const newRequest = new Request(url.toString(), request)
+	const newUrl = url.toString()
+	const newRequest = new Request(newUrl, request)
 	const newResponse = await fetch(newRequest)
-	return handleRedirect(schemaPath, newRequest, newResponse)
+	return handleRedirect(schemaPath, newRequest, newResponse, fetch)
 }
 
 export const remixRedirectHandler: Middleware = {
-	async onResponse({ request, response, schemaPath }) {
-		return handleRedirect(schemaPath, request, response)
+	async onResponse({ request, response, schemaPath, options }) {
+		return handleRedirect(schemaPath, request, response, options.fetch)
 	},
 }
 
@@ -69,25 +71,34 @@ export const remixParseHandler: Middleware = {
 
 export const requestRewriteHandler: Middleware = {
 	async onRequest({ request, schemaPath }) {
+		const url = new URL(request.url)
+
+		let pathname = url.pathname
+
 		// handle optional language path param at start of path - "/en/..." - defaults to region in which request is made
-		if (schemaPath.startsWith('/{language}/')) {
-			const url = new URL(request.url)
+		if (schemaPath.startsWith('/{language}/') && pathname.match(/^\/\//)) {
 			// language is blank (path name starts with "//")
-			if (url.pathname.match(/^\/\//)) {
-				url.pathname = url.pathname.replace(/^\/\//, '/')
-				return new Request(url.toString(), request)
-			}
+			// replace "//"
+			pathname = pathname.replace(/^\/\//, '/')
 		}
 
 		// handle optional search path param - ".../search/search%20term" only needed if search term is passed in
-		if (schemaPath.endsWith('/search/{search}')) {
-			const url = new URL(request.url)
+		if (
+			schemaPath.endsWith('/search/{search}') &&
+			pathname.match(/\/search\/$/)
+		) {
 			// search is blank
-			if (url.pathname.match(/\/search\/$/)) {
-				// remove "/search/{search}"
-				url.pathname = url.pathname.replace(/\/search\/$/, '')
-				return new Request(url.toString(), request)
-			}
+			// remove "/search/{search}"
+			pathname = pathname.replace(/\/search\/$/, '')
 		}
+
+		// pathname was not changed, return to just continue with original request
+		if (url.pathname === pathname) {
+			return
+		}
+
+		// update pathname and return new request
+		url.pathname = pathname
+		return new Request(url.toString(), request)
 	},
 }

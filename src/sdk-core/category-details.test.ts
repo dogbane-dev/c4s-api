@@ -1,24 +1,24 @@
 import { describe, expect, it } from 'bun:test'
 import { CategoryInfoResponseSchema } from '../open-api/zod'
-import { formatZodError } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SCategoryDetails } from './category-details'
 
 describe('category details', () => {
 	it('fetches', async () => {
-		const result = await getC4SCategoryDetails({
-			language: 'en',
-			id: 4,
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SCategoryDetails(
+			{
+				language: 'en',
+				id: 4,
+			},
+			mockClient,
+		)
 
-		const parseResult = CategoryInfoResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Category info response', parseResult),
-		).toBeTrue()
-
-		// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-		const category = parseResult.data!
+		const category = expectMatchesSchema(
+			result,
+			CategoryInfoResponseSchema,
+			'Category info response',
+		)
 		expect(category).toBeDefined()
 
 		const {
@@ -44,5 +44,6 @@ describe('category details', () => {
 		expect(totals.stores).toBeNumber()
 
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 })

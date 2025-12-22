@@ -1,29 +1,31 @@
 import { describe, expect, it } from 'bun:test'
 import { StudioClipSearchResponseSchema } from '../open-api/zod'
-import { formatZodError } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SStudioClips } from './studio-clips'
 
 describe('studio clips', () => {
 	it('fetches with all options provided', async () => {
-		const result = await getC4SStudioClips({
-			id: 254031,
-			language: 'en',
-			slug: 'tatti-roana-bondage',
-			page: 1,
-			sort: 'recommended',
-			categoryId: 0,
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 254031,
+				language: 'en',
+				slug: 'tatti-roana-bondage',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 0,
+			},
+			mockClient,
+		)
 
-		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Studio clip search response', parseResult),
-		).toBeTrue()
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
 
 		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+			clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
@@ -32,56 +34,62 @@ describe('studio clips', () => {
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('fetches only clips with all options provided', async () => {
-		const result = await getC4SStudioClips({
-			id: 254031,
-			language: 'en',
-			slug: 'tatti-roana-bondage',
-			page: 1,
-			sort: 'recommended',
-			categoryId: 0,
-			onlyClips: true,
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 254031,
+				language: 'en',
+				slug: 'tatti-roana-bondage',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 0,
+				onlyClips: true,
+			},
+			mockClient,
+		)
 
-		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
 
-		expect(
-			parseResult.success,
-			formatZodError('Studio clip search response', parseResult),
-		).toBeTrue()
-
-		const { clips, onSaleClips, ...otherDetails } =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+		const { clips, onSaleClips, ...otherDetails } = clipSearch
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 
 		// no other details should be returned because onlyClips is true
 		expect(otherDetails).toBeEmptyObject()
+
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
 	it('fetches without slug provided - handles remix redirect', async () => {
-		const result = await getC4SStudioClips({
-			id: 254031,
-			language: 'en',
-			page: 1,
-			sort: 'recommended',
-			categoryId: 0,
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 254031,
+				language: 'en',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 0,
+			},
+			mockClient,
+		)
 
-		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Studio clip search response', parseResult),
-		).toBeTrue()
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
 
 		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+			clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
@@ -90,29 +98,31 @@ describe('studio clips', () => {
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(2)
 	})
 
 	it('fetches with all options provided and search term', async () => {
 		const SEARCH = 'ball gag'
 
-		const result = await getC4SStudioClips({
-			id: 254031,
-			language: 'en',
-			slug: 'tatti-roana-bondage',
-			page: 1,
-			sort: 'recommended',
-			categoryId: 0,
-			search: SEARCH,
-		})
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 254031,
+				language: 'en',
+				slug: 'tatti-roana-bondage',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 0,
+				search: SEARCH,
+			},
+			mockClient,
+		)
 
-		await Bun.file('./debug.json').write(JSON.stringify(result, null, 2))
-
-		const parseResult = StudioClipSearchResponseSchema.safeParse(result)
-
-		expect(
-			parseResult.success,
-			formatZodError('Studio clip search response', parseResult),
-		).toBeTrue()
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
 
 		const {
 			clips,
@@ -121,9 +131,7 @@ describe('studio clips', () => {
 			clipsCount,
 			keyword,
 			...staticDetails
-		} =
-			// biome-ignore lint/style/noNonNullAssertion: previous expect asserts success
-			parseResult.data!
+		} = clipSearch
 
 		expect(keyword).toBe(SEARCH)
 
@@ -133,5 +141,7 @@ describe('studio clips', () => {
 		expect(onSaleClips).toBeArray()
 
 		expect(staticDetails).toBeDefined()
+
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 })
