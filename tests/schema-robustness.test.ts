@@ -13,18 +13,16 @@ import {
 	getC4SStudio,
 	getC4SStudioClips,
 } from '../src/sdk-core'
-import { formatZodError } from '../src/testing/utils'
+import { expectMatchesSchema } from '../src/testing/utils'
 
 const getAndValidateStudio = async (p: GetC4SStudioParams) => {
 	const studio = await getC4SStudio(p)
-	const parseResult = SingleStudioResponseSchema.safeParse(studio)
-	expect(parseResult.success, formatZodError('Studio', parseResult)).toBeTrue()
+	expectMatchesSchema(studio, SingleStudioResponseSchema, 'Studio')
 }
 
 const getAndValidateClip = async (p: GetC4SClipParams) => {
 	const clip = await getC4SClip(p)
-	const parseResult = SingleClipResponseSchema.safeParse(clip)
-	expect(parseResult.success, formatZodError('Clip', parseResult)).toBeTrue()
+	expectMatchesSchema(clip, SingleClipResponseSchema, 'Clip')
 }
 
 const getTopStores = async () => {
@@ -84,15 +82,12 @@ describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 				language: 'en',
 				sort: 'added_at',
 			})
-			const parsedStudioClipsResult =
-				StudioClipSearchResponseSchema.safeParse(studioClipsResult)
-			expect(
-				parsedStudioClipsResult.success,
-				formatZodError('Studio clip search response', parsedStudioClipsResult),
-			).toBeTrue()
 
-			// biome-ignore lint/style/noNonNullAssertion: asserted above
-			const { clips } = parsedStudioClipsResult.data!
+			const { clips } = expectMatchesSchema(
+				studioClipsResult,
+				StudioClipSearchResponseSchema,
+				'Studio clips result',
+			)
 
 			for (let i = 0; i < clips.length; i++) {
 				const clip = clips[i]

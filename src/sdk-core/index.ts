@@ -1,6 +1,7 @@
 export * from './categories'
 export * from './category-details'
 export * from './category-see-more'
+export * from './search-clips'
 export * from './single-clip'
 export * from './single-studio'
 export * from './studio-clips'

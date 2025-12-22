@@ -61,7 +61,20 @@ export const INVALID_SEE_MORE_PAGES: number[] = [1, 4]
 export const STUDIO_CLIPS_PER_PAGE = 20 // seems to be hard coded in api and cannot be changed
 
 export const CLIP_SEARCH_SORTS = ['bestmatch', 'mostrecent'] as const
-export type ClipSearchSort = (typeof CLIP_SEARCH_SORTS)[number]
+export type SearchC4SSort = (typeof CLIP_SEARCH_SORTS)[number]
+
+const CLIP_SEARCH_SORT_MAP = {
+	'most-popular': 'bestmatch',
+	'most-recent': 'mostrecent',
+} as const
+
+export type ClipSearchSort = keyof typeof CLIP_SEARCH_SORT_MAP
+
+export const parseClipSearchSort = (
+	sort: ClipSearchSort | undefined,
+): SearchC4SSort => {
+	return sort ? CLIP_SEARCH_SORT_MAP[sort] : 'bestmatch'
+}
 
 export const CLIP_SEARCH_FILTER_DATES = ['24h', '7d', '30d', '1y'] as const
 export const CLIP_SEARCH_FILTER_FORMATS = ['avi', 'mp4', 'mov', 'wmv'] as const
@@ -97,6 +110,7 @@ export type ClipSearchFilter = {
 	sexualPreferences?: SexualPreference | SexualPreference[]
 	price?: ClipSearchFilterPrice | ClipSearchFilterPrice[]
 	category?: number | number[]
+	performer?: number | number[]
 }
 const filterKeyMap: Record<keyof ClipSearchFilter, string> = {
 	past: 'd',
@@ -105,6 +119,7 @@ const filterKeyMap: Record<keyof ClipSearchFilter, string> = {
 	sexualPreferences: 'o',
 	price: 'p',
 	category: 'cp',
+	performer: 'ap',
 }
 
 const FILTER_DELIMITER = '-'
@@ -127,9 +142,9 @@ export const parseClipSearchFilters = (
 			values = parseSexualPreferences(values as SexualPreference[])
 		}
 
-		// categories are joined by underscores for some reason instead of _and_
+		// categories & performers are joined by underscores for some reason instead of _and_
 		filterStrings.push(
-			`${filterKey}${values.join(key === 'category' ? '_' : FILTER_VALUE_DELIMITER)}`,
+			`${filterKey}${values.join(key === 'category' || key === 'performer' ? '_' : FILTER_VALUE_DELIMITER)}`,
 		)
 	}
 

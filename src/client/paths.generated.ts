@@ -4,1829 +4,1873 @@
  */
 
 export interface paths {
-    "/{language}/studio/{studioId}/{clipId}/{clipSlug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get clip
-         * @description Get a single clip's full details
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$clipId.$clipSlug" */
-                    _data: "routes/($lang).studio.$id_.$clipId.$clipSlug";
-                };
-                header?: never;
-                path: {
-                    /** @description A unique identifier for a studio */
-                    studioId: number;
-                    /** @description A unique identifier for a clip */
-                    clipId: number;
-                    /** @description The text identifier slug for a clip */
-                    clipSlug: string;
-                    /** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
-                    language: "en" | "fr" | "de" | "pt" | "es" | "it";
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/remix-deferred": {
-                            studioId: string;
-                            clipId: string;
-                            clipSlug: string;
-                            ga_tracking_id: string | null;
-                            recommendationsPromise: {
-                                recommendations: {
-                                    clipId: string;
-                                    producer: number;
-                                    bannerLink: string;
-                                    title: string;
-                                    position: number;
-                                    categoryId: number;
-                                    duration: number;
-                                    suggestedClipUrl: string;
-                                    previewLink: string;
-                                    previewUrl: string | null;
-                                    srcSet: string;
-                                    responsiveSrcset: {
-                                        srcSet: string;
-                                        media: number;
-                                    }[];
-                                    customPreview: boolean;
-                                    customPreviewUrl: string | null;
-                                    studioTitle: string;
-                                    studioLink: string;
-                                    price: number;
-                                    dateDisplay: string;
-                                    recommendationsQueryId: string;
-                                    scroll_page: number;
-                                    screen_size: null;
-                                    id: number;
-                                    checkout_link: string;
-                                    date_display: string;
-                                    cdn_preview_link: string | null;
-                                    is_preview_enabled: boolean;
-                                    cdn_previewlg_link: string;
-                                    link: string;
-                                    format: null;
-                                    resolution_text: null;
-                                    resolution: null;
-                                    time_minutes: number;
-                                    size_mb: null;
-                                    size: null;
-                                    category_link: string;
-                                    category_name: string;
-                                    performers: {
-                                        id: number;
-                                        stage_name: string;
-                                        total_clips: null;
-                                        avatars: null;
-                                        created_at: null;
-                                    }[] | null;
-                                    description: string | null;
-                                    description_sanitized: string | null;
-                                    translations: null;
-                                    studio: {
-                                        id: number;
-                                        name: string;
-                                        slug: string;
-                                        avatar: null;
-                                        avatar_thumbs: null;
-                                        banner: null;
-                                        banner_thumbs: null;
-                                        total_clips: null;
-                                        last_clip: null;
-                                        most_recent_clip_id: null;
-                                        link: string;
-                                        category: null;
-                                    };
-                                    gifPreviewUrl: string | null;
-                                    discounted_price: {
-                                        name: string | null;
-                                        id: null;
-                                        sale_type: string;
-                                        percent: number;
-                                        tiers: null;
-                                        discount: number;
-                                    } | null;
-                                    onSale: boolean | null;
-                                    isAudio: boolean;
-                                }[];
-                                pills: {
-                                    value: number;
-                                    label: string;
-                                    type: string;
-                                    isActive: boolean;
-                                }[];
-                            };
-                            clipIsUnavailable: boolean;
-                            visibility_mode: string;
-                            store_status: string;
-                            hideStoreAvatar: boolean;
-                            store_has_clips: boolean;
-                            similarStoreClips: unknown[];
-                            studioSlug: string;
-                            clip: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: string | null;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                scroll_page: number;
-                                screen_size: string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: string;
-                                resolution: string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links?: {
-                                    category: string;
-                                    translations?: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: string | null;
-                                    avatar_thumbs: {
-                                        avatar_sm: string;
-                                        avatar_md: string;
-                                    } | null;
-                                    banner: string | null;
-                                    banner_thumbs: {
-                                        banner_xlg: string;
-                                        banner_lg: string;
-                                        banner_md: string;
-                                        banner_sm: string;
-                                    } | null;
-                                    total_clips: number | null;
-                                    last_clip: null;
-                                    most_recent_clip_id: number | null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: string | null;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                onSale: boolean | null;
-                                isAudio: boolean;
-                            };
-                            followersCount: number;
-                            clipsCount: number;
-                            studioCategories: {
-                                id: number;
-                                name: string;
-                                translations: null;
-                                link: string;
-                                search_link: string;
-                                store_link: string | null;
-                                clean_name: string;
-                                total_clips: null;
-                                thumb: null;
-                                pill: null;
-                            }[];
-                            nextLink: string;
-                            prevLink: string | null;
-                            meta: {
-                                title: string;
-                                keywords: string | null;
-                                description: string;
-                                author: string;
-                                robots: null;
-                                copyright: null;
-                                engine: string;
-                                revision: null;
-                                image: string;
-                                image_alt: string;
-                                location: string;
-                                og_description: string | null;
-                                og_url: string;
-                                twitter_site: string;
-                                twitter_card: string;
-                            };
-                            canonical: {
-                                href: string;
-                            };
-                        };
-                    };
-                };
-                /** @description 204 No Content */
-                204: {
-                    headers: {
-                        "x-remix-redirect": string;
-                        "x-remix-status": string;
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-                /** @description 403 Server Error */
-                403: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            message: string;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{language}/studio/{studioId}/{studioSlug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get studio
-         * @description Get a single studio's full details
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$studioSlug.$" */
-                    _data: "routes/($lang).studio.$id_.$studioSlug.$";
-                };
-                header?: never;
-                path: {
-                    /** @description A unique identifier for a studio */
-                    studioId: number;
-                    /** @description The text identifier slug for a studio */
-                    studioSlug: string;
-                    /** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
-                    language: "en" | "fr" | "de" | "pt" | "es" | "it";
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "text/remix-deferred": {
-                            onSaleClips: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: string | null;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                scroll_page: number;
-                                screen_size: string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: string;
-                                resolution: string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links?: {
-                                    category: string;
-                                    translations?: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: string | null;
-                                    avatar_thumbs: {
-                                        avatar_sm: string;
-                                        avatar_md: string;
-                                    } | null;
-                                    banner: string | null;
-                                    banner_thumbs: {
-                                        banner_xlg: string;
-                                        banner_lg: string;
-                                        banner_md: string;
-                                        banner_sm: string;
-                                    } | null;
-                                    total_clips: number | null;
-                                    last_clip: null;
-                                    most_recent_clip_id: number | null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: string | null;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                onSale: boolean | null;
-                                isAudio: boolean;
-                            }[];
-                            clips: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: string | null;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                scroll_page: number;
-                                screen_size: string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: string;
-                                resolution: string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links?: {
-                                    category: string;
-                                    translations?: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: string | null;
-                                    avatar_thumbs: {
-                                        avatar_sm: string;
-                                        avatar_md: string;
-                                    } | null;
-                                    banner: string | null;
-                                    banner_thumbs: {
-                                        banner_xlg: string;
-                                        banner_lg: string;
-                                        banner_md: string;
-                                        banner_sm: string;
-                                    } | null;
-                                    total_clips: number | null;
-                                    last_clip: null;
-                                    most_recent_clip_id: number | null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: string | null;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                onSale: boolean | null;
-                                isAudio: boolean;
-                            }[];
-                            ga_tracking_id: string | null;
-                            avatarSrc: string;
-                            bannerSrc?: string;
-                            store_has_clips: boolean;
-                            browseSimilarClipsLink: string;
-                            classicWidgetExperimentActive: boolean;
-                            similarStoreClips: unknown[];
-                            bannerSrcset: {
-                                srcSet: string;
-                                media: number;
-                            }[];
-                            description: string | null;
-                            clipsCount: number;
-                            clipsOutsideOrientationCount: number;
-                            followersCount: number;
-                            title: string;
-                            page: number;
-                            studioId: string;
-                            studioSlug: string;
-                            view: string;
-                            categoryId: string;
-                            socialLinks: {
-                                title: string;
-                                url: string;
-                            }[] | null;
-                            donate: boolean;
-                            tribute: boolean;
-                            canBeFollowed: boolean;
-                            otherStudios?: {
-                                avatarSrc: string;
-                                title: string;
-                                link: string;
-                                id: number;
-                                categories: {
-                                    category: string;
-                                    id: number;
-                                    name: string;
-                                    translations: null;
-                                    link: string;
-                                    search_link: string;
-                                    store_link: null;
-                                    clean_name: string;
-                                    total_clips: null;
-                                    thumb: null;
-                                    pill: null;
-                                }[];
-                            }[];
-                            categories: {
-                                id: number;
-                                name: string;
-                                link: string;
-                            }[];
-                            meta: {
-                                title: string;
-                                keywords: string | null;
-                                description: string | null;
-                                author: string;
-                                robots: null;
-                                copyright: string;
-                                engine: string;
-                                revision: null;
-                                image: string;
-                                image_alt: string;
-                                location: string;
-                                og_description: (string | null) | null;
-                                og_url: string;
-                                twitter_site: string;
-                                twitter_card: string;
-                                language: string;
-                            };
-                            clipsSort: string;
-                            sortOptions: {
-                                label: string;
-                                value: string;
-                            }[];
-                            storeDefaultSorting: string;
-                            canonical: {
-                                href: string;
-                            };
-                            selectedOrientations: number[];
-                            isContentPreferenceLGBT: boolean;
-                            isChatEnabled: boolean;
-                            isCreatorOnline: boolean;
-                            visibility_mode: string;
-                            store_status: string;
-                        };
-                    };
-                };
-                /** @description 204 No Content */
-                204: {
-                    headers: {
-                        "x-remix-redirect": string;
-                        "x-remix-status": string;
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{language}/studio/{studioId}/{studioSlug}/{category}/{page}/{sort}/Limit24/search/{search}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get studio clips
-         * @description Get a paginated list of a studio's clips. Page size is fixed at 20, changing limit in url will not have any effect.
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$studioSlug.$" */
-                    _data: "routes/($lang).studio.$id_.$studioSlug.$";
-                    /** @description Whether to return only the studio's clips. If omitted, the response will include studio details. Note: passing any value to this param will be interpreted as true, so passing 'false' as no effect */
-                    onlyClips?: "true";
-                };
-                header?: never;
-                path: {
-                    /** @description A unique identifier for a studio */
-                    studioId: number;
-                    /** @description The text identifier slug for a studio */
-                    studioSlug: string;
-                    /** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
-                    language: "en" | "fr" | "de" | "pt" | "es" | "it";
-                    /** @description Page number */
-                    page: number;
-                    /** @description The sort order of the clip search results */
-                    sort: "recommended" | "added_at" | "most_popular" | "top_selling" | "featured" | "longest";
-                    /** @description Search term to filter clip results by. If not provided url should omit '/search/' path param. */
-                    search: string;
-                    /** @description The category ID to filter the search by. Setting the value to 0 will filter by all categories. */
-                    category: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            clips: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: string | null;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                searchQueryId?: string;
-                                scroll_page: number;
-                                screen_size: string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: string;
-                                resolution: string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links?: {
-                                    category: string;
-                                    translations?: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: null;
-                                    avatar_thumbs: null;
-                                    banner: null;
-                                    banner_thumbs: null;
-                                    total_clips: null;
-                                    last_clip: null;
-                                    most_recent_clip_id: null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: string | null;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                onSale: boolean | null;
-                                isAudio: boolean;
-                            }[];
-                            onSaleClips: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: string | null;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                searchQueryId?: string;
-                                scroll_page: number;
-                                screen_size: string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: string;
-                                resolution: string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links?: {
-                                    category: string;
-                                    translations?: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: null;
-                                    avatar_thumbs: null;
-                                    banner: null;
-                                    banner_thumbs: null;
-                                    total_clips: null;
-                                    last_clip: null;
-                                    most_recent_clip_id: null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: string | null;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                onSale: boolean | null;
-                                isAudio: boolean;
-                            }[];
-                        } & {
-                            ga_tracking_id?: string | null;
-                            avatarSrc?: string;
-                            bannerSrc?: string;
-                            store_has_clips?: boolean;
-                            browseSimilarClipsLink?: string;
-                            classicWidgetExperimentActive?: boolean;
-                            similarStoreClips?: unknown[];
-                            bannerSrcset?: {
-                                srcSet: string;
-                                media: number;
-                            }[];
-                            description?: string | null;
-                            clipsCount?: number;
-                            clipsOutsideOrientationCount?: number;
-                            followersCount?: number;
-                            title?: string;
-                            page?: number;
-                            studioId?: string;
-                            studioSlug?: string;
-                            view?: string;
-                            keyword?: string;
-                            socialLinks?: {
-                                title: string;
-                                url: string;
-                            }[] | null;
-                            donate?: boolean;
-                            tribute?: boolean;
-                            canBeFollowed?: boolean;
-                            categories?: {
-                                id: number;
-                                name: string;
-                                link: string;
-                            }[];
-                            meta?: {
-                                title: string;
-                                keywords: string | null;
-                                description: string | null;
-                                author: string;
-                                robots: null;
-                                copyright: string;
-                                engine: string;
-                                revision: null;
-                                image: string;
-                                image_alt: string;
-                                location: string;
-                                og_description: string | null;
-                                og_url: string;
-                                twitter_site: string;
-                                twitter_card: string;
-                                language: string;
-                                keyword?: string;
-                            };
-                            clipsSort?: string;
-                            sortOptions?: {
-                                label: string;
-                                value: string;
-                            }[];
-                            storeDefaultSorting?: string;
-                            canonical?: {
-                                href: string;
-                            };
-                            selectedOrientations?: number[];
-                            isContentPreferenceLGBT?: boolean;
-                            isChatEnabled?: boolean;
-                            isCreatorOnline?: boolean;
-                            visibility_mode?: string;
-                            store_status?: string;
-                        };
-                    };
-                };
-                /** @description 204 No Content */
-                204: {
-                    headers: {
-                        "x-remix-redirect": string;
-                        "x-remix-status": string;
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{language}/clips/category/{category}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get category details
-         * @description Get all category details by ID including top stores and clips, as well as new and trending clips
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Sexual preference option(s) joined by underscores. 1 (ID: Straight), 2 (ID: Gay), 3 (ID: Lesbian), 4 (ID: Bisexual), 5 (ID: Trans) */
-                    pill: number[];
-                    /** @description Data loader param. Must be set to "routes/($lang).clips.category.$id.($catName)" */
-                    _data: "routes/($lang).clips.category.$id.($catName)";
-                };
-                header?: never;
-                path: {
-                    /** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
-                    language: "en" | "fr" | "de" | "pt" | "es" | "it";
-                    /** @description C4S category ID */
-                    category: number;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            meta: {
-                                title: string;
-                                keywords: string;
-                                description: string;
-                                author: string;
-                                robots: null;
-                                copyright: string;
-                                engine: string;
-                                revision: string;
-                                image: null;
-                                image_alt: null;
-                                location: null;
-                                og_description: (string | null) | null;
-                                og_url: null;
-                                twitter_site: null;
-                                twitter_card: null;
-                            };
-                            totals: {
-                                stores: number;
-                                clips: number;
-                                outside_orientation: {
-                                    stores: number;
-                                    clips: number;
-                                };
-                            };
-                            description: {
-                                top: {
-                                    content: string;
-                                    font_size: string;
-                                    font_color: string;
-                                    is_html: boolean;
-                                    category: {
-                                        id: number;
-                                        name: string;
-                                        translations: null;
-                                        link: string;
-                                        search_link: string;
-                                        store_link: string | null;
-                                        clean_name: string;
-                                        total_clips: null;
-                                        thumb: null;
-                                        pill: null;
-                                    };
-                                    meta_data: {
-                                        meta_title: string | null;
-                                        meta_description: string | null;
-                                        header_one: null;
-                                        header_two: null;
-                                        header_three: null;
-                                    };
-                                };
-                                bottom: null;
-                            };
-                            category: {
-                                id: number;
-                                name: string;
-                                translations: null;
-                                link: string;
-                                search_link: string;
-                                store_link: string | null;
-                                clean_name: string;
-                                total_clips: null;
-                                thumb: null;
-                                pill: null;
-                            };
-                            topStores: {
-                                storeId: number;
-                                avatarSrc: string;
-                                avatarLink: string;
-                                storeName: string;
-                                storeLink: string;
-                                storeCategory: string;
-                                storeCategoryLink: string;
-                                storeFilteredByCategoryLink: string;
-                                latestClipPreview: string;
-                                latestClipPreviewLink: string;
-                                latestClipCategory: string;
-                                latestClipCategoryId: number;
-                                latestClipUpdate: string;
-                                totalClips: number;
-                            }[];
-                            newStores: {
-                                storeId: number;
-                                avatarSrc: string;
-                                avatarLink: string;
-                                storeName: string;
-                                storeLink: string;
-                                storeCategory: string;
-                                storeCategoryLink: string;
-                                storeFilteredByCategoryLink: string;
-                                latestClipPreview: string;
-                                latestClipPreviewLink: string;
-                                latestClipCategory: string;
-                                latestClipCategoryId: number;
-                                latestClipUpdate: string;
-                                totalClips: number;
-                            }[];
-                            relatedCategories: {
-                                id: number;
-                                name: string;
-                                categoryLink: string;
-                                thumb: string;
-                                totalClips: number;
-                            }[];
-                            recentlyAddedCategoryClips: {
-                                clipId: number;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                description: string | null;
-                                translations: null;
-                                categoryId: number;
-                                categoryName: string;
-                                categoryLink: string;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                srcSet: string;
-                                previewUrl: string;
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                queryId: string;
-                                isSuggestedWishlist: boolean;
-                                onSale: boolean | null;
-                            }[];
-                            trendingRetroClips: {
-                                clipId: number;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                description: string | null;
-                                translations: null;
-                                categoryId: number;
-                                categoryName: string;
-                                categoryLink: string;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                srcSet: string;
-                                previewUrl: string;
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                queryId: string;
-                                isSuggestedWishlist: boolean;
-                                onSale: boolean | null;
-                            }[];
-                            recentlyAddedRelatedClips: {
-                                clipId: number;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                description: string | null;
-                                translations: null;
-                                categoryId: number;
-                                categoryName: string;
-                                categoryLink: string;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                srcSet: string;
-                                previewUrl: string;
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                queryId: string;
-                                isSuggestedWishlist: boolean;
-                                onSale: boolean | null;
-                            }[];
-                            topClips: {
-                                clipId: number;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                description: string | null;
-                                translations: null;
-                                categoryId: number;
-                                categoryName: string;
-                                categoryLink: string;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                srcSet: string;
-                                previewUrl: string;
-                                customPreview: boolean;
-                                customPreviewUrl: string | null;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                queryId: string;
-                                isSuggestedWishlist: boolean;
-                                onSale: boolean | null;
-                            }[];
-                            id: string;
-                            canonical: {
-                                href: string;
-                            };
-                            selectedOrientations: number[];
-                            isContentPreferenceLGBT: boolean;
-                            contentPreferencePills: string[];
-                            categoryAvailablePreferencePills: number[];
-                            isAgeVerificationRequired: boolean;
-                            hrefLang: {
-                                href: string;
-                            };
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/clips/category/seeMore": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get additional category details
-         * @description Get additional category details for a category not returned by category details endpoint. Based on section parameter will return subsequent pages of top stores, top clips, or recently added related clips for this category.
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Determines what type of data is returned */
-                    section: "top-stores-see-more" | "top-clips-see-more" | "recently-added-related-clips-see-more";
-                    lng?: "en" | "fr" | "de" | "pt" | "es" | "it";
-                    /** @description C4S category ID */
-                    id: number;
-                    /** @description See more category info page number. Can only be 2 or 3. */
-                    page: number;
-                    /** @description Sexual preference option(s) joined by underscores. 1 (ID: Straight), 2 (ID: Gay), 3 (ID: Lesbian), 4 (ID: Bisexual), 5 (ID: Trans) */
-                    pill: number[];
-                    /** @description Data loader param. Must be set to "routes/clips.category.seeMore" */
-                    _data: "routes/clips.category.seeMore";
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            seeMoreExtra: {
-                                id: number;
-                                name: string;
-                                slug: string;
-                                avatar: string;
-                                avatar_thumbs: {
-                                    avatar_sm: string;
-                                    avatar_md: string;
-                                };
-                                banner: null;
-                                banner_thumbs: null;
-                                total_clips: number;
-                                last_clip: {
-                                    id: number;
-                                    added_at: string;
-                                    category: {
-                                        id: number;
-                                        name: string;
-                                        link: string;
-                                    };
-                                    thumbs: {
-                                        square_sm: string;
-                                        square_md: string;
-                                        rect_sm: string;
-                                        rect_md: string;
-                                        rect_lrg: string;
-                                        rect_ex_lrg: string;
-                                    };
-                                };
-                                most_recent_clip_id: null;
-                                link: string;
-                                category: {
-                                    id: number;
-                                    name: string;
-                                    translations: null;
-                                    link: string;
-                                    search_link: string;
-                                    store_link: string | null;
-                                    clean_name: string;
-                                    total_clips: null;
-                                    thumb: null;
-                                    pill: null;
-                                };
-                            }[] | {
-                                id: number;
-                                title: string;
-                                slug: string;
-                                link: string;
-                                related_categories: null;
-                                related_keywords: null;
-                                description: string | null;
-                                description_sanitized: string | null;
-                                translations: null;
-                                added_at: string;
-                                price: number;
-                                discounted_price: {
-                                    name: string | null;
-                                    id: null;
-                                    sale_type: string;
-                                    percent: number;
-                                    tiers: null;
-                                    discount: number;
-                                } | null;
-                                format: null;
-                                screen: null;
-                                resolution: null;
-                                length: number;
-                                suggested_clip_url: string;
-                                size: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: null;
-                                    avatar_thumbs: null;
-                                    banner: null;
-                                    banner_thumbs: null;
-                                    total_clips: null;
-                                    last_clip: null;
-                                    most_recent_clip_id: null;
-                                    link: string;
-                                    category: null;
-                                };
-                                category: {
-                                    id: number;
-                                    name: string;
-                                    translations: null;
-                                    link: string;
-                                    search_link: string;
-                                    store_link: string | null;
-                                    clean_name: string;
-                                    total_clips: null;
-                                    thumb: null;
-                                    pill: null;
-                                };
-                                thumb: string;
-                                thumbs: {
-                                    square_sm: string;
-                                    square_md: string;
-                                    rect_sm: string;
-                                    rect_md: string;
-                                    rect_lrg: string;
-                                    rect_ex_lrg: string;
-                                };
-                                mediabook_url: null;
-                                mediabook_quality: null;
-                                video_preview_link: string | null;
-                                cdn_previewlg_link: string;
-                                cdn_preview_link: string;
-                                checkout_link: string;
-                                next_link: null;
-                                prev_link: null;
-                                show_click_for_preview: boolean;
-                                webm_preview_link: string | null;
-                                gif_preview_link: string | null;
-                                download: null;
-                                is_encoded: null;
-                                player: null;
-                                orientation: null;
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                archived: boolean;
-                                on_sale: null;
-                            }[];
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/clips/ajax/categoriesdropdown": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get list of categories
-         * @description Get full list of categories and recommendations
-         */
-        get: {
-            parameters: {
-                query?: {
-                    lng?: "en" | "fr" | "de" | "pt" | "es" | "it";
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            success: boolean;
-                            code: string;
-                            categories: {
-                                id: number;
-                                name: string;
-                                link: string;
-                                search_link: string;
-                                pill: number | null;
-                            }[];
-                            recommendations: {
-                                id: number;
-                                name: string;
-                                link: string;
-                                search_link: string;
-                                pill: number | null;
-                            }[];
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/{filters}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search for clips
-         * @description Search for clips by term
-         */
-        get: {
-            parameters: {
-                query: {
-                    /** @description Data loader param. Must be set to "routes/($lang).clips.search.$" */
-                    _data: "routes/($lang).clips.search.$";
-                };
-                header?: never;
-                path: {
-                    /** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
-                    language: "en" | "fr" | "de" | "pt" | "es" | "it";
-                    /** @description Search term to filter clip results by */
-                    search: string;
-                    /** @description C4S category ID */
-                    category: number;
-                    /** @description Studio page number. Seems to have no effect */
-                    storePage: number;
-                    /** @description Page number */
-                    page: number;
-                    studioSort: "bestmatch";
-                    categorySort: "bestmatch";
-                    clipSort: "bestmatch" | "mostrecent";
-                    /** @description Search filters */
-                    filters: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 200 OK */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            searchQueryId: string;
-                            success: boolean;
-                            code: string;
-                            data: {
-                                clips: {
-                                    id: number;
-                                    title: string;
-                                    slug: string;
-                                    link: string;
-                                    related_categories: {
-                                        category: string;
-                                        translations: null;
-                                        link: string;
-                                    }[];
-                                    related_keywords: {
-                                        keyword: string;
-                                        translations: null;
-                                        link: string;
-                                    }[];
-                                    description: null | string;
-                                    description_sanitized: null | string;
-                                    translations: null;
-                                    added_at: string;
-                                    price: number;
-                                    discounted_price: null;
-                                    format: string;
-                                    screen: string;
-                                    resolution: string;
-                                    length: number;
-                                    suggested_clip_url: string;
-                                    size: number;
-                                    studio: {
-                                        id: number;
-                                        name: string;
-                                        slug: string;
-                                        avatar: null;
-                                        avatar_thumbs: null;
-                                        banner: null;
-                                        banner_thumbs: null;
-                                        total_clips: null;
-                                        last_clip: null;
-                                        most_recent_clip_id: null;
-                                        link: string;
-                                        category: null;
-                                    };
-                                    category: {
-                                        id: number;
-                                        name: string;
-                                        translations: null;
-                                        link: string;
-                                        search_link: string;
-                                        store_link: null;
-                                        clean_name: string;
-                                        total_clips: null;
-                                        thumb: null;
-                                        pill: null;
-                                    };
-                                    thumb: string;
-                                    thumbs: {
-                                        square_sm: string;
-                                        square_md: string;
-                                        rect_sm: string;
-                                        rect_md: string;
-                                        rect_lrg: string;
-                                        rect_ex_lrg: string;
-                                    };
-                                    mediabook_url: null | string;
-                                    mediabook_quality: null | string;
-                                    video_preview_link: string;
-                                    cdn_previewlg_link: string;
-                                    cdn_preview_link: string;
-                                    checkout_link: string;
-                                    next_link: null;
-                                    prev_link: null;
-                                    show_click_for_preview: boolean;
-                                    webm_preview_link: string | null;
-                                    gif_preview_link: string | null;
-                                    download: null;
-                                    is_encoded: null;
-                                    player: null;
-                                    orientation: null;
-                                    performers: {
-                                        id: number;
-                                        stage_name: string;
-                                        total_clips: null;
-                                        avatars: null;
-                                        created_at: null;
-                                    }[] | null;
-                                    archived: boolean;
-                                    on_sale: null;
-                                }[];
-                                performer: null;
-                                pills: {
-                                    value: number;
-                                    label: string;
-                                    type: string;
-                                    isActive: boolean;
-                                }[];
-                                performer_pills: {
-                                    value: number;
-                                    label: string;
-                                    type: string;
-                                    avatars: {
-                                        "18x16": {
-                                            url: string;
-                                        };
-                                        "20x20": {
-                                            url: string;
-                                        };
-                                        "30x30": {
-                                            url: string;
-                                        };
-                                        "52x52": {
-                                            url: string;
-                                        };
-                                        "88x88": {
-                                            url: string;
-                                        };
-                                        "120x120": {
-                                            url: string;
-                                        };
-                                        "188x188": {
-                                            url: string;
-                                        };
-                                        original: {
-                                            url: string;
-                                        };
-                                    } | null;
-                                    isActive: boolean;
-                                }[];
-                                totalClips: number;
-                                totalClipPages: number;
-                                spellcheck: null;
-                                message: null;
-                                recommendations: null;
-                            };
-                            spellcheck: null;
-                            pills: {
-                                value: number;
-                                label: string;
-                                type: string;
-                                isActive: boolean;
-                            }[];
-                            performerPills: {
-                                value: number;
-                                label: string;
-                                type: string;
-                                avatars: {
-                                    "18x16": {
-                                        url: string;
-                                    };
-                                    "20x20": {
-                                        url: string;
-                                    };
-                                    "30x30": {
-                                        url: string;
-                                    };
-                                    "52x52": {
-                                        url: string;
-                                    };
-                                    "88x88": {
-                                        url: string;
-                                    };
-                                    "120x120": {
-                                        url: string;
-                                    };
-                                    "188x188": {
-                                        url: string;
-                                    };
-                                    original: {
-                                        url: string;
-                                    };
-                                } | null;
-                                isActive: boolean;
-                                avatar?: string;
-                            }[];
-                            totalClipPages: number;
-                            clipsPage: number;
-                            activeFilters: {
-                                /** @enum {string} */
-                                date: "24h" | "7d" | "30d" | "1y";
-                                /** @enum {string} */
-                                format: "avi" | "mp4" | "mov" | "wmv";
-                                /** @enum {string} */
-                                duration: "0_5" | "5_10" | "10_15" | "15_30" | "30+";
-                                /** @enum {string} */
-                                resolution: "4k" | "hd" | "sd";
-                                /** @enum {string} */
-                                price: "0_10" | "10_25" | "100+" | "25_50" | "50_100" | "on_sale";
-                                content_preference: string[];
-                                category_id: string[];
-                            };
-                            clipsSort: string;
-                            defaultSortFromCookie: string;
-                            isActiveExperiment: boolean;
-                            experimentId: string;
-                            keyword: string;
-                            categoryId: string;
-                            meta: {
-                                title: string;
-                                description: string;
-                            };
-                            clips: {
-                                clipId: string;
-                                producer: number;
-                                bannerLink: string;
-                                title: string;
-                                position: number;
-                                categoryId: number;
-                                duration: number;
-                                suggestedClipUrl: string;
-                                previewLink: string;
-                                previewUrl: null | string;
-                                srcSet: string;
-                                responsiveSrcset: {
-                                    srcSet: string;
-                                    media: number;
-                                }[];
-                                customPreview: boolean;
-                                customPreviewUrl: null | string;
-                                studioTitle: string;
-                                studioLink: string;
-                                price: number;
-                                dateDisplay: string;
-                                scroll_page: number;
-                                screen_size: null | string;
-                                id: number;
-                                checkout_link: string;
-                                date_display: string;
-                                cdn_preview_link: null | string;
-                                is_preview_enabled: boolean;
-                                cdn_previewlg_link: string;
-                                link: string;
-                                format: string;
-                                resolution_text: null | string;
-                                resolution: null | string;
-                                time_minutes: number;
-                                size_mb: number;
-                                size: number;
-                                category_link: string;
-                                category_name: string;
-                                related_category_links: {
-                                    category: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                keyword_links: {
-                                    keyword: string;
-                                    translations: null;
-                                    link: string;
-                                }[];
-                                performers: {
-                                    id: number;
-                                    stage_name: string;
-                                    total_clips: null;
-                                    avatars: null;
-                                    created_at: null;
-                                }[] | null;
-                                description: null | string;
-                                description_sanitized: null | string;
-                                translations: null;
-                                studio: {
-                                    id: number;
-                                    name: string;
-                                    slug: string;
-                                    avatar: null;
-                                    avatar_thumbs: null;
-                                    banner: null;
-                                    banner_thumbs: null;
-                                    total_clips: null;
-                                    last_clip: null;
-                                    most_recent_clip_id: null;
-                                    link: string;
-                                    category: null;
-                                };
-                                gifPreviewUrl: null | string;
-                                discounted_price: null;
-                                onSale: null;
-                                isAudio: boolean;
-                            }[];
-                            performer: null;
-                            canonical: {
-                                href: string;
-                            };
-                            orientation: unknown[];
-                            isShowSavedSearchHint: boolean;
-                            isPerformerSearch: boolean;
-                        };
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+	'/{language}/studio/{studioId}/{clipId}/{clipSlug}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get clip
+		 * @description Get a single clip's full details
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$clipId.$clipSlug" */
+					_data: 'routes/($lang).studio.$id_.$clipId.$clipSlug'
+				}
+				header?: never
+				path: {
+					/** @description A unique identifier for a studio */
+					studioId: number
+					/** @description A unique identifier for a clip */
+					clipId: number
+					/** @description The text identifier slug for a clip */
+					clipSlug: string
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'text/remix-deferred': {
+							studioId: string
+							clipId: string
+							clipSlug: string
+							ga_tracking_id: string | null
+							recommendationsPromise: {
+								recommendations: {
+									clipId: string
+									producer: number
+									bannerLink: string
+									title: string
+									position: number
+									categoryId: number
+									duration: number
+									suggestedClipUrl: string
+									previewLink: string
+									previewUrl: string | null
+									srcSet: string
+									responsiveSrcset: {
+										srcSet: string
+										media: number
+									}[]
+									customPreview: boolean
+									customPreviewUrl: string | null
+									studioTitle: string
+									studioLink: string
+									price: number
+									dateDisplay: string
+									recommendationsQueryId: string
+									scroll_page: number
+									screen_size: null
+									id: number
+									checkout_link: string
+									date_display: string
+									cdn_preview_link: string | null
+									is_preview_enabled: boolean
+									cdn_previewlg_link: string
+									link: string
+									format: null
+									resolution_text: null
+									resolution: null
+									time_minutes: number
+									size_mb: null
+									size: null
+									category_link: string
+									category_name: string
+									performers:
+										| {
+												id: number
+												stage_name: string
+												total_clips: null
+												avatars: null
+												created_at: null
+										  }[]
+										| null
+									description: string | null
+									description_sanitized: string | null
+									translations: null
+									studio: {
+										id: number
+										name: string
+										slug: string
+										avatar: null
+										avatar_thumbs: null
+										banner: null
+										banner_thumbs: null
+										total_clips: null
+										last_clip: null
+										most_recent_clip_id: null
+										link: string
+										category: null
+									}
+									gifPreviewUrl: string | null
+									discounted_price: {
+										name: string | null
+										id: null
+										sale_type: string
+										percent: number
+										tiers: null
+										discount: number
+									} | null
+									onSale: boolean | null
+									isAudio: boolean
+								}[]
+								pills: {
+									value: number
+									label: string
+									type: string
+									isActive: boolean
+								}[]
+							}
+							clipIsUnavailable: boolean
+							visibility_mode: string
+							store_status: string
+							hideStoreAvatar: boolean
+							store_has_clips: boolean
+							similarStoreClips: unknown[]
+							studioSlug: string
+							clip: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								scroll_page: number
+								screen_size: string
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string
+								resolution: string
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations?: null
+									link: string
+								}[]
+								keyword_links: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: string | null
+									avatar_thumbs: {
+										avatar_sm: string
+										avatar_md: string
+									} | null
+									banner: string | null
+									banner_thumbs: {
+										banner_xlg: string
+										banner_lg: string
+										banner_md: string
+										banner_sm: string
+									} | null
+									total_clips: number | null
+									last_clip: null
+									most_recent_clip_id: number | null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								onSale: boolean | null
+								isAudio: boolean
+							}
+							followersCount: number
+							clipsCount: number
+							studioCategories: {
+								id: number
+								name: string
+								translations: null
+								link: string
+								search_link: string
+								store_link: string | null
+								clean_name: string
+								total_clips: null
+								thumb: null
+								pill: null
+							}[]
+							nextLink: string
+							prevLink: string | null
+							meta: {
+								title: string
+								keywords: string | null
+								description: string
+								author: string
+								robots: null
+								copyright: null
+								engine: string
+								revision: null
+								image: string
+								image_alt: string
+								location: string
+								og_description: string | null
+								og_url: string
+								twitter_site: string
+								twitter_card: string
+							}
+							canonical: {
+								href: string
+							}
+						}
+					}
+				}
+				/** @description 204 No Content */
+				204: {
+					headers: {
+						'x-remix-redirect': string
+						'x-remix-status': string
+						[name: string]: unknown
+					}
+					content?: never
+				}
+				/** @description 403 Server Error */
+				403: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							message: string
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/{language}/studio/{studioId}/{studioSlug}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get studio
+		 * @description Get a single studio's full details
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$studioSlug.$" */
+					_data: 'routes/($lang).studio.$id_.$studioSlug.$'
+				}
+				header?: never
+				path: {
+					/** @description A unique identifier for a studio */
+					studioId: number
+					/** @description The text identifier slug for a studio */
+					studioSlug: string
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'text/remix-deferred': {
+							onSaleClips: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								scroll_page: number
+								screen_size: string
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string
+								resolution: string
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations?: null
+									link: string
+								}[]
+								keyword_links: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: string | null
+									avatar_thumbs: {
+										avatar_sm: string
+										avatar_md: string
+									} | null
+									banner: string | null
+									banner_thumbs: {
+										banner_xlg: string
+										banner_lg: string
+										banner_md: string
+										banner_sm: string
+									} | null
+									total_clips: number | null
+									last_clip: null
+									most_recent_clip_id: number | null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								onSale: boolean | null
+								isAudio: boolean
+							}[]
+							clips: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								scroll_page: number
+								screen_size: string
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string
+								resolution: string
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations?: null
+									link: string
+								}[]
+								keyword_links: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: string | null
+									avatar_thumbs: {
+										avatar_sm: string
+										avatar_md: string
+									} | null
+									banner: string | null
+									banner_thumbs: {
+										banner_xlg: string
+										banner_lg: string
+										banner_md: string
+										banner_sm: string
+									} | null
+									total_clips: number | null
+									last_clip: null
+									most_recent_clip_id: number | null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								onSale: boolean | null
+								isAudio: boolean
+							}[]
+							ga_tracking_id: string | null
+							avatarSrc: string
+							bannerSrc?: string
+							store_has_clips: boolean
+							browseSimilarClipsLink: string
+							classicWidgetExperimentActive: boolean
+							similarStoreClips: unknown[]
+							bannerSrcset: {
+								srcSet: string
+								media: number
+							}[]
+							description: string | null
+							clipsCount: number
+							clipsOutsideOrientationCount: number
+							followersCount: number
+							title: string
+							page: number
+							studioId: string
+							studioSlug: string
+							view: string
+							categoryId: string
+							socialLinks:
+								| {
+										title: string
+										url: string
+								  }[]
+								| null
+							donate: boolean
+							tribute: boolean
+							canBeFollowed: boolean
+							otherStudios?: {
+								avatarSrc: string
+								title: string
+								link: string
+								id: number
+								categories: {
+									category: string
+									id: number
+									name: string
+									translations: null
+									link: string
+									search_link: string
+									store_link: null
+									clean_name: string
+									total_clips: null
+									thumb: null
+									pill: null
+								}[]
+							}[]
+							categories: {
+								id: number
+								name: string
+								link: string
+							}[]
+							meta: {
+								title: string
+								keywords: string | null
+								description: string | null
+								author: string
+								robots: null
+								copyright: string
+								engine: string
+								revision: null
+								image: string
+								image_alt: string
+								location: string
+								og_description: (string | null) | null
+								og_url: string
+								twitter_site: string
+								twitter_card: string
+								language: string
+							}
+							clipsSort: string
+							sortOptions: {
+								label: string
+								value: string
+							}[]
+							storeDefaultSorting: string
+							canonical: {
+								href: string
+							}
+							selectedOrientations: number[]
+							isContentPreferenceLGBT: boolean
+							isChatEnabled: boolean
+							isCreatorOnline: boolean
+							visibility_mode: string
+							store_status: string
+						}
+					}
+				}
+				/** @description 204 No Content */
+				204: {
+					headers: {
+						'x-remix-redirect': string
+						'x-remix-status': string
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/{language}/studio/{studioId}/{studioSlug}/{category}/{page}/{sort}/Limit24/search/{search}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get studio clips
+		 * @description Get a paginated list of a studio's clips. Page size is fixed at 20, changing limit in url will not have any effect.
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Data loader param. Must be set to "routes/($lang).studio.$id_.$studioSlug.$" */
+					_data: 'routes/($lang).studio.$id_.$studioSlug.$'
+					/** @description Whether to return only the studio's clips. If omitted, the response will include studio details. Note: passing any value to this param will be interpreted as true, so passing 'false' as no effect */
+					onlyClips?: 'true'
+				}
+				header?: never
+				path: {
+					/** @description A unique identifier for a studio */
+					studioId: number
+					/** @description The text identifier slug for a studio */
+					studioSlug: string
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description Page number */
+					page: number
+					/** @description The sort order of the clip search results */
+					sort:
+						| 'recommended'
+						| 'added_at'
+						| 'most_popular'
+						| 'top_selling'
+						| 'featured'
+						| 'longest'
+					/** @description Search term to filter clip results by. If not provided url should omit '/search/' path param. */
+					search: string
+					/** @description The category ID to filter the search by. Setting the value to 0 will filter by all categories. */
+					category: number
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							clips: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								searchQueryId?: string
+								scroll_page: number
+								screen_size: string
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string
+								resolution: string
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations?: null
+									link: string
+								}[]
+								keyword_links: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: null
+									avatar_thumbs: null
+									banner: null
+									banner_thumbs: null
+									total_clips: null
+									last_clip: null
+									most_recent_clip_id: null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								onSale: boolean | null
+								isAudio: boolean
+							}[]
+							onSaleClips: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								searchQueryId?: string
+								scroll_page: number
+								screen_size: string
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string
+								resolution: string
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations?: null
+									link: string
+								}[]
+								keyword_links: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: null
+									avatar_thumbs: null
+									banner: null
+									banner_thumbs: null
+									total_clips: null
+									last_clip: null
+									most_recent_clip_id: null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								onSale: boolean | null
+								isAudio: boolean
+							}[]
+						} & {
+							ga_tracking_id?: string | null
+							avatarSrc?: string
+							bannerSrc?: string
+							store_has_clips?: boolean
+							browseSimilarClipsLink?: string
+							classicWidgetExperimentActive?: boolean
+							similarStoreClips?: unknown[]
+							bannerSrcset?: {
+								srcSet: string
+								media: number
+							}[]
+							description?: string | null
+							clipsCount?: number
+							clipsOutsideOrientationCount?: number
+							followersCount?: number
+							title?: string
+							page?: number
+							studioId?: string
+							studioSlug?: string
+							view?: string
+							keyword?: string
+							socialLinks?:
+								| {
+										title: string
+										url: string
+								  }[]
+								| null
+							donate?: boolean
+							tribute?: boolean
+							canBeFollowed?: boolean
+							categories?: {
+								id: number
+								name: string
+								link: string
+							}[]
+							meta?: {
+								title: string
+								keywords: string | null
+								description: string | null
+								author: string
+								robots: null
+								copyright: string
+								engine: string
+								revision: null
+								image: string
+								image_alt: string
+								location: string
+								og_description: string | null
+								og_url: string
+								twitter_site: string
+								twitter_card: string
+								language: string
+								keyword?: string
+							}
+							clipsSort?: string
+							sortOptions?: {
+								label: string
+								value: string
+							}[]
+							storeDefaultSorting?: string
+							canonical?: {
+								href: string
+							}
+							selectedOrientations?: number[]
+							isContentPreferenceLGBT?: boolean
+							isChatEnabled?: boolean
+							isCreatorOnline?: boolean
+							visibility_mode?: string
+							store_status?: string
+						}
+					}
+				}
+				/** @description 204 No Content */
+				204: {
+					headers: {
+						'x-remix-redirect': string
+						'x-remix-status': string
+						[name: string]: unknown
+					}
+					content?: never
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/{language}/clips/category/{category}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get category details
+		 * @description Get all category details by ID including top stores and clips, as well as new and trending clips
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Sexual preference option(s) joined by underscores. 1 (ID: Straight), 2 (ID: Gay), 3 (ID: Lesbian), 4 (ID: Bisexual), 5 (ID: Trans) */
+					pill: number[]
+					/** @description Data loader param. Must be set to "routes/($lang).clips.category.$id.($catName)" */
+					_data: 'routes/($lang).clips.category.$id.($catName)'
+				}
+				header?: never
+				path: {
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description C4S category ID */
+					category: number
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							meta: {
+								title: string
+								keywords: string
+								description: string
+								author: string
+								robots: null
+								copyright: string
+								engine: string
+								revision: string
+								image: null
+								image_alt: null
+								location: null
+								og_description: (string | null) | null
+								og_url: null
+								twitter_site: null
+								twitter_card: null
+							}
+							totals: {
+								stores: number
+								clips: number
+								outside_orientation: {
+									stores: number
+									clips: number
+								}
+							}
+							description: {
+								top: {
+									content: string
+									font_size: string
+									font_color: string
+									is_html: boolean
+									category: {
+										id: number
+										name: string
+										translations: null
+										link: string
+										search_link: string
+										store_link: string | null
+										clean_name: string
+										total_clips: null
+										thumb: null
+										pill: null
+									}
+									meta_data: {
+										meta_title: string | null
+										meta_description: string | null
+										header_one: null
+										header_two: null
+										header_three: null
+									}
+								}
+								bottom: null
+							}
+							category: {
+								id: number
+								name: string
+								translations: null
+								link: string
+								search_link: string
+								store_link: string | null
+								clean_name: string
+								total_clips: null
+								thumb: null
+								pill: null
+							}
+							topStores: {
+								storeId: number
+								avatarSrc: string
+								avatarLink: string
+								storeName: string
+								storeLink: string
+								storeCategory: string
+								storeCategoryLink: string
+								storeFilteredByCategoryLink: string
+								latestClipPreview: string
+								latestClipPreviewLink: string
+								latestClipCategory: string
+								latestClipCategoryId: number
+								latestClipUpdate: string
+								totalClips: number
+							}[]
+							newStores: {
+								storeId: number
+								avatarSrc: string
+								avatarLink: string
+								storeName: string
+								storeLink: string
+								storeCategory: string
+								storeCategoryLink: string
+								storeFilteredByCategoryLink: string
+								latestClipPreview: string
+								latestClipPreviewLink: string
+								latestClipCategory: string
+								latestClipCategoryId: number
+								latestClipUpdate: string
+								totalClips: number
+							}[]
+							relatedCategories: {
+								id: number
+								name: string
+								categoryLink: string
+								thumb: string
+								totalClips: number
+							}[]
+							recentlyAddedCategoryClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: string | null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: boolean | null
+							}[]
+							trendingRetroClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: string | null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: boolean | null
+							}[]
+							recentlyAddedRelatedClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: string | null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: boolean | null
+							}[]
+							topClips: {
+								clipId: number
+								producer: number
+								bannerLink: string
+								title: string
+								description: string | null
+								translations: null
+								categoryId: number
+								categoryName: string
+								categoryLink: string
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								srcSet: string
+								previewUrl: string
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								discounted_price: {
+									name: string | null
+									id: null
+									sale_type: string
+									percent: number
+									tiers: null
+									discount: number
+								} | null
+								queryId: string
+								isSuggestedWishlist: boolean
+								onSale: boolean | null
+							}[]
+							id: string
+							canonical: {
+								href: string
+							}
+							selectedOrientations: number[]
+							isContentPreferenceLGBT: boolean
+							contentPreferencePills: string[]
+							categoryAvailablePreferencePills: number[]
+							isAgeVerificationRequired: boolean
+							hrefLang: {
+								href: string
+							}
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/clips/category/seeMore': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get additional category details
+		 * @description Get additional category details for a category not returned by category details endpoint. Based on section parameter will return subsequent pages of top stores, top clips, or recently added related clips for this category.
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Determines what type of data is returned */
+					section:
+						| 'top-stores-see-more'
+						| 'top-clips-see-more'
+						| 'recently-added-related-clips-see-more'
+					lng?: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description C4S category ID */
+					id: number
+					/** @description See more category info page number. Can only be 2 or 3. */
+					page: number
+					/** @description Sexual preference option(s) joined by underscores. 1 (ID: Straight), 2 (ID: Gay), 3 (ID: Lesbian), 4 (ID: Bisexual), 5 (ID: Trans) */
+					pill: number[]
+					/** @description Data loader param. Must be set to "routes/clips.category.seeMore" */
+					_data: 'routes/clips.category.seeMore'
+				}
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							seeMoreExtra:
+								| {
+										id: number
+										name: string
+										slug: string
+										avatar: string
+										avatar_thumbs: {
+											avatar_sm: string
+											avatar_md: string
+										}
+										banner: null
+										banner_thumbs: null
+										total_clips: number
+										last_clip: {
+											id: number
+											added_at: string
+											category: {
+												id: number
+												name: string
+												link: string
+											}
+											thumbs: {
+												square_sm: string
+												square_md: string
+												rect_sm: string
+												rect_md: string
+												rect_lrg: string
+												rect_ex_lrg: string
+											}
+										}
+										most_recent_clip_id: null
+										link: string
+										category: {
+											id: number
+											name: string
+											translations: null
+											link: string
+											search_link: string
+											store_link: string | null
+											clean_name: string
+											total_clips: null
+											thumb: null
+											pill: null
+										}
+								  }[]
+								| {
+										id: number
+										title: string
+										slug: string
+										link: string
+										related_categories: null
+										related_keywords: null
+										description: string | null
+										description_sanitized: string | null
+										translations: null
+										added_at: string
+										price: number
+										discounted_price: {
+											name: string | null
+											id: null
+											sale_type: string
+											percent: number
+											tiers: null
+											discount: number
+										} | null
+										format: null
+										screen: null
+										resolution: null
+										length: number
+										suggested_clip_url: string
+										size: null
+										studio: {
+											id: number
+											name: string
+											slug: string
+											avatar: null
+											avatar_thumbs: null
+											banner: null
+											banner_thumbs: null
+											total_clips: null
+											last_clip: null
+											most_recent_clip_id: null
+											link: string
+											category: null
+										}
+										category: {
+											id: number
+											name: string
+											translations: null
+											link: string
+											search_link: string
+											store_link: string | null
+											clean_name: string
+											total_clips: null
+											thumb: null
+											pill: null
+										}
+										thumb: string
+										thumbs: {
+											square_sm: string
+											square_md: string
+											rect_sm: string
+											rect_md: string
+											rect_lrg: string
+											rect_ex_lrg: string
+										}
+										mediabook_url: null
+										mediabook_quality: null
+										video_preview_link: string | null
+										cdn_previewlg_link: string
+										cdn_preview_link: string
+										checkout_link: string
+										next_link: null
+										prev_link: null
+										show_click_for_preview: boolean
+										webm_preview_link: string | null
+										gif_preview_link: string | null
+										download: null
+										is_encoded: null
+										player: null
+										orientation: null
+										performers:
+											| {
+													id: number
+													stage_name: string
+													total_clips: null
+													avatars: null
+													created_at: null
+											  }[]
+											| null
+										archived: boolean
+										on_sale: null
+								  }[]
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/clips/ajax/categoriesdropdown': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Get list of categories
+		 * @description Get full list of categories and recommendations
+		 */
+		get: {
+			parameters: {
+				query?: {
+					lng?: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+				}
+				header?: never
+				path?: never
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							success: boolean
+							code: string
+							categories: {
+								id: number
+								name: string
+								link: string
+								search_link: string
+								pill: number | null
+							}[]
+							recommendations: {
+								id: number
+								name: string
+								link: string
+								search_link: string
+								pill: number | null
+							}[]
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
+	'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}': {
+		parameters: {
+			query?: never
+			header?: never
+			path?: never
+			cookie?: never
+		}
+		/**
+		 * Search for clips
+		 * @description Search for clips by term
+		 */
+		get: {
+			parameters: {
+				query: {
+					/** @description Data loader param. Must be set to "routes/($lang).clips.search.$" */
+					_data: 'routes/($lang).clips.search.$'
+				}
+				header?: never
+				path: {
+					/** @description The language of the returned data. If omitted, the language will be automatically determined by location of the request. */
+					language: 'en' | 'fr' | 'de' | 'pt' | 'es' | 'it'
+					/** @description Search term to filter clip results by */
+					search: string
+					/** @description Studio page number. Seems to have no effect */
+					storePage: number
+					/** @description Page number */
+					page: number
+					category: 0
+					studioSort: 'bestmatch'
+					categorySort: 'bestmatch'
+					clipSort: 'bestmatch' | 'mostrecent'
+					/** @description Search filters */
+					filters: string
+				}
+				cookie?: never
+			}
+			requestBody?: never
+			responses: {
+				/** @description 200 OK */
+				200: {
+					headers: {
+						[name: string]: unknown
+					}
+					content: {
+						'application/json': {
+							searchQueryId: string
+							success: boolean
+							code: string
+							data: {
+								clips: {
+									id: number
+									title: string
+									slug: string
+									link: string
+									related_categories?:
+										| {
+												category: string
+												translations: null
+												link: string
+										  }[]
+										| null
+									related_keywords?:
+										| {
+												keyword: string
+												translations: null
+												link: string
+										  }[]
+										| null
+									description: string | null
+									description_sanitized: string | null
+									translations: null
+									added_at: string
+									price: number
+									discounted_price: null
+									format: string
+									screen: string | null
+									resolution: string | null
+									length: number
+									suggested_clip_url: string
+									size: number
+									studio: {
+										id: number
+										name: string
+										slug: string
+										avatar: null
+										avatar_thumbs: null
+										banner: null
+										banner_thumbs: null
+										total_clips: null
+										last_clip: null
+										most_recent_clip_id: null
+										link: string
+										category: null
+									}
+									category: {
+										id: number
+										name: string
+										translations: null
+										link: string
+										search_link: string
+										store_link: null
+										clean_name: string
+										total_clips: null
+										thumb: null
+										pill: null
+									}
+									thumb: string
+									thumbs: {
+										square_sm: string
+										square_md: string
+										rect_sm: string
+										rect_md: string
+										rect_lrg: string
+										rect_ex_lrg: string
+									}
+									mediabook_url: string | null
+									mediabook_quality: string | null
+									video_preview_link: string | null
+									cdn_previewlg_link: string
+									cdn_preview_link: string
+									checkout_link: string
+									next_link: null
+									prev_link: null
+									show_click_for_preview: boolean
+									webm_preview_link: string | null
+									gif_preview_link: string | null
+									download: null
+									is_encoded: null
+									player: null
+									orientation: null
+									performers:
+										| {
+												id: number
+												stage_name: string
+												total_clips: null
+												avatars: null
+												created_at: null
+										  }[]
+										| null
+									archived: boolean
+									on_sale: null
+								}[]
+								performer: null
+								pills:
+									| {
+											value: number
+											label: string
+											type: string
+											isActive: boolean
+									  }[]
+									| null
+								performer_pills:
+									| {
+											value: number
+											label: string
+											type: string
+											avatars: {
+												'18x16': {
+													url: string | null
+												}
+												'20x20': {
+													url: string | null
+												}
+												'30x30': {
+													url: string | null
+												}
+												'52x52': {
+													url: string | null
+												}
+												'88x88': {
+													url: string | null
+												}
+												'120x120': {
+													url: string | null
+												}
+												'188x188': {
+													url: string | null
+												}
+												original: {
+													url: string | null
+												}
+											} | null
+											isActive: boolean
+									  }[]
+									| null
+								totalClips: number
+								totalClipPages: number
+								spellcheck: null
+								message: null
+								recommendations: null
+							}
+							spellcheck: null
+							pills?: {
+								value: number
+								label: string
+								type: string
+								isActive: boolean
+							}[]
+							performerPills?: {
+								value: number
+								label: string
+								type: string
+								avatars: {
+									'18x16': {
+										url: string | null
+									}
+									'20x20': {
+										url: string | null
+									}
+									'30x30': {
+										url: string | null
+									}
+									'52x52': {
+										url: string | null
+									}
+									'88x88': {
+										url: string | null
+									}
+									'120x120': {
+										url: string | null
+									}
+									'188x188': {
+										url: string | null
+									}
+									original: {
+										url: string | null
+									}
+								} | null
+								isActive: boolean
+								avatar?: string
+							}[]
+							totalClipPages: number
+							clipsPage: number
+							activeFilters: {
+								date?: ['24h' | '7d' | '30d' | '1y'] | null
+								format?: ('avi' | 'mp4' | 'mov' | 'wmv')[] | null
+								duration?: ('0_5' | '5_10' | '10_15' | '15_30' | '30+')[] | null
+								resolution?: ('4k' | 'hd' | 'sd')[] | null
+								price?:
+									| (
+											| '0_10'
+											| '10_25'
+											| '100+'
+											| '25_50'
+											| '50_100'
+											| 'on_sale'
+									  )[]
+									| null
+								content_preference?: string[] | null
+								category_id?: string[]
+							}
+							clipsSort: string
+							defaultSortFromCookie: string
+							isActiveExperiment: boolean
+							experimentId: string
+							keyword?: string
+							categoryId: string
+							meta: {
+								title: string
+								description: string
+							}
+							clips: {
+								clipId: string
+								producer: number
+								bannerLink: string
+								title: string
+								position: number
+								categoryId: number
+								duration: number
+								suggestedClipUrl: string
+								previewLink: string
+								previewUrl: string | null
+								srcSet: string
+								responsiveSrcset: {
+									srcSet: string
+									media: number
+								}[]
+								customPreview: boolean
+								customPreviewUrl: string | null
+								studioTitle: string
+								studioLink: string
+								price: number
+								dateDisplay: string
+								scroll_page: number
+								screen_size: string | null
+								id: number
+								checkout_link: string
+								date_display: string
+								cdn_preview_link: string | null
+								is_preview_enabled: boolean
+								cdn_previewlg_link: string
+								link: string
+								format: string
+								resolution_text: string | null
+								resolution: string | null
+								time_minutes: number
+								size_mb: number
+								size: number
+								category_link: string
+								category_name: string
+								related_category_links?: {
+									category: string
+									translations: null
+									link: string
+								}[]
+								keyword_links?: {
+									keyword: string
+									translations: null
+									link: string
+								}[]
+								performers:
+									| {
+											id: number
+											stage_name: string
+											total_clips: null
+											avatars: null
+											created_at: null
+									  }[]
+									| null
+								description: string | null
+								description_sanitized: string | null
+								translations: null
+								studio: {
+									id: number
+									name: string
+									slug: string
+									avatar: null
+									avatar_thumbs: null
+									banner: null
+									banner_thumbs: null
+									total_clips: null
+									last_clip: null
+									most_recent_clip_id: null
+									link: string
+									category: null
+								}
+								gifPreviewUrl: string | null
+								discounted_price: null
+								onSale: null
+								isAudio: boolean
+							}[]
+							performer: null
+							canonical: {
+								href: string
+							}
+							orientation: unknown[]
+							isShowSavedSearchHint: boolean
+							isPerformerSearch: boolean
+						}
+					}
+				}
+			}
+		}
+		put?: never
+		post?: never
+		delete?: never
+		options?: never
+		head?: never
+		patch?: never
+		trace?: never
+	}
 }
-export type webhooks = Record<string, never>;
+export type webhooks = Record<string, never>
 export interface components {
-    schemas: never;
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+	schemas: never
+	responses: never
+	parameters: never
+	requestBodies: never
+	headers: never
+	pathItems: never
 }
-export type $defs = Record<string, never>;
-export type operations = Record<string, never>;
+export type $defs = Record<string, never>
+export type operations = Record<string, never>

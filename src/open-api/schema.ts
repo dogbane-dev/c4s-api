@@ -318,7 +318,7 @@ const schema = createDocument({
 				},
 			},
 		},
-		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/{filters}':
+		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}':
 			{
 				get: {
 					summary: 'Search for clips',
@@ -326,19 +326,13 @@ const schema = createDocument({
 					requestParams: {
 						path: z.object({
 							language,
-							// if search is not provided, url can omit everything. unless past page 1?
 							search: clipSearchTerm,
-							// category goes at end ??? and url changes
-							// categories filter can go at end too ???
-							category,
 							storePage: studioPage,
 							page,
-							// most popular = best match
-							// if sort = bestmatch, the everything after page is omitted, unless there is a filter applied
+							category: z.literal(0),
 							studioSort: z.literal('bestmatch'),
 							categorySort: z.literal('bestmatch'),
 							clipSort: z.enum(CLIP_SEARCH_SORTS),
-
 							filters: z.string().meta({
 								description: 'Search filters',
 								example: 'Elaborate serialized filters. More info TBD',

@@ -10,14 +10,17 @@ import { type SearchC4SClipsParams, searchC4SClips } from './search-clips'
 
 const testCases = enumerateTestCases<SearchC4SClipsParams>({
 	language: [undefined, 'en'],
-	category: [undefined, 4],
 	search: [undefined, 'robe'],
-	page: [1],
-	sort: ['bestmatch', 'mostrecent'],
+	page: [1, 3],
+	sort: ['most-popular', 'most-recent'],
 	filter: [
 		undefined,
 		{
 			past: '7d',
+			format: ['mp4', 'wmv'],
+		},
+		{
+			category: '4',
 		},
 	],
 })
@@ -35,10 +38,19 @@ describe('clip search', () => {
 				'Clip search response',
 			)
 
-			const { clips } = searchData
+			const { clips, activeFilters } = searchData
 
 			expect(clips).toBeArray()
 			expect(clips.length).toBeGreaterThan(0)
+
+			if (testCase.filter) {
+				expect(activeFilters).not.toBeEmptyObject()
+				const { past } = testCase.filter
+				expect(activeFilters.date).toEqual(past ? [past] : null)
+				// TODO - more expects for active filters to match test case
+			} else {
+				expect(activeFilters).toBeEmptyObject()
+			}
 
 			expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 		})

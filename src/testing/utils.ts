@@ -43,7 +43,10 @@ type MockedClient = C4SClient & { fetch: Mock<typeof globalThis.fetch> }
 export const getMockClient = (): MockedClient => {
 	const mockFetch = mock(fetch)
 	const mockedClient = createC4SClient({
-		fetch: mockFetch,
+		fetch: (r) => {
+			// console.log('fetching', r.url)
+			return mockFetch(r)
+		},
 	})
 	;(mockedClient as MockedClient).fetch = mockFetch
 	return mockedClient as MockedClient

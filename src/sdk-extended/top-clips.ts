@@ -32,11 +32,14 @@ const getC4STopClips = async (
 	params: GetC4STopClipsParams,
 	client?: C4SClient,
 ): Promise<GetC4STopClipsData> => {
-	const details = await getC4SCategoryDetails({
-		id: params.categoryId,
-		language: params.language,
-		sexualPreferences: params.sexualPreferences,
-	}, client)
+	const details = await getC4SCategoryDetails(
+		{
+			id: params.categoryId,
+			language: params.language,
+			sexualPreferences: params.sexualPreferences,
+		},
+		client,
+	)
 
 	let topClips: GetC4STopClipsData = details.topClips.map((r) => ({
 		clipId: r.clipId,
@@ -58,12 +61,15 @@ const getC4STopClips = async (
 	}))
 
 	for (const page of VALID_SEE_MORE_PAGES) {
-		const result = await getC4SCategorySeeMoreTopClips({
-			id: params.categoryId,
-			page,
-			language: params.language,
-			sexualPreferences: params.sexualPreferences,
-		}, client)
+		const result = await getC4SCategorySeeMoreTopClips(
+			{
+				id: params.categoryId,
+				page,
+				language: params.language,
+				sexualPreferences: params.sexualPreferences,
+			},
+			client,
+		)
 
 		const mapped = result.map((r) => {
 			return {

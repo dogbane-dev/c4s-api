@@ -5,6 +5,7 @@ import {
 	type ClipSearchSort,
 	type Language,
 	parseClipSearchFilters,
+	parseClipSearchSort,
 	parseLanguage,
 } from '../shared/utils'
 
@@ -12,13 +13,12 @@ type SearchC4SClipsParams = {
 	search?: string
 	language?: Language
 	filter?: ClipSearchFilter
-	category?: number
 	page?: number
 	sort?: ClipSearchSort
 }
 
 type SearchC4SClipsData =
-	paths['/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/{filters}']['get']['responses']['200']['content']['application/json']
+	paths['/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}']['get']['responses']['200']['content']['application/json']
 
 const searchC4SClips = async (
 	params: SearchC4SClipsParams,
@@ -27,17 +27,17 @@ const searchC4SClips = async (
 	const c = getClient(client)
 
 	const res = await c.GET(
-		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/{filters}',
+		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}',
 		{
 			params: {
 				path: {
 					language: parseLanguage(params.language),
-					category: params.category ?? 0,
 					search: params.search ?? '',
-					clipSort: params.sort ?? 'bestmatch',
+					clipSort: parseClipSearchSort(params.sort),
 					filters: parseClipSearchFilters(params.filter),
 					page: params.page ?? 1,
 					// all hardcoded / unsure of effect
+					category: 0, // really parsed from filters
 					storePage: 1,
 					categorySort: 'bestmatch',
 					studioSort: 'bestmatch',

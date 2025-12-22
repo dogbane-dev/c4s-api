@@ -88,7 +88,7 @@ MIT
 TBD
 
 ## Future Work / Possible Contributions
-- add endpoint for generic public search
+- add endpoint(s) for performers
 - add example responses, better notes & descriptions to all endpoints & schemas
 - document available exports and SDK
 - add jsdoc comments to all methods

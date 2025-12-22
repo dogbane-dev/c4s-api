@@ -64,5 +64,6 @@ export {
 	getC4SCategoryByName,
 	getC4SCategoryById,
 	type C4SCategory,
+	type GetC4SCategoriesParams,
 	type GetC4SCategoriesData,
 }

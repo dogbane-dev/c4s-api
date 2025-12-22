@@ -92,6 +92,32 @@ export const requestRewriteHandler: Middleware = {
 			pathname = pathname.replace(/\/search\/$/, '')
 		}
 
+		if (
+			schemaPath ===
+			'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}'
+		) {
+			// no search, fix "//"
+			if (pathname.match(/^\/clips\/search\/\//)) {
+				pathname = pathname.replace(/^\/clips\/search\/\//, '/clips/search/')
+			}
+			// no filters
+			if (pathname.match(/\/filters\/$/)) {
+				// remove ".../filters/"
+				pathname = pathname.replace(/\/filters\/$/, '')
+			}
+			// all default sorts - remove sorts substring
+			if (
+				pathname.match(
+					/\/sortstudios\/bestmatch\/sortclips\/bestmatch\/sortcategories\/bestmatch$/,
+				)
+			) {
+				pathname = pathname.replace(
+					/\/sortstudios\/bestmatch\/sortclips\/bestmatch\/sortcategories\/bestmatch$/,
+					'',
+				)
+			}
+		}
+
 		// pathname was not changed, return to just continue with original request
 		if (url.pathname === pathname) {
 			return
@@ -99,6 +125,7 @@ export const requestRewriteHandler: Middleware = {
 
 		// update pathname and return new request
 		url.pathname = pathname
+		// console.log('Rewriting', '\n', request.url, '\n', url.toString())
 		return new Request(url.toString(), request)
 	},
 }
