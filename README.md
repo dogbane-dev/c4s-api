@@ -89,6 +89,7 @@ TBD
 
 ## Future Work / Possible Contributions
 - add endpoint(s) for performers
+- add endpoint(s) for store search 
 - add example responses, better notes & descriptions to all endpoints & schemas
 - document available exports and SDK
 - add jsdoc comments to all methods
