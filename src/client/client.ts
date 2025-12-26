@@ -6,9 +6,11 @@ import {
 } from './middleware'
 import type { paths } from './paths.generated'
 
-type C4SClient = Client<paths>
-const createC4SClient = (ops?: Pick<ClientOptions, 'fetch'>): C4SClient => {
-	const client: Client<paths> = createClient<paths>({
+type C4SClient<P extends {} = paths> = Client<P>
+const createC4SClient = <P extends {} = paths>(
+	ops?: Pick<ClientOptions, 'fetch'>,
+): C4SClient<P> => {
+	const client = createClient<P>({
 		baseUrl: 'https://www.clips4sale.com',
 		headers: {
 			Cookie: 'ageVerified=true;',
@@ -36,8 +38,8 @@ const createC4SClient = (ops?: Pick<ClientOptions, 'fetch'>): C4SClient => {
 }
 
 const clientSingleton = createC4SClient()
-function getClient(optionalClient?: C4SClient): C4SClient {
+function getC4SClient(optionalClient?: C4SClient): C4SClient {
 	return optionalClient ?? clientSingleton
 }
 
-export { getClient, createC4SClient, type C4SClient }
+export { getC4SClient, createC4SClient, type C4SClient }

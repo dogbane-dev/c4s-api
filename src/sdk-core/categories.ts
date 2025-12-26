@@ -1,4 +1,4 @@
-import { type C4SClient, getClient } from '../client/client'
+import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import type { Language } from '../shared/utils'
 
@@ -13,7 +13,7 @@ const getC4SCategories = async (
 	params?: GetC4SCategoriesParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData> => {
-	const c = getClient(client)
+	const c = getC4SClient(client)
 	const res = await c.GET('/clips/ajax/categoriesdropdown', {
 		params: {
 			query: {

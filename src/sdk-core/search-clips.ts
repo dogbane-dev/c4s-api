@@ -1,4 +1,4 @@
-import { type C4SClient, getClient } from '../client/client'
+import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
 	type ClipSearchFilter,
@@ -24,7 +24,7 @@ const searchC4SClips = async (
 	params: SearchC4SClipsParams,
 	client?: C4SClient,
 ): Promise<SearchC4SClipsData> => {
-	const c = getClient(client)
+	const c = getC4SClient(client)
 
 	const res = await c.GET(
 		'/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}',

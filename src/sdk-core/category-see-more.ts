@@ -1,4 +1,4 @@
-import { type C4SClient, getClient } from '../client/client'
+import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
 	type InferFromField,
@@ -31,7 +31,7 @@ const getC4SCategorySeeMore = async (
 	params: GetC4SCategorySeeMoreParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreData> => {
-	const c = getClient(client)
+	const c = getC4SClient(client)
 	const res = await c.GET('/clips/category/seeMore', {
 		params: {
 			query: {

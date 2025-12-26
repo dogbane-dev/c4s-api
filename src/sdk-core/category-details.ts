@@ -1,4 +1,4 @@
-import { type C4SClient, getClient } from '../client/client'
+import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
 	type Language,
@@ -20,7 +20,7 @@ const getC4SCategoryDetails = async (
 	params: GetC4SCategoryDetailsParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategoryDetailsData> => {
-	const c = getClient(client)
+	const c = getC4SClient(client)
 	const res = await c.GET('/{language}/clips/category/{category}', {
 		params: {
 			path: {
