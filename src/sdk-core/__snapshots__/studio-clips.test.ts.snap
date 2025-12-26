@@ -359,3 +359,675 @@ exports[`studio clips fetches without slug provided - handles remix redirect 1`]
   "visibility_mode": "online",
 }
 `;
+
+exports[`studio clips fetches with all options provided - TRB 1`] = `
+{
+  "avatarSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/avatar/avatar_md_20685.jpg",
+  "bannerSrc": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_md_28779.jpg",
+  "bannerSrcset": [
+    {
+      "media": 1536,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_xlg_28779.jpg",
+    },
+    {
+      "media": 1280,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_lg_28779.jpg",
+    },
+    {
+      "media": 1024,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_md_28779.jpg",
+    },
+    {
+      "media": 320,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/254031/assets/banner/banner_sm_28779.jpg",
+    },
+  ],
+  "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
+  "canBeFollowed": true,
+  "canonical": {
+    "href": "http://www.clips4sale.com/en/studio/254031/tatti-roana-bondage/0/1/recommended/Limit24",
+  },
+  "categories": [
+    {
+      "id": 1039,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1039-ballgagged/Page1/recommended/Limit24",
+      "name": "BALLGAGGED",
+    },
+    {
+      "id": 14,
+      "link": "/studio/254031/tatti-roana-bondage/Cat14-blow-jobs/Page1/recommended/Limit24",
+      "name": "BLOW JOBS",
+    },
+    {
+      "id": 4,
+      "link": "/studio/254031/tatti-roana-bondage/Cat4-bondage/Page1/recommended/Limit24",
+      "name": "BONDAGE",
+    },
+    {
+      "id": 1017,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1017-bondage-blowjobs/Page1/recommended/Limit24",
+      "name": "BONDAGE BLOWJOBS",
+    },
+    {
+      "id": 350,
+      "link": "/studio/254031/tatti-roana-bondage/Cat350-brat-girls/Page1/recommended/Limit24",
+      "name": "BRAT GIRLS",
+    },
+    {
+      "id": 1627,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1627-classic-bondage/Page1/recommended/Limit24",
+      "name": "CLASSIC BONDAGE",
+    },
+    {
+      "id": 183,
+      "link": "/studio/254031/tatti-roana-bondage/Cat183-cuckolding/Page1/recommended/Limit24",
+      "name": "CUCKOLDING",
+    },
+    {
+      "id": 1,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1-foot-fetish/Page1/recommended/Limit24",
+      "name": "FOOT FETISH",
+    },
+    {
+      "id": 1719,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1719-gamer-girls/Page1/recommended/Limit24",
+      "name": "GAMER GIRLS",
+    },
+    {
+      "id": 981,
+      "link": "/studio/254031/tatti-roana-bondage/Cat981-office-domination/Page1/recommended/Limit24",
+      "name": "OFFICE DOMINATION",
+    },
+    {
+      "id": 486,
+      "link": "/studio/254031/tatti-roana-bondage/Cat486-struggling/Page1/recommended/Limit24",
+      "name": "STRUGGLING",
+    },
+    {
+      "id": 1322,
+      "link": "/studio/254031/tatti-roana-bondage/Cat1322-submissive-slave-training/Page1/recommended/Limit24",
+      "name": "SUBMISSIVE / SLAVE TRAINING",
+    },
+    {
+      "id": 88,
+      "link": "/studio/254031/tatti-roana-bondage/Cat88-superheroines/Page1/recommended/Limit24",
+      "name": "SUPERHEROINES",
+    },
+    {
+      "id": 488,
+      "link": "/studio/254031/tatti-roana-bondage/Cat488-tape-bondage/Page1/recommended/Limit24",
+      "name": "TAPE BONDAGE",
+    },
+  ],
+  "classicWidgetExperimentActive": false,
+  "clipsOutsideOrientationCount": 0,
+  "clipsSort": "recommended",
+  "description": "My names Tatti, welcome to my C4S page!! I&#039;m so excited to be sharing my videos with you and I hope you like bondage as much as I do;)  I&#039;m 5&#039;2, big titties and I love bondage!!! Now that i&#039;ve introduced myself let me tell you a little bit about the content you&#039;ll find on my page! There&#039;s nothing i&#039;ve said no to yet so I&#039;d say you won&#039;t find many that seriously love bondage like me! I have been a bondage lover for the last 5ish years filming with various studios over the years but only recently have decided to give it a go on my own sites, so i&#039;m really grateful for all your support! You&#039;ll find a range of different materials I like to explore, tape, rope, cuffs, cling film, silk and many more (&amp; more to come). I like to try new things but also love a classic hogtie and ballgag too hehe.. I&#039;m also available for custom content which you can request by checking my twitter! Thank you for taking time to get to know me, hopefully soon I will be one of your favourite damsels...",
+  "donate": false,
+  "ga_tracking_id": null,
+  "isChatEnabled": true,
+  "isContentPreferenceLGBT": false,
+  "isCreatorOnline": false,
+  "meta": {
+    "author": "clips4sale.com",
+    "copyright": "https://www.clips4sale.com 2025",
+    "description": "Bondage of various styles, both classic and unique. Filmed in 4K",
+    "engine": "Clips4Sale",
+    "image": "/Assets/Static/img/c4sFixedLogo.png",
+    "image_alt": "Clips4Sale.com",
+    "keywords": null,
+    "language": "en",
+    "location": "studio-page",
+    "og_description": "Bondage of various styles, both classic and unique. Filmed in 4K",
+    "og_url": "/studio/254031/tatti-roana-bondage",
+    "revision": null,
+    "robots": null,
+    "title": "Tatti Roana Bondage",
+    "twitter_card": "summary_large_image",
+    "twitter_site": "@clips4sale",
+  },
+  "page": 1,
+  "selectedOrientations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
+  "similarStoreClips": [],
+  "socialLinks": [
+    {
+      "title": "email_for_fans",
+      "url": "tattiroana@hotmail.com",
+    },
+    {
+      "title": "twitter_url",
+      "url": "https://x.com/tattiroana1",
+    },
+  ],
+  "sortOptions": [
+    {
+      "label": "Recommended",
+      "value": "recommended",
+    },
+    {
+      "label": "Most Recent",
+      "value": "added_at",
+    },
+    {
+      "label": "Most Popular",
+      "value": "most_popular",
+    },
+    {
+      "label": "Top Selling",
+      "value": "top_selling",
+    },
+    {
+      "label": "Longest Clips",
+      "value": "longest",
+    },
+  ],
+  "storeDefaultSorting": "recommended",
+  "store_has_clips": true,
+  "store_status": "open",
+  "studioId": "254031",
+  "studioSlug": "tatti-roana-bondage",
+  "title": "Tatti Roana Bondage",
+  "tribute": true,
+  "view": "grid",
+  "visibility_mode": "online",
+}
+`;
+
+exports[`studio clips fetches with all options provided - TT 1`] = `
+{
+  "avatarSrc": "https://imagecdn.clips4sale.com/accounts99/111172/assets/avatar/avatar_md_105809.jpg",
+  "bannerSrc": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_md_2649.jpg",
+  "bannerSrcset": [
+    {
+      "media": 1536,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_xlg_2649.jpg",
+    },
+    {
+      "media": 1280,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_lg_2649.jpg",
+    },
+    {
+      "media": 1024,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_md_2649.jpg",
+    },
+    {
+      "media": 320,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_sm_2649.jpg",
+    },
+  ],
+  "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
+  "canBeFollowed": true,
+  "canonical": {
+    "href": "http://www.clips4sale.com/en/studio/111172/tied-tales/0/1/recommended/Limit24",
+  },
+  "categories": [
+    {
+      "id": 31,
+      "link": "/studio/111172/tied-tales/Cat31-18-19-yrs-old/Page1/recommended/Limit24",
+      "name": "18 & 19 YRS OLD",
+    },
+    {
+      "id": 1296,
+      "link": "/studio/111172/tied-tales/Cat1296-babysitter/Page1/recommended/Limit24",
+      "name": "BABYSITTER",
+    },
+    {
+      "id": 213,
+      "link": "/studio/111172/tied-tales/Cat213-bdsm/Page1/recommended/Limit24",
+      "name": "BDSM",
+    },
+    {
+      "id": 4,
+      "link": "/studio/111172/tied-tales/Cat4-bondage/Page1/recommended/Limit24",
+      "name": "BONDAGE",
+    },
+    {
+      "id": 1277,
+      "link": "/studio/111172/tied-tales/Cat1277-bondage-male/Page1/recommended/Limit24",
+      "name": "BONDAGE MALE",
+    },
+    {
+      "id": 346,
+      "link": "/studio/111172/tied-tales/Cat346-bound-orgasms/Page1/recommended/Limit24",
+      "name": "BOUND ORGASMS",
+    },
+    {
+      "id": 525,
+      "link": "/studio/111172/tied-tales/Cat525-challenges/Page1/recommended/Limit24",
+      "name": "CHALLENGES",
+    },
+    {
+      "id": 1697,
+      "link": "/studio/111172/tied-tales/Cat1697-did/Page1/recommended/Limit24",
+      "name": "DID",
+    },
+    {
+      "id": 484,
+      "link": "/studio/111172/tied-tales/Cat484-escaping/Page1/recommended/Limit24",
+      "name": "ESCAPING",
+    },
+    {
+      "id": 763,
+      "link": "/studio/111172/tied-tales/Cat763-food-stuffing/Page1/recommended/Limit24",
+      "name": "FOOD STUFFING",
+    },
+    {
+      "id": 579,
+      "link": "/studio/111172/tied-tales/Cat579-foot-tickling/Page1/recommended/Limit24",
+      "name": "FOOT TICKLING",
+    },
+    {
+      "id": 431,
+      "link": "/studio/111172/tied-tales/Cat431-hand-over-mouth/Page1/recommended/Limit24",
+      "name": "HAND OVER MOUTH",
+    },
+    {
+      "id": 483,
+      "link": "/studio/111172/tied-tales/Cat483-interviews/Page1/recommended/Limit24",
+      "name": "INTERVIEWS",
+    },
+    {
+      "id": 711,
+      "link": "/studio/111172/tied-tales/Cat711-jerk-off-instruction/Page1/recommended/Limit24",
+      "name": "JERK OFF INSTRUCTION",
+    },
+    {
+      "id": 709,
+      "link": "/studio/111172/tied-tales/Cat709-joi/Page1/recommended/Limit24",
+      "name": "JOI",
+    },
+    {
+      "id": 1701,
+      "link": "/studio/111172/tied-tales/Cat1701-made-to-cum/Page1/recommended/Limit24",
+      "name": "MADE TO CUM",
+    },
+    {
+      "id": 1233,
+      "link": "/studio/111172/tied-tales/Cat1233-mummification/Page1/recommended/Limit24",
+      "name": "MUMMIFICATION",
+    },
+    {
+      "id": 394,
+      "link": "/studio/111172/tied-tales/Cat394-pov/Page1/recommended/Limit24",
+      "name": "POV",
+    },
+    {
+      "id": 1539,
+      "link": "/studio/111172/tied-tales/Cat1539-pov-female/Page1/recommended/Limit24",
+      "name": "POV FEMALE",
+    },
+    {
+      "id": 587,
+      "link": "/studio/111172/tied-tales/Cat587-rope-bondage/Page1/recommended/Limit24",
+      "name": "ROPE BONDAGE",
+    },
+    {
+      "id": 460,
+      "link": "/studio/111172/tied-tales/Cat460-self-bondage/Page1/recommended/Limit24",
+      "name": "SELF BONDAGE",
+    },
+    {
+      "id": 1440,
+      "link": "/studio/111172/tied-tales/Cat1440-small-feet/Page1/recommended/Limit24",
+      "name": "SMALL FEET",
+    },
+    {
+      "id": 486,
+      "link": "/studio/111172/tied-tales/Cat486-struggling/Page1/recommended/Limit24",
+      "name": "STRUGGLING",
+    },
+    {
+      "id": 88,
+      "link": "/studio/111172/tied-tales/Cat88-superheroines/Page1/recommended/Limit24",
+      "name": "SUPERHEROINES",
+    },
+  ],
+  "classicWidgetExperimentActive": false,
+  "clipsOutsideOrientationCount": 0,
+  "clipsSort": "recommended",
+  "description": "Our videos are carefully crafted with creative storylines that aim to fully immerse and engage our viewers. Each video is a full-length feature bondage tale, beloved by our fans for their thrilling and intense plots. You will witness the peril of our poor damsels as they are put into impossible situations, and experience their desperate struggles to break free. We hope you find enjoyment in our content and would greatly appreciate your feedback on our clips.&lt;br /&gt;&lt;br /&gt;Experience the thrill of bondage without breaking the bank with our Tied Talettes. These are exclusive, uncut scenes from our feature full length stories that can be purchased separately for our budget-savvy fans. As each scene unfolds, our characters may stray from their normal behaviors and reveal unexpected desires.&lt;br /&gt;&lt;br /&gt;But our models aren&#039;t just objects of fantasy - get to know them on a personal level with our Talkin Bondage series. Watch as they give intimate interviews and share their deepest secrets and desires.&lt;br /&gt;&lt;br /&gt;And for those who want to take their fantasy to the next level, check out our latest series: POV Tales starring YOU! Be captivated by our stunning models or take control and give them commands - the choice is yours.&lt;br /&gt;&lt;br /&gt;Experience the ultimate thrill with our never-ending bondage challenges, including the intense BDSM Tournament, fierce Mistress Wars, harrowing Bondage Survivor, playful Bondage Tickle Escape Challenge, and so much more! We push their limits and test their endurance as they compete against others in the world of bondage. Who will you emerge victorious or succumb to the tantalizing restraints? Own them now!&lt;br /&gt;&lt;br /&gt;Have a specific story or chat log that you&#039;ve been eager to see brought to life? We offer custom videos tailored to your preferences. Contact us with your tales and let us make your fantasies a reality.",
+  "donate": false,
+  "ga_tracking_id": null,
+  "isChatEnabled": true,
+  "isContentPreferenceLGBT": false,
+  "isCreatorOnline": false,
+  "meta": {
+    "author": "clips4sale.com",
+    "copyright": "https://www.clips4sale.com 2025",
+    "description": "Full length damsel in  bondage clips with a sexy storyline.",
+    "engine": "Clips4Sale",
+    "image": "/Assets/Static/img/c4sFixedLogo.png",
+    "image_alt": "Clips4Sale.com",
+    "keywords": "BONDAGE damsel in stories heels bare feet rope gag ball gag hogtie struggle escape revenge sexy sex moan socks tickle knock out peril blackmail fem fem drool tape cousins sisters babysitter hostage tricked domme superheroine supergirl gag talk naked boots foot fetish tickling foot tickling on screen tying foot worship POV tied and gagged storyline girl next door male bondage couple in couple bondage feet tickling toes escaping contest",
+    "language": "en",
+    "location": "studio-page",
+    "og_description": "Full length damsel in  bondage clips with a sexy storyline.",
+    "og_url": "/studio/111172/tied-tales",
+    "revision": null,
+    "robots": null,
+    "title": "Tied Tales",
+    "twitter_card": "summary_large_image",
+    "twitter_site": "@clips4sale",
+  },
+  "page": 1,
+  "selectedOrientations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
+  "similarStoreClips": [],
+  "socialLinks": [
+    {
+      "title": "email_for_fans",
+      "url": "Tiedtales@gmail.com",
+    },
+    {
+      "title": "instagram_url",
+      "url": "https://www.instagram.com/tiedtales1/",
+    },
+    {
+      "title": "twitter_url",
+      "url": "https://twitter.com/tiedtales",
+    },
+    {
+      "title": "website",
+      "url": "http://www.tiedtales.com",
+    },
+  ],
+  "sortOptions": [
+    {
+      "label": "Recommended",
+      "value": "recommended",
+    },
+    {
+      "label": "Most Recent",
+      "value": "added_at",
+    },
+    {
+      "label": "Most Popular",
+      "value": "most_popular",
+    },
+    {
+      "label": "Top Selling",
+      "value": "top_selling",
+    },
+    {
+      "label": "Featured Clips",
+      "value": "featured",
+    },
+    {
+      "label": "Longest Clips",
+      "value": "longest",
+    },
+    {
+      "label": "Creator Favorites",
+      "value": "display_order_desc",
+    },
+  ],
+  "storeDefaultSorting": "display_order_desc",
+  "store_has_clips": true,
+  "store_status": "open",
+  "studioId": "111172",
+  "studioSlug": "tied-tales",
+  "title": "Tied Tales",
+  "tribute": true,
+  "view": "grid",
+  "visibility_mode": "online",
+}
+`;
+
+exports[`studio clips fetches all options + specific category - TT 1`] = `
+{
+  "avatarSrc": "https://imagecdn.clips4sale.com/accounts99/111172/assets/avatar/avatar_md_105809.jpg",
+  "bannerSrc": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_md_2649.jpg",
+  "bannerSrcset": [
+    {
+      "media": 1536,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_xlg_2649.jpg",
+    },
+    {
+      "media": 1280,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_lg_2649.jpg",
+    },
+    {
+      "media": 1024,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_md_2649.jpg",
+    },
+    {
+      "media": 320,
+      "srcSet": "https://imagecdn.clips4sale.com/accounts99/111172/assets/banner/banner_sm_2649.jpg",
+    },
+  ],
+  "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
+  "canBeFollowed": true,
+  "canonical": {
+    "href": "http://www.clips4sale.com/en/studio/111172/tied-tales/4/1/recommended/Limit24",
+  },
+  "categories": [
+    {
+      "id": 31,
+      "link": "/studio/111172/tied-tales/Cat31-18-19-yrs-old/Page1/recommended/Limit24",
+      "name": "18 & 19 YRS OLD",
+    },
+    {
+      "id": 1296,
+      "link": "/studio/111172/tied-tales/Cat1296-babysitter/Page1/recommended/Limit24",
+      "name": "BABYSITTER",
+    },
+    {
+      "id": 213,
+      "link": "/studio/111172/tied-tales/Cat213-bdsm/Page1/recommended/Limit24",
+      "name": "BDSM",
+    },
+    {
+      "id": 4,
+      "link": "/studio/111172/tied-tales/Cat4-bondage/Page1/recommended/Limit24",
+      "name": "BONDAGE",
+    },
+    {
+      "id": 1277,
+      "link": "/studio/111172/tied-tales/Cat1277-bondage-male/Page1/recommended/Limit24",
+      "name": "BONDAGE MALE",
+    },
+    {
+      "id": 346,
+      "link": "/studio/111172/tied-tales/Cat346-bound-orgasms/Page1/recommended/Limit24",
+      "name": "BOUND ORGASMS",
+    },
+    {
+      "id": 525,
+      "link": "/studio/111172/tied-tales/Cat525-challenges/Page1/recommended/Limit24",
+      "name": "CHALLENGES",
+    },
+    {
+      "id": 1697,
+      "link": "/studio/111172/tied-tales/Cat1697-did/Page1/recommended/Limit24",
+      "name": "DID",
+    },
+    {
+      "id": 484,
+      "link": "/studio/111172/tied-tales/Cat484-escaping/Page1/recommended/Limit24",
+      "name": "ESCAPING",
+    },
+    {
+      "id": 763,
+      "link": "/studio/111172/tied-tales/Cat763-food-stuffing/Page1/recommended/Limit24",
+      "name": "FOOD STUFFING",
+    },
+    {
+      "id": 579,
+      "link": "/studio/111172/tied-tales/Cat579-foot-tickling/Page1/recommended/Limit24",
+      "name": "FOOT TICKLING",
+    },
+    {
+      "id": 431,
+      "link": "/studio/111172/tied-tales/Cat431-hand-over-mouth/Page1/recommended/Limit24",
+      "name": "HAND OVER MOUTH",
+    },
+    {
+      "id": 483,
+      "link": "/studio/111172/tied-tales/Cat483-interviews/Page1/recommended/Limit24",
+      "name": "INTERVIEWS",
+    },
+    {
+      "id": 711,
+      "link": "/studio/111172/tied-tales/Cat711-jerk-off-instruction/Page1/recommended/Limit24",
+      "name": "JERK OFF INSTRUCTION",
+    },
+    {
+      "id": 709,
+      "link": "/studio/111172/tied-tales/Cat709-joi/Page1/recommended/Limit24",
+      "name": "JOI",
+    },
+    {
+      "id": 1701,
+      "link": "/studio/111172/tied-tales/Cat1701-made-to-cum/Page1/recommended/Limit24",
+      "name": "MADE TO CUM",
+    },
+    {
+      "id": 1233,
+      "link": "/studio/111172/tied-tales/Cat1233-mummification/Page1/recommended/Limit24",
+      "name": "MUMMIFICATION",
+    },
+    {
+      "id": 394,
+      "link": "/studio/111172/tied-tales/Cat394-pov/Page1/recommended/Limit24",
+      "name": "POV",
+    },
+    {
+      "id": 1539,
+      "link": "/studio/111172/tied-tales/Cat1539-pov-female/Page1/recommended/Limit24",
+      "name": "POV FEMALE",
+    },
+    {
+      "id": 587,
+      "link": "/studio/111172/tied-tales/Cat587-rope-bondage/Page1/recommended/Limit24",
+      "name": "ROPE BONDAGE",
+    },
+    {
+      "id": 460,
+      "link": "/studio/111172/tied-tales/Cat460-self-bondage/Page1/recommended/Limit24",
+      "name": "SELF BONDAGE",
+    },
+    {
+      "id": 1440,
+      "link": "/studio/111172/tied-tales/Cat1440-small-feet/Page1/recommended/Limit24",
+      "name": "SMALL FEET",
+    },
+    {
+      "id": 486,
+      "link": "/studio/111172/tied-tales/Cat486-struggling/Page1/recommended/Limit24",
+      "name": "STRUGGLING",
+    },
+    {
+      "id": 88,
+      "link": "/studio/111172/tied-tales/Cat88-superheroines/Page1/recommended/Limit24",
+      "name": "SUPERHEROINES",
+    },
+  ],
+  "classicWidgetExperimentActive": false,
+  "clipsOutsideOrientationCount": 0,
+  "clipsSort": "recommended",
+  "description": "Our videos are carefully crafted with creative storylines that aim to fully immerse and engage our viewers. Each video is a full-length feature bondage tale, beloved by our fans for their thrilling and intense plots. You will witness the peril of our poor damsels as they are put into impossible situations, and experience their desperate struggles to break free. We hope you find enjoyment in our content and would greatly appreciate your feedback on our clips.&lt;br /&gt;&lt;br /&gt;Experience the thrill of bondage without breaking the bank with our Tied Talettes. These are exclusive, uncut scenes from our feature full length stories that can be purchased separately for our budget-savvy fans. As each scene unfolds, our characters may stray from their normal behaviors and reveal unexpected desires.&lt;br /&gt;&lt;br /&gt;But our models aren&#039;t just objects of fantasy - get to know them on a personal level with our Talkin Bondage series. Watch as they give intimate interviews and share their deepest secrets and desires.&lt;br /&gt;&lt;br /&gt;And for those who want to take their fantasy to the next level, check out our latest series: POV Tales starring YOU! Be captivated by our stunning models or take control and give them commands - the choice is yours.&lt;br /&gt;&lt;br /&gt;Experience the ultimate thrill with our never-ending bondage challenges, including the intense BDSM Tournament, fierce Mistress Wars, harrowing Bondage Survivor, playful Bondage Tickle Escape Challenge, and so much more! We push their limits and test their endurance as they compete against others in the world of bondage. Who will you emerge victorious or succumb to the tantalizing restraints? Own them now!&lt;br /&gt;&lt;br /&gt;Have a specific story or chat log that you&#039;ve been eager to see brought to life? We offer custom videos tailored to your preferences. Contact us with your tales and let us make your fantasies a reality.",
+  "donate": false,
+  "ga_tracking_id": null,
+  "isChatEnabled": true,
+  "isContentPreferenceLGBT": false,
+  "isCreatorOnline": false,
+  "meta": {
+    "author": "clips4sale.com",
+    "copyright": "https://www.clips4sale.com 2025",
+    "description": "Full length damsel in  bondage clips with a sexy storyline.",
+    "engine": "Clips4Sale",
+    "image": "/Assets/Static/img/c4sFixedLogo.png",
+    "image_alt": "Clips4Sale.com",
+    "keywords": "BONDAGE damsel in stories heels bare feet rope gag ball gag hogtie struggle escape revenge sexy sex moan socks tickle knock out peril blackmail fem fem drool tape cousins sisters babysitter hostage tricked domme superheroine supergirl gag talk naked boots foot fetish tickling foot tickling on screen tying foot worship POV tied and gagged storyline girl next door male bondage couple in couple bondage feet tickling toes escaping contest",
+    "language": "en",
+    "location": "studio-page",
+    "og_description": "Full length damsel in  bondage clips with a sexy storyline.",
+    "og_url": "/studio/111172/tied-tales",
+    "revision": null,
+    "robots": null,
+    "title": "Tied Tales",
+    "twitter_card": "summary_large_image",
+    "twitter_site": "@clips4sale",
+  },
+  "page": 1,
+  "selectedOrientations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+  ],
+  "similarStoreClips": [],
+  "socialLinks": [
+    {
+      "title": "email_for_fans",
+      "url": "Tiedtales@gmail.com",
+    },
+    {
+      "title": "instagram_url",
+      "url": "https://www.instagram.com/tiedtales1/",
+    },
+    {
+      "title": "twitter_url",
+      "url": "https://twitter.com/tiedtales",
+    },
+    {
+      "title": "website",
+      "url": "http://www.tiedtales.com",
+    },
+  ],
+  "sortOptions": [
+    {
+      "label": "Recommended",
+      "value": "recommended",
+    },
+    {
+      "label": "Most Recent",
+      "value": "added_at",
+    },
+    {
+      "label": "Most Popular",
+      "value": "most_popular",
+    },
+    {
+      "label": "Top Selling",
+      "value": "top_selling",
+    },
+    {
+      "label": "Featured Clips",
+      "value": "featured",
+    },
+    {
+      "label": "Longest Clips",
+      "value": "longest",
+    },
+    {
+      "label": "Creator Favorites",
+      "value": "display_order_desc",
+    },
+  ],
+  "storeDefaultSorting": "display_order_desc",
+  "store_has_clips": true,
+  "store_status": "open",
+  "studioId": "111172",
+  "studioSlug": "tied-tales",
+  "title": "Tied Tales",
+  "tribute": true,
+  "view": "grid",
+  "visibility_mode": "online",
+}
+`;

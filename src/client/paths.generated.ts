@@ -677,6 +677,7 @@ export interface paths {
 						| 'top_selling'
 						| 'featured'
 						| 'longest'
+						| 'display_order_desc'
 					/** @description Search term to filter clip results by. If not provided url should omit '/search/' path param. */
 					search: string
 					/** @description The category ID to filter the search by. Setting the value to 0 will filter by all categories. */

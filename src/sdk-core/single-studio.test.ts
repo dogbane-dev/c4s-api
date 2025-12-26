@@ -5,13 +5,43 @@ import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SStudio } from './single-studio'
 
 describe('single studio', () => {
-	it('fetches with slug provided', async () => {
+	it('fetches with slug provided - TRB', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SStudio(
 			{
 				id: 254031,
 				language: 'en',
 				slug: 'tatti-roana-bondage',
+			},
+			mockClient,
+		)
+
+		const studio = expectMatchesSchema(
+			result,
+			SingleStudioResponseSchema,
+			'Studio response',
+		)
+
+		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
+			studio
+
+		expect(clips).toBeArray()
+		expect(onSaleClips).toBeArray()
+		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
+
+		expect(staticDetails).toBeDefined()
+		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
+
+	it('fetches with slug provided - TT', async () => {
+		const mockClient = getMockClient()
+		const result = await getC4SStudio(
+			{
+				id: 111172,
+				language: 'en',
+				slug: 'tied-tales',
 			},
 			mockClient,
 		)

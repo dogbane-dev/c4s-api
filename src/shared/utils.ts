@@ -51,9 +51,26 @@ export const STUDIO_SEARCH_SORTS = [
 	'top_selling',
 	'featured',
 	'longest',
+	'display_order_desc',
 ] as const
+export type C4SStudioSearchSort = (typeof STUDIO_SEARCH_SORTS)[number]
 
-export type StudioSearchSort = (typeof STUDIO_SEARCH_SORTS)[number]
+const STUDIO_SEARCH_SORT_MAP = {
+	recommended: 'recommended',
+	'most-recent': 'added_at',
+	'most-popular': 'most_popular',
+	'top-selling': 'top_selling',
+	featured: 'featured',
+	longest: 'longest',
+	'create-favorites': 'display_order_desc',
+} as const
+export type StudioSearchSortParam = keyof typeof STUDIO_SEARCH_SORT_MAP
+
+export const parseStudioSearchSort = (
+	sort: StudioSearchSortParam | undefined,
+): C4SStudioSearchSort => {
+	return sort ? STUDIO_SEARCH_SORT_MAP[sort] : 'recommended'
+}
 
 export const VALID_SEE_MORE_PAGES: number[] = [2, 3]
 export const INVALID_SEE_MORE_PAGES: number[] = [1, 4]
@@ -68,10 +85,10 @@ const CLIP_SEARCH_SORT_MAP = {
 	'most-recent': 'mostrecent',
 } as const
 
-export type ClipSearchSort = keyof typeof CLIP_SEARCH_SORT_MAP
+export type ClipSearchSortParam = keyof typeof CLIP_SEARCH_SORT_MAP
 
 export const parseClipSearchSort = (
-	sort: ClipSearchSort | undefined,
+	sort: ClipSearchSortParam | undefined,
 ): SearchC4SSort => {
 	return sort ? CLIP_SEARCH_SORT_MAP[sort] : 'bestmatch'
 }

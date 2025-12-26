@@ -2783,7 +2783,8 @@
 								"most_popular",
 								"top_selling",
 								"featured",
-								"longest"
+								"longest",
+								"display_order_desc"
 							]
 						},
 						"required": true,

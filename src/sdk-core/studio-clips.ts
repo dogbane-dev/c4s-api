@@ -4,7 +4,8 @@ import {
 	type Language,
 	parseLanguage,
 	parseSlug,
-	type StudioSearchSort,
+	parseStudioSearchSort,
+	type StudioSearchSortParam,
 } from '../shared/utils'
 
 type GetC4SStudioClipsParams = {
@@ -12,7 +13,7 @@ type GetC4SStudioClipsParams = {
 	slug?: string
 	page?: number
 	categoryId?: number
-	sort?: StudioSearchSort
+	sort?: StudioSearchSortParam
 	search?: string
 	onlyClips?: boolean
 	language?: Language
@@ -38,7 +39,7 @@ const getC4SStudioClips = async (
 					category: params.categoryId ?? 0,
 					page: params.page ?? 1,
 					search: params.search ?? '',
-					sort: params.sort ?? 'recommended',
+					sort: parseStudioSearchSort(params.sort),
 					language: parseLanguage(params.language),
 				},
 				query: {

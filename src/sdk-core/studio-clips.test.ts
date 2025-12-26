@@ -4,7 +4,7 @@ import { expectMatchesSchema, getMockClient } from '../testing/utils'
 import { getC4SStudioClips } from './studio-clips'
 
 describe('studio clips', () => {
-	it('fetches with all options provided', async () => {
+	it('fetches with all options provided - TRB', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SStudioClips(
 			{
@@ -14,6 +14,72 @@ describe('studio clips', () => {
 				page: 1,
 				sort: 'recommended',
 				categoryId: 0,
+			},
+			mockClient,
+		)
+
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
+
+		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
+			clipSearch
+
+		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
+		expect(clips).toBeArray()
+		expect(onSaleClips).toBeArray()
+
+		expect(staticDetails).toBeDefined()
+		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
+
+	it('fetches with all options provided - TT', async () => {
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 111172,
+				language: 'en',
+				slug: 'tied-tales',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 0,
+			},
+			mockClient,
+		)
+
+		const clipSearch = expectMatchesSchema(
+			result,
+			StudioClipSearchResponseSchema,
+			'Studio clip search response',
+		)
+
+		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
+			clipSearch
+
+		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
+		expect(clips).toBeArray()
+		expect(onSaleClips).toBeArray()
+
+		expect(staticDetails).toBeDefined()
+		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
+
+	it('fetches all options + specific category - TT', async () => {
+		const mockClient = getMockClient()
+		const result = await getC4SStudioClips(
+			{
+				id: 111172,
+				language: 'en',
+				slug: 'tied-tales',
+				page: 1,
+				sort: 'recommended',
+				categoryId: 4,
 			},
 			mockClient,
 		)
