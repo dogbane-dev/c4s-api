@@ -151,4 +151,43 @@ describe('single clip', () => {
 		).toThrowError(C4SStudioNotFoundError)
 		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
+
+	it('fetches clip that is under review', async () => {
+		const mockClient = getMockClient()
+		const result = await getC4SClip(
+			{
+				id: 20424263,
+				studioId: 96993,
+				language: 'en',
+				slug: 'chrissy-marie-leotard-chairtied-mp4',
+			},
+			mockClient,
+		)
+
+		const clip = expectMatchesSchema(
+			result,
+			SingleClipResponseSchema,
+			'Clip response',
+		)
+		expect(clip).toBeDefined()
+
+		// reset dynamic data
+		clip.clip.studio.most_recent_clip_id = null
+		clip.clip.studio.total_clips = null
+
+		const {
+			recommendationsPromise,
+			followersCount,
+			clipsCount,
+			...staticDetails
+		} = clip
+
+		expect(followersCount).toBeNumber()
+		expect(clipsCount).toBeNumber()
+		expect(recommendationsPromise.pills).toBeArray()
+		expect(recommendationsPromise.recommendations).toBeArray()
+
+		expect(staticDetails).toMatchSnapshot()
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
 })

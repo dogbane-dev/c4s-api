@@ -249,7 +249,7 @@ export interface paths {
 								thumb: null
 								pill: null
 							}[]
-							nextLink: string
+							nextLink: string | null
 							prevLink: string | null
 							meta: {
 								title: string
@@ -260,7 +260,7 @@ export interface paths {
 								copyright: null
 								engine: string
 								revision: null
-								image: string
+								image?: string
 								image_alt: string
 								location: string
 								og_description: string | null

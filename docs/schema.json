@@ -1081,7 +1081,14 @@
 											}
 										},
 										"nextLink": {
-											"type": "string"
+											"anyOf": [
+												{
+													"type": "string"
+												},
+												{
+													"type": "null"
+												}
+											]
 										},
 										"prevLink": {
 											"anyOf": [
@@ -1165,7 +1172,6 @@
 												"copyright",
 												"engine",
 												"revision",
-												"image",
 												"image_alt",
 												"location",
 												"og_description",
