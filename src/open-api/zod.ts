@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/correctness/noUnusedVariables: semi-generated schemas from quick-type */
 import * as z from 'zod'
 import {
 	CLIP_SEARCH_FILTER_DATES,
@@ -11,20 +10,17 @@ import {
 const CanonicalSchema = z.object({
 	href: z.string(),
 })
-type Canonical = z.infer<typeof CanonicalSchema>
 
 const KeywordLinkSchema = z.object({
 	keyword: z.string(),
 	translations: z.null(),
 	link: z.string(),
 })
-type KeywordLink = z.infer<typeof KeywordLinkSchema>
 
 const AvatarThumbsSchema = z.object({
 	avatar_sm: z.string(),
 	avatar_md: z.string(),
 })
-type AvatarThumbs = z.infer<typeof AvatarThumbsSchema>
 
 const BannerThumbsSchema = z.object({
 	banner_xlg: z.string(),
@@ -32,7 +28,6 @@ const BannerThumbsSchema = z.object({
 	banner_md: z.string(),
 	banner_sm: z.string(),
 })
-type BannerThumbs = z.infer<typeof BannerThumbsSchema>
 
 const SingleClipMetaSchema = z.object({
 	title: z.string(),
@@ -51,7 +46,6 @@ const SingleClipMetaSchema = z.object({
 	twitter_site: z.string(),
 	twitter_card: z.string(),
 })
-type SingleClipMeta = z.infer<typeof SingleClipMetaSchema>
 
 const PillSchema = z.object({
 	value: z.number(),
@@ -59,7 +53,6 @@ const PillSchema = z.object({
 	type: z.string(),
 	isActive: z.boolean(),
 })
-type Pill = z.infer<typeof PillSchema>
 
 const RecommendationStudioSchema = z.object({
 	id: z.number(),
@@ -75,7 +68,6 @@ const RecommendationStudioSchema = z.object({
 	link: z.string(),
 	category: z.null(),
 })
-type RecommendationStudio = z.infer<typeof RecommendationStudioSchema>
 
 const CategoryInfoSchema = z.object({
 	id: z.number(),
@@ -104,13 +96,11 @@ const ClipStudioSchema = z.object({
 	link: z.string(),
 	category: z.null(),
 })
-type ClipStudio = z.infer<typeof ClipStudioSchema>
 
 export const SrcsetSchema = z.object({
 	srcSet: z.string(),
 	media: z.number(),
 })
-export type Srcset = z.infer<typeof SrcsetSchema>
 
 export const PerformerSchema = z.object({
 	id: z.number(),
@@ -119,7 +109,6 @@ export const PerformerSchema = z.object({
 	avatars: z.null(),
 	created_at: z.null(),
 })
-export type Performer = z.infer<typeof PerformerSchema>
 
 const RecommendationSchema = z.object({
 	clipId: z.string(),
@@ -177,14 +166,12 @@ const RecommendationSchema = z.object({
 	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
-type Recommendation = z.infer<typeof RecommendationSchema>
 
 export const RelatedCategoryLinkSchema = z.object({
 	category: z.string(),
 	translations: z.null().optional(),
 	link: z.string(),
 })
-export type RelatedCategoryLink = z.infer<typeof RelatedCategoryLinkSchema>
 
 const ClipSchema = z.object({
 	clipId: z.string(),
@@ -243,13 +230,11 @@ const ClipSchema = z.object({
 	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
-type Clip = z.infer<typeof ClipSchema>
 
 const RecommendationsPromiseSchema = z.object({
 	recommendations: z.array(RecommendationSchema),
 	pills: z.array(PillSchema),
 })
-type RecommendationsPromise = z.infer<typeof RecommendationsPromiseSchema>
 
 export const SingleClipResponseSchema = z.object({
 	studioId: z.string(),
@@ -273,7 +258,6 @@ export const SingleClipResponseSchema = z.object({
 	meta: SingleClipMetaSchema,
 	canonical: CanonicalSchema,
 })
-type SingleClipResponse = z.infer<typeof SingleClipResponseSchema>
 
 // ------------
 
@@ -282,9 +266,6 @@ export const SingleStudioResponseCategorySchema = z.object({
 	name: z.string(),
 	link: z.string(),
 })
-export type SingleStudioResponseCategory = z.infer<
-	typeof SingleStudioResponseCategorySchema
->
 
 export const StudioSchema = z.object({
 	id: z.number(),
@@ -300,7 +281,6 @@ export const StudioSchema = z.object({
 	link: z.string(),
 	category: z.null(),
 })
-export type Studio = z.infer<typeof StudioSchema>
 
 export const SingleStudioMetaSchema = z.object({
 	title: z.string(),
@@ -320,7 +300,6 @@ export const SingleStudioMetaSchema = z.object({
 	twitter_card: z.string(),
 	language: z.string(),
 })
-export type SingleStudioMeta = z.infer<typeof SingleStudioMetaSchema>
 
 export const OtherStudioCategorySchema = z.object({
 	category: z.string(),
@@ -335,19 +314,16 @@ export const OtherStudioCategorySchema = z.object({
 	thumb: z.null(),
 	pill: z.null(),
 })
-export type OtherStudioCategory = z.infer<typeof OtherStudioCategorySchema>
 
 export const SocialLinkSchema = z.object({
 	title: z.string(),
 	url: z.string(),
 })
-export type SocialLink = z.infer<typeof SocialLinkSchema>
 
 export const SortOptionSchema = z.object({
 	label: z.string(),
 	value: z.string(),
 })
-export type SortOption = z.infer<typeof SortOptionSchema>
 
 export const StudioClipSchema = z.object({
 	clipId: z.string(),
@@ -407,7 +383,6 @@ export const StudioClipSchema = z.object({
 	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
-export type StudioClip = z.infer<typeof StudioClipSchema>
 
 export const OtherStudioSchema = z.object({
 	avatarSrc: z.string(),
@@ -416,7 +391,6 @@ export const OtherStudioSchema = z.object({
 	id: z.number(),
 	categories: z.array(OtherStudioCategorySchema),
 })
-export type OtherStudio = z.infer<typeof OtherStudioSchema>
 
 export const SingleStudioResponseSchema = z.object({
 	onSaleClips: z.array(ClipSchema),
@@ -459,7 +433,6 @@ export const SingleStudioResponseSchema = z.object({
 	visibility_mode: z.string(),
 	store_status: z.string(),
 })
-export type SingleStudioResponse = z.infer<typeof SingleStudioResponseSchema>
 
 // ------------
 
@@ -468,7 +441,6 @@ export const BaseCategorySchema = z.object({
 	name: z.string(),
 	link: z.string(),
 })
-export type BaseCategory = z.infer<typeof BaseCategorySchema>
 
 export const StudioClipSearchMetaSchema = z.object({
 	title: z.string(),
@@ -489,7 +461,6 @@ export const StudioClipSearchMetaSchema = z.object({
 	language: z.string(),
 	keyword: z.string().optional(),
 })
-export type StudioSearchMeta = z.infer<typeof StudioClipSearchMetaSchema>
 
 export const StudioSearchClipSchema = z.object({
 	clipId: z.string(),
@@ -549,7 +520,6 @@ export const StudioSearchClipSchema = z.object({
 	onSale: z.boolean().nullable(),
 	isAudio: z.boolean(),
 })
-export type StudioSearchClip = z.infer<typeof StudioSearchClipSchema>
 
 const BaseStudioClipSearchResponseSchema = z.object({
 	clips: z.array(StudioSearchClipSchema),
@@ -599,10 +569,6 @@ export const StudioClipSearchResponseSchema =
 			.partial(),
 	)
 
-export type StudioClipSearchResponse = z.infer<
-	typeof StudioClipSearchResponseSchema
->
-
 // -----
 
 export const MetaDataSchema = z.object({
@@ -612,7 +578,6 @@ export const MetaDataSchema = z.object({
 	header_two: z.null(),
 	header_three: z.null(),
 })
-export type MetaData = z.infer<typeof MetaDataSchema>
 
 export const CategoryInfoMetaSchema = z.object({
 	title: z.string(),
@@ -631,7 +596,6 @@ export const CategoryInfoMetaSchema = z.object({
 	twitter_site: z.null(),
 	twitter_card: z.null(),
 })
-export type CategoryInfoMeta = z.infer<typeof CategoryInfoMetaSchema>
 
 export const StoreSchema = z.object({
 	storeId: z.number(),
@@ -649,7 +613,6 @@ export const StoreSchema = z.object({
 	latestClipUpdate: z.string(),
 	totalClips: z.number(),
 })
-export type Store = z.infer<typeof StoreSchema>
 
 export const CategoryClipSchema = z.object({
 	clipId: z.number(),
@@ -685,7 +648,6 @@ export const CategoryClipSchema = z.object({
 	isSuggestedWishlist: z.boolean(),
 	onSale: z.boolean().nullable(),
 })
-export type CategoryClip = z.infer<typeof CategoryClipSchema>
 
 export const RelatedCategorySchema = z.object({
 	id: z.number(),
@@ -694,13 +656,11 @@ export const RelatedCategorySchema = z.object({
 	thumb: z.string(),
 	totalClips: z.number(),
 })
-export type RelatedCategory = z.infer<typeof RelatedCategorySchema>
 
 export const OutsideOrientationSchema = z.object({
 	stores: z.number(),
 	clips: z.number(),
 })
-export type OutsideOrientation = z.infer<typeof OutsideOrientationSchema>
 
 export const TrendingRetroClipSchema = z.object({
 	clipId: z.number(),
@@ -736,7 +696,6 @@ export const TrendingRetroClipSchema = z.object({
 	isSuggestedWishlist: z.boolean(),
 	onSale: z.boolean().nullable(),
 })
-export type TrendingRetroClip = z.infer<typeof TrendingRetroClipSchema>
 
 export const TopSchema = z.object({
 	content: z.string(),
@@ -746,20 +705,17 @@ export const TopSchema = z.object({
 	category: CategoryInfoSchema,
 	meta_data: MetaDataSchema,
 })
-export type Top = z.infer<typeof TopSchema>
 
 export const TotalsSchema = z.object({
 	stores: z.number(),
 	clips: z.number(),
 	outside_orientation: OutsideOrientationSchema,
 })
-export type Totals = z.infer<typeof TotalsSchema>
 
 export const DescriptionSchema = z.object({
 	top: TopSchema,
 	bottom: z.null(),
 })
-export type Description = z.infer<typeof DescriptionSchema>
 
 export const CategoryInfoResponseSchema = z.object({
 	meta: CategoryInfoMetaSchema,
@@ -782,7 +738,6 @@ export const CategoryInfoResponseSchema = z.object({
 	isAgeVerificationRequired: z.boolean(),
 	hrefLang: CanonicalSchema,
 })
-export type CategoryInfoResponse = z.infer<typeof CategoryInfoResponseSchema>
 
 export const ThumbsSchema = z.object({
 	square_sm: z.string(),
@@ -792,7 +747,6 @@ export const ThumbsSchema = z.object({
 	rect_lrg: z.string(),
 	rect_ex_lrg: z.string(),
 })
-export type Thumbs = z.infer<typeof ThumbsSchema>
 
 export const LastClipSchema = z.object({
 	id: z.number(),
@@ -800,7 +754,6 @@ export const LastClipSchema = z.object({
 	category: BaseCategorySchema,
 	thumbs: ThumbsSchema,
 })
-export type LastClip = z.infer<typeof LastClipSchema>
 
 export const CategorySeeMoreExtraStoreSchema = z.object({
 	id: z.number(),
@@ -816,9 +769,6 @@ export const CategorySeeMoreExtraStoreSchema = z.object({
 	link: z.string(),
 	category: CategoryInfoSchema,
 })
-export type CategorySeeMoreExtraStore = z.infer<
-	typeof CategorySeeMoreExtraStoreSchema
->
 
 export const CategorySeeMoreExtraClipSchema = z.object({
 	id: z.number(),
@@ -871,9 +821,6 @@ export const CategorySeeMoreExtraClipSchema = z.object({
 	archived: z.boolean(),
 	on_sale: z.null(),
 })
-export type CategorySeeMoreExtraClip = z.infer<
-	typeof CategorySeeMoreExtraClipSchema
->
 
 export const CategorySeeMoreResponseSchema = z.object({
 	seeMoreExtra: z.union([
@@ -881,9 +828,6 @@ export const CategorySeeMoreResponseSchema = z.object({
 		z.array(CategorySeeMoreExtraClipSchema),
 	]),
 })
-export type CategorySeeMoreResponse = z.infer<
-	typeof CategorySeeMoreResponseSchema
->
 
 export const CategorySchema = z.object({
 	id: z.number(),
@@ -892,7 +836,6 @@ export const CategorySchema = z.object({
 	search_link: z.string(),
 	pill: z.number().nullable(),
 })
-export type Category = z.infer<typeof CategorySchema>
 
 export const CategoriesResponseSchema = z.object({
 	success: z.boolean(),
@@ -900,7 +843,6 @@ export const CategoriesResponseSchema = z.object({
 	categories: z.array(CategorySchema),
 	recommendations: z.array(CategorySchema),
 })
-export type CategoeriesResponse = z.infer<typeof CategoriesResponseSchema>
 
 // ------------------------------
 
@@ -914,14 +856,12 @@ export const ActiveFiltersSchema = z.object({
 	content_preference: z.array(z.string().regex(/^[0-9]+$/)).nullish(),
 	category_id: z.array(z.string().regex(/^[0-9]+$/)).optional(),
 })
-export type ActiveFilters = z.infer<typeof ActiveFiltersSchema>
 
 export const SearchRelatedCategorySchema = z.object({
 	category: z.string(),
 	translations: z.null(),
 	link: z.string(),
 })
-export type SearchRelatedCategory = z.infer<typeof SearchRelatedCategorySchema>
 
 export const SearchResultStudioSchema = z.object({
 	id: z.number(),
@@ -937,7 +877,6 @@ export const SearchResultStudioSchema = z.object({
 	link: z.string(),
 	category: z.null(),
 })
-export type SearchResultStudio = z.infer<typeof SearchResultStudioSchema>
 
 export const SearchResultCategorySchema = z.object({
 	id: z.number(),
@@ -951,13 +890,11 @@ export const SearchResultCategorySchema = z.object({
 	thumb: z.null(),
 	pill: z.null(),
 })
-export type SearchResultCategory = z.infer<typeof SearchResultCategorySchema>
 
 export const MetaSchema = z.object({
 	title: z.string(),
 	description: z.string(),
 })
-export type Meta = z.infer<typeof MetaSchema>
 
 export const ClipSearchResponseClipSchema = z.object({
 	clipId: z.string(),
@@ -1007,9 +944,6 @@ export const ClipSearchResponseClipSchema = z.object({
 	onSale: z.null(),
 	isAudio: z.boolean(),
 })
-export type ClipSearchResponseClip = z.infer<
-	typeof ClipSearchResponseClipSchema
->
 
 export const DataClipSchema = z.object({
 	id: z.number(),
@@ -1053,7 +987,6 @@ export const DataClipSchema = z.object({
 	archived: z.boolean(),
 	on_sale: z.null(),
 })
-export type DataClip = z.infer<typeof DataClipSchema>
 
 const AvatarSizeSchema = z.object({
 	url: z.string().nullable(),
@@ -1069,7 +1002,6 @@ export const AvatarsSchema = z.object({
 	'188x188': AvatarSizeSchema,
 	original: AvatarSizeSchema,
 })
-export type Avatars = z.infer<typeof AvatarsSchema>
 
 export const PerformerPillElementSchema = z.object({
 	value: z.number(),
@@ -1079,7 +1011,6 @@ export const PerformerPillElementSchema = z.object({
 	isActive: z.boolean(),
 	avatar: z.string().optional(),
 })
-export type PerformerPillElement = z.infer<typeof PerformerPillElementSchema>
 
 export const PerformerPillSchema = z.object({
 	value: z.number(),
@@ -1088,7 +1019,6 @@ export const PerformerPillSchema = z.object({
 	avatars: AvatarsSchema.nullable(),
 	isActive: z.boolean(),
 })
-export type PerformerPill = z.infer<typeof PerformerPillSchema>
 
 export const SearchDataSchema = z.object({
 	clips: z.array(DataClipSchema),
@@ -1101,7 +1031,6 @@ export const SearchDataSchema = z.object({
 	message: z.null(),
 	recommendations: z.null(),
 })
-export type SearchData = z.infer<typeof SearchDataSchema>
 
 export const ClipSearchResponseSchema = z.object({
 	searchQueryId: z.string(),
@@ -1128,4 +1057,3 @@ export const ClipSearchResponseSchema = z.object({
 	isShowSavedSearchHint: z.boolean(),
 	isPerformerSearch: z.boolean(),
 })
-export type ClipSearchResponse = z.infer<typeof ClipSearchResponseSchema>

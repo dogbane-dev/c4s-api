@@ -1,4 +1,4 @@
-// Does not get bundled
+// Does not get bundled - for generation of schema + types only
 
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
@@ -197,16 +197,6 @@ const schema = createDocument({
 							'x-remix-status': z.string(),
 						}),
 					},
-					// "403": {
-					// 	description: "403 Server Error",
-					// 	content: {
-					// 		"application/json": {
-					// 			schema: z.object({
-					// 				message: z.string(),
-					// 			}),
-					// 		},
-					// 	},
-					// },
 				},
 			},
 		},
