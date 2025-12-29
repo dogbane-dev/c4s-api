@@ -5,7 +5,7 @@ import {
 	expectMatchesSchema,
 	getMockClient,
 	prettyPrint,
-} from '../testing/utils'
+} from '../utils/testing'
 import { type SearchC4SClipsParams, searchC4SClips } from './search-clips'
 
 const testCases = enumerateTestCases<SearchC4SClipsParams>({

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import { StudioClipSearchResponseSchema } from '../open-api/zod'
-import { expectMatchesSchema, getMockClient } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../utils/testing'
 import { getC4SStudioClips } from './studio-clips'
 
 describe('studio clips', () => {

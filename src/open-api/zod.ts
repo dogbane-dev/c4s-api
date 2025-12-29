@@ -170,7 +170,7 @@ const RecommendationSchema = z.object({
 export const RelatedCategoryLinkSchema = z.object({
 	category: z.string(),
 	translations: z.null().optional(),
-	link: z.string(),
+	link: z.string().nullable(),
 })
 
 const ClipSchema = z.object({
@@ -857,12 +857,6 @@ export const ActiveFiltersSchema = z.object({
 	category_id: z.array(z.string().regex(/^[0-9]+$/)).optional(),
 })
 
-export const SearchRelatedCategorySchema = z.object({
-	category: z.string(),
-	translations: z.null(),
-	link: z.string(),
-})
-
 export const SearchResultStudioSchema = z.object({
 	id: z.number(),
 	name: z.string(),
@@ -932,7 +926,7 @@ export const ClipSearchResponseClipSchema = z.object({
 	size: z.number(),
 	category_link: z.string(),
 	category_name: z.string(),
-	related_category_links: z.array(SearchRelatedCategorySchema).optional(),
+	related_category_links: z.array(RelatedCategoryLinkSchema).optional(),
 	keyword_links: z.array(KeywordLinkSchema).optional(),
 	performers: z.union([z.array(PerformerSchema), z.null()]),
 	description: z.string().nullable(),
@@ -950,7 +944,7 @@ export const DataClipSchema = z.object({
 	title: z.string(),
 	slug: z.string(),
 	link: z.string(),
-	related_categories: z.array(SearchRelatedCategorySchema).nullish(),
+	related_categories: z.array(RelatedCategoryLinkSchema).nullish(),
 	related_keywords: z.array(KeywordLinkSchema).nullish(),
 	description: z.string().nullable(),
 	description_sanitized: z.string().nullable(),

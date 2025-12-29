@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import { CategoriesResponseSchema } from '../open-api/zod'
-import { expectMatchesSchema, getMockClient } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../utils/testing'
 import { getC4SCategories } from './categories'
 
 describe('categories', () => {

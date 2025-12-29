@@ -6,7 +6,7 @@ import {
 	CategorySeeMoreResponseSchema,
 } from '../open-api/zod'
 import { INVALID_SEE_MORE_PAGES, VALID_SEE_MORE_PAGES } from '../shared/utils'
-import { expectMatchesSchema, getMockClient } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../utils/testing'
 import { getC4SCategorySeeMore } from './category-see-more'
 
 const variations = [

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'bun:test'
 import { C4SClipNotFoundError, C4SStudioNotFoundError } from '../client/utils'
 import { SingleClipResponseSchema } from '../open-api/zod'
-import { expectMatchesSchema, getMockClient } from '../testing/utils'
+import { expectMatchesSchema, getMockClient } from '../utils/testing'
 import { getC4SClip } from './single-clip'
 
 describe('single clip', () => {

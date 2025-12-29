@@ -13,7 +13,7 @@ import {
 	getC4SStudio,
 	getC4SStudioClips,
 } from '../src/sdk-core'
-import { expectMatchesSchema } from '../src/testing/utils'
+import { expectMatchesSchema } from '../src/utils/testing'
 
 const getAndValidateStudio = async (p: GetC4SStudioParams) => {
 	const studio = await getC4SStudio(p)
@@ -80,7 +80,7 @@ describe.skipIf(process.env.ROBUST_TESTS !== 'true')(
 				id: store.storeId,
 				slug: slug,
 				language: 'en',
-				sort: 'added_at',
+				sort: 'most-recent',
 			})
 
 			const { clips } = expectMatchesSchema(
