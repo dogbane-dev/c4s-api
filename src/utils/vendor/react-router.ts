@@ -1,6 +1,7 @@
 /** biome-ignore-all lint/suspicious/noAssignInExpressions: copied from Remix */
-/** biome-ignore-all lint/suspicious/useIterableCallbackReturn: <explanation> */
-/** biome-ignore-all lint/suspicious/noExplicitAny: <explanation> */
+/** biome-ignore-all lint/complexity/noBannedTypes: copied from Remix */
+/** biome-ignore-all lint/suspicious/useIterableCallbackReturn: copied from Remix */
+/** biome-ignore-all lint/suspicious/noExplicitAny: copied from Remix */
 
 // From Remix Run React and Router v2
 // https://github.com/remix-run/remix/blob/9989381a2c9c188071a08ef1aba4c49ce9db85c8/packages/remix-react/data.ts
