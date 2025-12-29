@@ -1,4 +1,4 @@
-import { parseDeferredReadableStream } from '@remix-run/react/dist/data'
+import { parseDeferredReadableStream } from '../utils/vendor/react-router'
 
 export const parseRemixBody = async <T>(
 	body: ReadableStream | string,
