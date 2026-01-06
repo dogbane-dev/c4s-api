@@ -52,13 +52,20 @@ describe('single studio', () => {
 			'Studio response',
 		)
 
-		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
-			studio
+		const {
+			followersCount,
+			clipsCount,
+			clips,
+			onSaleClips,
+			otherStudios,
+			...staticDetails
+		} = studio
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
+		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -80,13 +87,20 @@ describe('single studio', () => {
 			'Studio response',
 		)
 
-		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
-			studio
+		const {
+			followersCount,
+			clipsCount,
+			clips,
+			onSaleClips,
+			otherStudios,
+			...staticDetails
+		} = studio
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
+		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
