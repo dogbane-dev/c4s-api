@@ -15,6 +15,7 @@ type SearchC4SClipsParams = {
 	filter?: ClipSearchFilter
 	page?: number
 	sort?: ClipSearchSortParam
+	disableSpellcheck?: boolean
 }
 
 type SearchC4SClipsData =
@@ -44,6 +45,7 @@ const searchC4SClips = async (
 				},
 				query: {
 					_data: 'routes/($lang).clips.search.$',
+					...(params.disableSpellcheck ? { spellchecking: 0 } : {}),
 				},
 			},
 		},

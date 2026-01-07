@@ -7,6 +7,12 @@ import {
 	CLIP_SEARCH_FILTER_RESOLUTIONS,
 } from '../shared/utils'
 
+export const testNonNullValue = (name: string) =>
+	z.preprocess((v) => {
+		console.log(name, v)
+		return v
+	}, z.null())
+
 const CanonicalSchema = z.object({
 	href: z.string(),
 })
@@ -344,7 +350,7 @@ export const StudioClipSchema = z.object({
 	studioLink: z.string(),
 	price: z.number(),
 	dateDisplay: z.string(),
-	searchQueryId: z.string().optional(),
+	searchQueryId: z.string().nullable().optional(),
 	scroll_page: z.number(),
 	screen_size: z.string(),
 	id: z.number(),
@@ -481,7 +487,7 @@ export const StudioSearchClipSchema = z.object({
 	studioLink: z.string(),
 	price: z.number(),
 	dateDisplay: z.string(),
-	searchQueryId: z.string().optional(),
+	searchQueryId: z.string().nullable().optional(),
 	scroll_page: z.number(),
 	screen_size: z.string(),
 	id: z.number(),
@@ -1014,24 +1020,48 @@ export const PerformerPillSchema = z.object({
 	isActive: z.boolean(),
 })
 
+const SearchMessageSchema = z.object({
+	text: z.string(),
+	params: z
+		.object({
+			search_without_spellchecking: z.string(),
+		})
+		.nullable(),
+})
+
 export const SearchDataSchema = z.object({
-	clips: z.array(DataClipSchema),
-	performer: z.null(),
+	clips: z.array(DataClipSchema).nullable(),
+	performer: z
+		.object({
+			id: z.number(),
+			stage_name: z.string(),
+			total_clips: z.number(),
+			avatars: AvatarsSchema.nullable(),
+			created_at: z.null(),
+		})
+		.nullable(),
 	pills: z.array(PillSchema).nullable(),
 	performer_pills: z.array(PerformerPillSchema).nullable(),
-	totalClips: z.number(),
-	totalClipPages: z.number(),
-	spellcheck: z.null(),
-	message: z.null(),
-	recommendations: z.null(),
+	totalClips: z.number().nullable(),
+	totalClipPages: z.number().nullable(),
+	spellcheck: SearchMessageSchema.nullable(),
+	message: SearchMessageSchema.nullable(),
+	recommendations: z
+		.array(
+			DataClipSchema.extend({
+				size: z.number().nullable(),
+				format: z.number().nullable(),
+			}),
+		)
+		.nullable(),
 })
 
 export const ClipSearchResponseSchema = z.object({
-	searchQueryId: z.string(),
+	searchQueryId: z.string().nullable().optional(),
 	success: z.boolean(),
 	code: z.string(),
 	data: SearchDataSchema,
-	spellcheck: z.null(),
+	spellcheck: SearchMessageSchema.nullable(),
 	pills: z.array(PillSchema).optional(),
 	performerPills: z.array(PerformerPillElementSchema).optional(),
 	totalClipPages: z.number(),
@@ -1045,7 +1075,14 @@ export const ClipSearchResponseSchema = z.object({
 	categoryId: z.string(),
 	meta: MetaSchema,
 	clips: z.array(ClipSearchResponseClipSchema),
-	performer: z.null(),
+	performer: z
+		.object({
+			id: z.number(),
+			stageName: z.string(),
+			avatars: AvatarsSchema.nullable(),
+			totalClips: z.number(),
+		})
+		.nullable(),
 	canonical: CanonicalSchema,
 	orientation: z.array(z.any()),
 	isShowSavedSearchHint: z.boolean(),

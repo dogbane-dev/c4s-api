@@ -681,7 +681,14 @@
 																"type": "null"
 															},
 															"link": {
-																"type": "string"
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
 															}
 														},
 														"required": ["category", "link"],
@@ -1468,7 +1475,14 @@
 																	"type": "null"
 																},
 																"link": {
-																	"type": "string"
+																	"anyOf": [
+																		{
+																			"type": "string"
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
 																}
 															},
 															"required": ["category", "link"],
@@ -1953,7 +1967,14 @@
 																	"type": "null"
 																},
 																"link": {
-																	"type": "string"
+																	"anyOf": [
+																		{
+																			"type": "string"
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
 																}
 															},
 															"required": ["category", "link"],
@@ -2941,7 +2962,14 @@
 																"type": "string"
 															},
 															"searchQueryId": {
-																"type": "string"
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
 															},
 															"scroll_page": {
 																"type": "number"
@@ -3006,7 +3034,14 @@
 																			"type": "null"
 																		},
 																		"link": {
-																			"type": "string"
+																			"anyOf": [
+																				{
+																					"type": "string"
+																				},
+																				{
+																					"type": "null"
+																				}
+																			]
 																		}
 																	},
 																	"required": ["category", "link"],
@@ -3360,7 +3395,14 @@
 																"type": "string"
 															},
 															"searchQueryId": {
-																"type": "string"
+																"anyOf": [
+																	{
+																		"type": "string"
+																	},
+																	{
+																		"type": "null"
+																	}
+																]
 															},
 															"scroll_page": {
 																"type": "number"
@@ -3425,7 +3467,14 @@
 																			"type": "null"
 																		},
 																		"link": {
-																			"type": "string"
+																			"anyOf": [
+																				{
+																					"type": "string"
+																				},
+																				{
+																					"type": "null"
+																				}
+																			]
 																		}
 																	},
 																	"required": ["category", "link"],
@@ -6224,6 +6273,16 @@
 						},
 						"required": true,
 						"description": "Data loader param. Must be set to \"routes/($lang).clips.search.$\""
+					},
+					{
+						"in": "query",
+						"name": "spellchecking",
+						"schema": {
+							"description": "Whether to disable spellchecking which will change your search term if it things it is misspelled",
+							"example": 0,
+							"type": "number",
+							"const": 0
+						}
 					}
 				],
 				"responses": {
@@ -6235,7 +6294,14 @@
 									"type": "object",
 									"properties": {
 										"searchQueryId": {
-											"type": "string"
+											"anyOf": [
+												{
+													"type": "string"
+												},
+												{
+													"type": "null"
+												}
+											]
 										},
 										"success": {
 											"type": "boolean"
@@ -6247,455 +6313,653 @@
 											"type": "object",
 											"properties": {
 												"clips": {
-													"type": "array",
-													"items": {
-														"type": "object",
-														"properties": {
-															"id": {
-																"type": "number"
-															},
-															"title": {
-																"type": "string"
-															},
-															"slug": {
-																"type": "string"
-															},
-															"link": {
-																"type": "string"
-															},
-															"related_categories": {
-																"anyOf": [
-																	{
-																		"type": "array",
-																		"items": {
-																			"type": "object",
-																			"properties": {
-																				"category": {
-																					"type": "string"
-																				},
-																				"translations": {
-																					"type": "null"
-																				},
-																				"link": {
-																					"type": "string"
-																				}
-																			},
-																			"required": [
-																				"category",
-																				"translations",
-																				"link"
-																			],
-																			"additionalProperties": false
-																		}
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"related_keywords": {
-																"anyOf": [
-																	{
-																		"type": "array",
-																		"items": {
-																			"type": "object",
-																			"properties": {
-																				"keyword": {
-																					"type": "string"
-																				},
-																				"translations": {
-																					"type": "null"
-																				},
-																				"link": {
-																					"type": "string"
-																				}
-																			},
-																			"required": [
-																				"keyword",
-																				"translations",
-																				"link"
-																			],
-																			"additionalProperties": false
-																		}
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"description": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"description_sanitized": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"translations": {
-																"type": "null"
-															},
-															"added_at": {
-																"type": "string"
-															},
-															"price": {
-																"type": "number"
-															},
-															"discounted_price": {
-																"type": "null"
-															},
-															"format": {
-																"type": "string"
-															},
-															"screen": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"resolution": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"length": {
-																"type": "number"
-															},
-															"suggested_clip_url": {
-																"type": "string"
-															},
-															"size": {
-																"type": "number"
-															},
-															"studio": {
+													"anyOf": [
+														{
+															"type": "array",
+															"items": {
 																"type": "object",
 																"properties": {
 																	"id": {
 																		"type": "number"
 																	},
-																	"name": {
+																	"title": {
 																		"type": "string"
 																	},
 																	"slug": {
 																		"type": "string"
 																	},
-																	"avatar": {
-																		"type": "null"
-																	},
-																	"avatar_thumbs": {
-																		"type": "null"
-																	},
-																	"banner": {
-																		"type": "null"
-																	},
-																	"banner_thumbs": {
-																		"type": "null"
-																	},
-																	"total_clips": {
-																		"type": "null"
-																	},
-																	"last_clip": {
-																		"type": "null"
-																	},
-																	"most_recent_clip_id": {
-																		"type": "null"
-																	},
 																	"link": {
 																		"type": "string"
 																	},
-																	"category": {
-																		"type": "null"
-																	}
-																},
-																"required": [
-																	"id",
-																	"name",
-																	"slug",
-																	"avatar",
-																	"avatar_thumbs",
-																	"banner",
-																	"banner_thumbs",
-																	"total_clips",
-																	"last_clip",
-																	"most_recent_clip_id",
-																	"link",
-																	"category"
-																],
-																"additionalProperties": false
-															},
-															"category": {
-																"type": "object",
-																"properties": {
-																	"id": {
-																		"type": "number"
+																	"related_categories": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"category": {
+																							"type": "string"
+																						},
+																						"translations": {
+																							"type": "null"
+																						},
+																						"link": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["category", "link"],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
 																	},
-																	"name": {
-																		"type": "string"
+																	"related_keywords": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"keyword": {
+																							"type": "string"
+																						},
+																						"translations": {
+																							"type": "null"
+																						},
+																						"link": {
+																							"type": "string"
+																						}
+																					},
+																					"required": [
+																						"keyword",
+																						"translations",
+																						"link"
+																					],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"description": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"description_sanitized": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
 																	},
 																	"translations": {
 																		"type": "null"
 																	},
-																	"link": {
+																	"added_at": {
 																		"type": "string"
 																	},
-																	"search_link": {
-																		"type": "string"
+																	"price": {
+																		"type": "number"
 																	},
-																	"store_link": {
+																	"discounted_price": {
 																		"type": "null"
 																	},
-																	"clean_name": {
+																	"format": {
 																		"type": "string"
 																	},
-																	"total_clips": {
-																		"type": "null"
+																	"screen": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"resolution": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"length": {
+																		"type": "number"
+																	},
+																	"suggested_clip_url": {
+																		"type": "string"
+																	},
+																	"size": {
+																		"type": "number"
+																	},
+																	"studio": {
+																		"type": "object",
+																		"properties": {
+																			"id": {
+																				"type": "number"
+																			},
+																			"name": {
+																				"type": "string"
+																			},
+																			"slug": {
+																				"type": "string"
+																			},
+																			"avatar": {
+																				"type": "null"
+																			},
+																			"avatar_thumbs": {
+																				"type": "null"
+																			},
+																			"banner": {
+																				"type": "null"
+																			},
+																			"banner_thumbs": {
+																				"type": "null"
+																			},
+																			"total_clips": {
+																				"type": "null"
+																			},
+																			"last_clip": {
+																				"type": "null"
+																			},
+																			"most_recent_clip_id": {
+																				"type": "null"
+																			},
+																			"link": {
+																				"type": "string"
+																			},
+																			"category": {
+																				"type": "null"
+																			}
+																		},
+																		"required": [
+																			"id",
+																			"name",
+																			"slug",
+																			"avatar",
+																			"avatar_thumbs",
+																			"banner",
+																			"banner_thumbs",
+																			"total_clips",
+																			"last_clip",
+																			"most_recent_clip_id",
+																			"link",
+																			"category"
+																		],
+																		"additionalProperties": false
+																	},
+																	"category": {
+																		"type": "object",
+																		"properties": {
+																			"id": {
+																				"type": "number"
+																			},
+																			"name": {
+																				"type": "string"
+																			},
+																			"translations": {
+																				"type": "null"
+																			},
+																			"link": {
+																				"type": "string"
+																			},
+																			"search_link": {
+																				"type": "string"
+																			},
+																			"store_link": {
+																				"type": "null"
+																			},
+																			"clean_name": {
+																				"type": "string"
+																			},
+																			"total_clips": {
+																				"type": "null"
+																			},
+																			"thumb": {
+																				"type": "null"
+																			},
+																			"pill": {
+																				"type": "null"
+																			}
+																		},
+																		"required": [
+																			"id",
+																			"name",
+																			"translations",
+																			"link",
+																			"search_link",
+																			"store_link",
+																			"clean_name",
+																			"total_clips",
+																			"thumb",
+																			"pill"
+																		],
+																		"additionalProperties": false
 																	},
 																	"thumb": {
+																		"type": "string"
+																	},
+																	"thumbs": {
+																		"type": "object",
+																		"properties": {
+																			"square_sm": {
+																				"type": "string"
+																			},
+																			"square_md": {
+																				"type": "string"
+																			},
+																			"rect_sm": {
+																				"type": "string"
+																			},
+																			"rect_md": {
+																				"type": "string"
+																			},
+																			"rect_lrg": {
+																				"type": "string"
+																			},
+																			"rect_ex_lrg": {
+																				"type": "string"
+																			}
+																		},
+																		"required": [
+																			"square_sm",
+																			"square_md",
+																			"rect_sm",
+																			"rect_md",
+																			"rect_lrg",
+																			"rect_ex_lrg"
+																		],
+																		"additionalProperties": false
+																	},
+																	"mediabook_url": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"mediabook_quality": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"video_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"cdn_previewlg_link": {
+																		"type": "string"
+																	},
+																	"cdn_preview_link": {
+																		"type": "string"
+																	},
+																	"checkout_link": {
+																		"type": "string"
+																	},
+																	"next_link": {
 																		"type": "null"
 																	},
-																	"pill": {
+																	"prev_link": {
+																		"type": "null"
+																	},
+																	"show_click_for_preview": {
+																		"type": "boolean"
+																	},
+																	"webm_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"gif_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"download": {
+																		"type": "null"
+																	},
+																	"is_encoded": {
+																		"type": "null"
+																	},
+																	"player": {
+																		"type": "null"
+																	},
+																	"orientation": {
+																		"type": "null"
+																	},
+																	"performers": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"id": {
+																							"type": "number"
+																						},
+																						"stage_name": {
+																							"type": "string"
+																						},
+																						"total_clips": {
+																							"type": "null"
+																						},
+																						"avatars": {
+																							"type": "null"
+																						},
+																						"created_at": {
+																							"type": "null"
+																						}
+																					},
+																					"required": [
+																						"id",
+																						"stage_name",
+																						"total_clips",
+																						"avatars",
+																						"created_at"
+																					],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"archived": {
+																		"type": "boolean"
+																	},
+																	"on_sale": {
 																		"type": "null"
 																	}
 																},
 																"required": [
 																	"id",
-																	"name",
-																	"translations",
+																	"title",
+																	"slug",
 																	"link",
-																	"search_link",
-																	"store_link",
-																	"clean_name",
-																	"total_clips",
+																	"description",
+																	"description_sanitized",
+																	"translations",
+																	"added_at",
+																	"price",
+																	"discounted_price",
+																	"format",
+																	"screen",
+																	"resolution",
+																	"length",
+																	"suggested_clip_url",
+																	"size",
+																	"studio",
+																	"category",
 																	"thumb",
-																	"pill"
+																	"thumbs",
+																	"mediabook_url",
+																	"mediabook_quality",
+																	"video_preview_link",
+																	"cdn_previewlg_link",
+																	"cdn_preview_link",
+																	"checkout_link",
+																	"next_link",
+																	"prev_link",
+																	"show_click_for_preview",
+																	"webm_preview_link",
+																	"gif_preview_link",
+																	"download",
+																	"is_encoded",
+																	"player",
+																	"orientation",
+																	"performers",
+																	"archived",
+																	"on_sale"
 																],
 																"additionalProperties": false
-															},
-															"thumb": {
-																"type": "string"
-															},
-															"thumbs": {
-																"type": "object",
-																"properties": {
-																	"square_sm": {
-																		"type": "string"
-																	},
-																	"square_md": {
-																		"type": "string"
-																	},
-																	"rect_sm": {
-																		"type": "string"
-																	},
-																	"rect_md": {
-																		"type": "string"
-																	},
-																	"rect_lrg": {
-																		"type": "string"
-																	},
-																	"rect_ex_lrg": {
-																		"type": "string"
-																	}
+															}
+														},
+														{
+															"type": "null"
+														}
+													]
+												},
+												"performer": {
+													"anyOf": [
+														{
+															"type": "object",
+															"properties": {
+																"id": {
+																	"type": "number"
 																},
-																"required": [
-																	"square_sm",
-																	"square_md",
-																	"rect_sm",
-																	"rect_md",
-																	"rect_lrg",
-																	"rect_ex_lrg"
-																],
-																"additionalProperties": false
-															},
-															"mediabook_url": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"mediabook_quality": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"video_preview_link": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"cdn_previewlg_link": {
-																"type": "string"
-															},
-															"cdn_preview_link": {
-																"type": "string"
-															},
-															"checkout_link": {
-																"type": "string"
-															},
-															"next_link": {
-																"type": "null"
-															},
-															"prev_link": {
-																"type": "null"
-															},
-															"show_click_for_preview": {
-																"type": "boolean"
-															},
-															"webm_preview_link": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"gif_preview_link": {
-																"anyOf": [
-																	{
-																		"type": "string"
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
-															},
-															"download": {
-																"type": "null"
-															},
-															"is_encoded": {
-																"type": "null"
-															},
-															"player": {
-																"type": "null"
-															},
-															"orientation": {
-																"type": "null"
-															},
-															"performers": {
-																"anyOf": [
-																	{
-																		"type": "array",
-																		"items": {
+																"stage_name": {
+																	"type": "string"
+																},
+																"total_clips": {
+																	"type": "number"
+																},
+																"avatars": {
+																	"anyOf": [
+																		{
 																			"type": "object",
 																			"properties": {
-																				"id": {
-																					"type": "number"
+																				"18x16": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
 																				},
-																				"stage_name": {
-																					"type": "string"
+																				"20x20": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
 																				},
-																				"total_clips": {
-																					"type": "null"
+																				"30x30": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
 																				},
-																				"avatars": {
-																					"type": "null"
+																				"52x52": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
 																				},
-																				"created_at": {
-																					"type": "null"
+																				"88x88": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
+																				},
+																				"120x120": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
+																				},
+																				"188x188": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
+																				},
+																				"original": {
+																					"type": "object",
+																					"properties": {
+																						"url": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["url"],
+																					"additionalProperties": false
 																				}
 																			},
 																			"required": [
-																				"id",
-																				"stage_name",
-																				"total_clips",
-																				"avatars",
-																				"created_at"
+																				"18x16",
+																				"20x20",
+																				"30x30",
+																				"52x52",
+																				"88x88",
+																				"120x120",
+																				"188x188",
+																				"original"
 																			],
 																			"additionalProperties": false
+																		},
+																		{
+																			"type": "null"
 																		}
-																	},
-																	{
-																		"type": "null"
-																	}
-																]
+																	]
+																},
+																"created_at": {
+																	"type": "null"
+																}
 															},
-															"archived": {
-																"type": "boolean"
-															},
-															"on_sale": {
-																"type": "null"
-															}
+															"required": [
+																"id",
+																"stage_name",
+																"total_clips",
+																"avatars",
+																"created_at"
+															],
+															"additionalProperties": false
 														},
-														"required": [
-															"id",
-															"title",
-															"slug",
-															"link",
-															"description",
-															"description_sanitized",
-															"translations",
-															"added_at",
-															"price",
-															"discounted_price",
-															"format",
-															"screen",
-															"resolution",
-															"length",
-															"suggested_clip_url",
-															"size",
-															"studio",
-															"category",
-															"thumb",
-															"thumbs",
-															"mediabook_url",
-															"mediabook_quality",
-															"video_preview_link",
-															"cdn_previewlg_link",
-															"cdn_preview_link",
-															"checkout_link",
-															"next_link",
-															"prev_link",
-															"show_click_for_preview",
-															"webm_preview_link",
-															"gif_preview_link",
-															"download",
-															"is_encoded",
-															"player",
-															"orientation",
-															"performers",
-															"archived",
-															"on_sale"
-														],
-														"additionalProperties": false
-													}
-												},
-												"performer": {
-													"type": "null"
+														{
+															"type": "null"
+														}
+													]
 												},
 												"pills": {
 													"anyOf": [
@@ -6926,19 +7190,568 @@
 													]
 												},
 												"totalClips": {
-													"type": "number"
+													"anyOf": [
+														{
+															"type": "number"
+														},
+														{
+															"type": "null"
+														}
+													]
 												},
 												"totalClipPages": {
-													"type": "number"
+													"anyOf": [
+														{
+															"type": "number"
+														},
+														{
+															"type": "null"
+														}
+													]
 												},
 												"spellcheck": {
-													"type": "null"
+													"anyOf": [
+														{
+															"type": "object",
+															"properties": {
+																"text": {
+																	"type": "string"
+																},
+																"params": {
+																	"anyOf": [
+																		{
+																			"type": "object",
+																			"properties": {
+																				"search_without_spellchecking": {
+																					"type": "string"
+																				}
+																			},
+																			"required": [
+																				"search_without_spellchecking"
+																			],
+																			"additionalProperties": false
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
+																}
+															},
+															"required": ["text", "params"],
+															"additionalProperties": false
+														},
+														{
+															"type": "null"
+														}
+													]
 												},
 												"message": {
-													"type": "null"
+													"anyOf": [
+														{
+															"type": "object",
+															"properties": {
+																"text": {
+																	"type": "string"
+																},
+																"params": {
+																	"anyOf": [
+																		{
+																			"type": "object",
+																			"properties": {
+																				"search_without_spellchecking": {
+																					"type": "string"
+																				}
+																			},
+																			"required": [
+																				"search_without_spellchecking"
+																			],
+																			"additionalProperties": false
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
+																}
+															},
+															"required": ["text", "params"],
+															"additionalProperties": false
+														},
+														{
+															"type": "null"
+														}
+													]
 												},
 												"recommendations": {
-													"type": "null"
+													"anyOf": [
+														{
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"id": {
+																		"type": "number"
+																	},
+																	"title": {
+																		"type": "string"
+																	},
+																	"slug": {
+																		"type": "string"
+																	},
+																	"link": {
+																		"type": "string"
+																	},
+																	"related_categories": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"category": {
+																							"type": "string"
+																						},
+																						"translations": {
+																							"type": "null"
+																						},
+																						"link": {
+																							"anyOf": [
+																								{
+																									"type": "string"
+																								},
+																								{
+																									"type": "null"
+																								}
+																							]
+																						}
+																					},
+																					"required": ["category", "link"],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"related_keywords": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"keyword": {
+																							"type": "string"
+																						},
+																						"translations": {
+																							"type": "null"
+																						},
+																						"link": {
+																							"type": "string"
+																						}
+																					},
+																					"required": [
+																						"keyword",
+																						"translations",
+																						"link"
+																					],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"description": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"description_sanitized": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"translations": {
+																		"type": "null"
+																	},
+																	"added_at": {
+																		"type": "string"
+																	},
+																	"price": {
+																		"type": "number"
+																	},
+																	"discounted_price": {
+																		"type": "null"
+																	},
+																	"format": {
+																		"anyOf": [
+																			{
+																				"type": "number"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"screen": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"resolution": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"length": {
+																		"type": "number"
+																	},
+																	"suggested_clip_url": {
+																		"type": "string"
+																	},
+																	"size": {
+																		"anyOf": [
+																			{
+																				"type": "number"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"studio": {
+																		"type": "object",
+																		"properties": {
+																			"id": {
+																				"type": "number"
+																			},
+																			"name": {
+																				"type": "string"
+																			},
+																			"slug": {
+																				"type": "string"
+																			},
+																			"avatar": {
+																				"type": "null"
+																			},
+																			"avatar_thumbs": {
+																				"type": "null"
+																			},
+																			"banner": {
+																				"type": "null"
+																			},
+																			"banner_thumbs": {
+																				"type": "null"
+																			},
+																			"total_clips": {
+																				"type": "null"
+																			},
+																			"last_clip": {
+																				"type": "null"
+																			},
+																			"most_recent_clip_id": {
+																				"type": "null"
+																			},
+																			"link": {
+																				"type": "string"
+																			},
+																			"category": {
+																				"type": "null"
+																			}
+																		},
+																		"required": [
+																			"id",
+																			"name",
+																			"slug",
+																			"avatar",
+																			"avatar_thumbs",
+																			"banner",
+																			"banner_thumbs",
+																			"total_clips",
+																			"last_clip",
+																			"most_recent_clip_id",
+																			"link",
+																			"category"
+																		],
+																		"additionalProperties": false
+																	},
+																	"category": {
+																		"type": "object",
+																		"properties": {
+																			"id": {
+																				"type": "number"
+																			},
+																			"name": {
+																				"type": "string"
+																			},
+																			"translations": {
+																				"type": "null"
+																			},
+																			"link": {
+																				"type": "string"
+																			},
+																			"search_link": {
+																				"type": "string"
+																			},
+																			"store_link": {
+																				"type": "null"
+																			},
+																			"clean_name": {
+																				"type": "string"
+																			},
+																			"total_clips": {
+																				"type": "null"
+																			},
+																			"thumb": {
+																				"type": "null"
+																			},
+																			"pill": {
+																				"type": "null"
+																			}
+																		},
+																		"required": [
+																			"id",
+																			"name",
+																			"translations",
+																			"link",
+																			"search_link",
+																			"store_link",
+																			"clean_name",
+																			"total_clips",
+																			"thumb",
+																			"pill"
+																		],
+																		"additionalProperties": false
+																	},
+																	"thumb": {
+																		"type": "string"
+																	},
+																	"thumbs": {
+																		"type": "object",
+																		"properties": {
+																			"square_sm": {
+																				"type": "string"
+																			},
+																			"square_md": {
+																				"type": "string"
+																			},
+																			"rect_sm": {
+																				"type": "string"
+																			},
+																			"rect_md": {
+																				"type": "string"
+																			},
+																			"rect_lrg": {
+																				"type": "string"
+																			},
+																			"rect_ex_lrg": {
+																				"type": "string"
+																			}
+																		},
+																		"required": [
+																			"square_sm",
+																			"square_md",
+																			"rect_sm",
+																			"rect_md",
+																			"rect_lrg",
+																			"rect_ex_lrg"
+																		],
+																		"additionalProperties": false
+																	},
+																	"mediabook_url": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"mediabook_quality": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"video_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"cdn_previewlg_link": {
+																		"type": "string"
+																	},
+																	"cdn_preview_link": {
+																		"type": "string"
+																	},
+																	"checkout_link": {
+																		"type": "string"
+																	},
+																	"next_link": {
+																		"type": "null"
+																	},
+																	"prev_link": {
+																		"type": "null"
+																	},
+																	"show_click_for_preview": {
+																		"type": "boolean"
+																	},
+																	"webm_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"gif_preview_link": {
+																		"anyOf": [
+																			{
+																				"type": "string"
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"download": {
+																		"type": "null"
+																	},
+																	"is_encoded": {
+																		"type": "null"
+																	},
+																	"player": {
+																		"type": "null"
+																	},
+																	"orientation": {
+																		"type": "null"
+																	},
+																	"performers": {
+																		"anyOf": [
+																			{
+																				"type": "array",
+																				"items": {
+																					"type": "object",
+																					"properties": {
+																						"id": {
+																							"type": "number"
+																						},
+																						"stage_name": {
+																							"type": "string"
+																						},
+																						"total_clips": {
+																							"type": "null"
+																						},
+																						"avatars": {
+																							"type": "null"
+																						},
+																						"created_at": {
+																							"type": "null"
+																						}
+																					},
+																					"required": [
+																						"id",
+																						"stage_name",
+																						"total_clips",
+																						"avatars",
+																						"created_at"
+																					],
+																					"additionalProperties": false
+																				}
+																			},
+																			{
+																				"type": "null"
+																			}
+																		]
+																	},
+																	"archived": {
+																		"type": "boolean"
+																	},
+																	"on_sale": {
+																		"type": "null"
+																	}
+																},
+																"required": [
+																	"id",
+																	"title",
+																	"slug",
+																	"link",
+																	"description",
+																	"description_sanitized",
+																	"translations",
+																	"added_at",
+																	"price",
+																	"discounted_price",
+																	"format",
+																	"screen",
+																	"resolution",
+																	"length",
+																	"suggested_clip_url",
+																	"size",
+																	"studio",
+																	"category",
+																	"thumb",
+																	"thumbs",
+																	"mediabook_url",
+																	"mediabook_quality",
+																	"video_preview_link",
+																	"cdn_previewlg_link",
+																	"cdn_preview_link",
+																	"checkout_link",
+																	"next_link",
+																	"prev_link",
+																	"show_click_for_preview",
+																	"webm_preview_link",
+																	"gif_preview_link",
+																	"download",
+																	"is_encoded",
+																	"player",
+																	"orientation",
+																	"performers",
+																	"archived",
+																	"on_sale"
+																],
+																"additionalProperties": false
+															}
+														},
+														{
+															"type": "null"
+														}
+													]
 												}
 											},
 											"required": [
@@ -6955,7 +7768,38 @@
 											"additionalProperties": false
 										},
 										"spellcheck": {
-											"type": "null"
+											"anyOf": [
+												{
+													"type": "object",
+													"properties": {
+														"text": {
+															"type": "string"
+														},
+														"params": {
+															"anyOf": [
+																{
+																	"type": "object",
+																	"properties": {
+																		"search_without_spellchecking": {
+																			"type": "string"
+																		}
+																	},
+																	"required": ["search_without_spellchecking"],
+																	"additionalProperties": false
+																},
+																{
+																	"type": "null"
+																}
+															]
+														}
+													},
+													"required": ["text", "params"],
+													"additionalProperties": false
+												},
+												{
+													"type": "null"
+												}
+											]
 										},
 										"pills": {
 											"type": "array",
@@ -7489,10 +8333,17 @@
 																	"type": "null"
 																},
 																"link": {
-																	"type": "string"
+																	"anyOf": [
+																		{
+																			"type": "string"
+																		},
+																		{
+																			"type": "null"
+																		}
+																	]
 																}
 															},
-															"required": ["category", "translations", "link"],
+															"required": ["category", "link"],
 															"additionalProperties": false
 														}
 													},
@@ -7702,7 +8553,191 @@
 											}
 										},
 										"performer": {
-											"type": "null"
+											"anyOf": [
+												{
+													"type": "object",
+													"properties": {
+														"id": {
+															"type": "number"
+														},
+														"stageName": {
+															"type": "string"
+														},
+														"avatars": {
+															"anyOf": [
+																{
+																	"type": "object",
+																	"properties": {
+																		"18x16": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"20x20": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"30x30": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"52x52": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"88x88": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"120x120": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"188x188": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		},
+																		"original": {
+																			"type": "object",
+																			"properties": {
+																				"url": {
+																					"anyOf": [
+																						{
+																							"type": "string"
+																						},
+																						{
+																							"type": "null"
+																						}
+																					]
+																				}
+																			},
+																			"required": ["url"],
+																			"additionalProperties": false
+																		}
+																	},
+																	"required": [
+																		"18x16",
+																		"20x20",
+																		"30x30",
+																		"52x52",
+																		"88x88",
+																		"120x120",
+																		"188x188",
+																		"original"
+																	],
+																	"additionalProperties": false
+																},
+																{
+																	"type": "null"
+																}
+															]
+														},
+														"totalClips": {
+															"type": "number"
+														}
+													},
+													"required": [
+														"id",
+														"stageName",
+														"avatars",
+														"totalClips"
+													],
+													"additionalProperties": false
+												},
+												{
+													"type": "null"
+												}
+											]
 										},
 										"canonical": {
 											"type": "object",
@@ -7726,7 +8761,6 @@
 										}
 									},
 									"required": [
-										"searchQueryId",
 										"success",
 										"code",
 										"data",

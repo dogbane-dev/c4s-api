@@ -117,6 +117,12 @@ const clipSearchTerm = z.string().meta({
 	example: 'ball gag',
 })
 
+const spellcheckingParam = z.literal(0).meta({
+	description:
+		'Whether to disable spellchecking which will change your search term if it things it is misspelled',
+	example: 0,
+})
+
 const schema = createDocument({
 	openapi: '3.1.0',
 	info: {
@@ -330,6 +336,7 @@ const schema = createDocument({
 						}),
 						query: z.object({
 							_data: dataParam('routes/($lang).clips.search.$'),
+							spellchecking: spellcheckingParam.optional(),
 						}),
 					},
 					responses: {
