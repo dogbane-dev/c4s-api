@@ -184,7 +184,7 @@ export interface paths {
 									translations?: null
 									link: string | null
 								}[]
-								keyword_links: {
+								keyword_links?: {
 									keyword: string
 									translations: null
 									link: string
@@ -385,7 +385,7 @@ export interface paths {
 									translations?: null
 									link: string | null
 								}[]
-								keyword_links: {
+								keyword_links?: {
 									keyword: string
 									translations: null
 									link: string
@@ -480,7 +480,7 @@ export interface paths {
 									translations?: null
 									link: string | null
 								}[]
-								keyword_links: {
+								keyword_links?: {
 									keyword: string
 									translations: null
 									link: string
@@ -739,7 +739,7 @@ export interface paths {
 									translations?: null
 									link: string | null
 								}[]
-								keyword_links: {
+								keyword_links?: {
 									keyword: string
 									translations: null
 									link: string
@@ -827,7 +827,7 @@ export interface paths {
 									translations?: null
 									link: string | null
 								}[]
-								keyword_links: {
+								keyword_links?: {
 									keyword: string
 									translations: null
 									link: string
