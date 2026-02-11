@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+// Bun Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`studio clips fetches with all options provided - TRB 1`] = `
 {
@@ -409,12 +409,8 @@ exports[`studio clips fetches with all options provided - TT 1`] = `
       "label": "Longest Clips",
       "value": "longest",
     },
-    {
-      "label": "Creator Favorites",
-      "value": "display_order_desc",
-    },
   ],
-  "storeDefaultSorting": "display_order_desc",
+  "storeDefaultSorting": "recommended",
   "store_has_clips": true,
   "store_status": "open",
   "studioId": "111172",
@@ -655,12 +651,8 @@ exports[`studio clips fetches all options + specific category - TT 1`] = `
       "label": "Longest Clips",
       "value": "longest",
     },
-    {
-      "label": "Creator Favorites",
-      "value": "display_order_desc",
-    },
   ],
-  "storeDefaultSorting": "display_order_desc",
+  "storeDefaultSorting": "recommended",
   "store_has_clips": true,
   "store_status": "open",
   "studioId": "111172",
