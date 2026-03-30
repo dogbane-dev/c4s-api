@@ -1,4 +1,4 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`single studio fetches with slug provided - TRB 1`] = `
 {
@@ -25,7 +25,7 @@ exports[`single studio fetches with slug provided - TRB 1`] = `
   "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
   "canBeFollowed": true,
   "canonical": {
-    "href": "http://www.clips4sale.com/en/studio/254031/tatti-roana-bondage",
+    "href": "http://www.clips4sale.com/studio/254031/tatti-roana-bondage",
   },
   "categories": [
     {
@@ -62,6 +62,11 @@ exports[`single studio fetches with slug provided - TRB 1`] = `
       "id": 183,
       "link": "/studio/254031/tatti-roana-bondage/Cat183-cuckolding/Page1/recommended/Limit10",
       "name": "CUCKOLDING",
+    },
+    {
+      "id": 160,
+      "link": "/studio/254031/tatti-roana-bondage/Cat160-female-training/Page1/recommended/Limit10",
+      "name": "FEMALE TRAINING",
     },
     {
       "id": 1,
@@ -206,7 +211,7 @@ exports[`single studio fetches with slug provided - TT 1`] = `
   "browseSimilarClipsLink": "/clips/search/category/4/clipsPage/1",
   "canBeFollowed": true,
   "canonical": {
-    "href": "http://www.clips4sale.com/en/studio/111172/tied-tales",
+    "href": "http://www.clips4sale.com/studio/111172/tied-tales",
   },
   "categories": [
     {
@@ -334,7 +339,7 @@ exports[`single studio fetches with slug provided - TT 1`] = `
   "classicWidgetExperimentActive": false,
   "clipsOutsideOrientationCount": 0,
   "clipsSort": "recommended",
-  "description": "Our videos are carefully crafted with creative storylines that aim to fully immerse and engage our viewers. Each video is a full-length feature bondage tale, beloved by our fans for their thrilling and intense plots. You will witness the peril of our poor damsels as they are put into impossible situations, and experience their desperate struggles to break free. We hope you find enjoyment in our content and would greatly appreciate your feedback on our clips.&lt;br /&gt;&lt;br /&gt;Experience the thrill of bondage without breaking the bank with our Tied Talettes. These are exclusive, uncut scenes from our feature full length stories that can be purchased separately for our budget-savvy fans. As each scene unfolds, our characters may stray from their normal behaviors and reveal unexpected desires.&lt;br /&gt;&lt;br /&gt;But our models aren&#039;t just objects of fantasy - get to know them on a personal level with our Talkin Bondage series. Watch as they give intimate interviews and share their deepest secrets and desires.&lt;br /&gt;&lt;br /&gt;And for those who want to take their fantasy to the next level, check out our latest series: POV Tales starring YOU! Be captivated by our stunning models or take control and give them commands - the choice is yours.&lt;br /&gt;&lt;br /&gt;Experience the ultimate thrill with our never-ending bondage challenges, including the intense BDSM Tournament, fierce Mistress Wars, harrowing Bondage Survivor, playful Bondage Tickle Escape Challenge, and so much more! We push their limits and test their endurance as they compete against others in the world of bondage. Who will you emerge victorious or succumb to the tantalizing restraints? Own them now!&lt;br /&gt;&lt;br /&gt;Have a specific story or chat log that you&#039;ve been eager to see brought to life? We offer custom videos tailored to your preferences. Contact us with your tales and let us make your fantasies a reality.",
+  "description": "Welcome to Tied Tales — high-quality rope bondage featuring tight ties, intense gags, genuine struggling, and creative storylines.&lt;br /&gt;&lt;br /&gt;We specialize in realistic bondage scenes where performers test their bonds with real effort and emotion. Expect clever escape challenges, fun games, and immersive scenarios that keep you engaged from start to finish.&lt;br /&gt;&lt;br /&gt;What you’ll find:&lt;br /&gt;•  Tight, detailed rope bondage in a variety of positions&lt;br /&gt;•  Effective gags (cleave, tape, ballgags) with clear muffled sounds and breathing&lt;br /&gt;•  Story-driven clips involving capture scenarios, bets, challenges, and escape attempts&lt;br /&gt;•  High-definition video with multiple camera angles and excellent audio&lt;br /&gt;•  Tied Talettes — shorter, more affordable scenes&lt;br /&gt;•  Full-length videos (10–30+ minutes) for deeper enjoyment&lt;br /&gt;•  Custom video requests always welcome&lt;br /&gt;&lt;br /&gt;Fresh content added regularly with a strong emphasis on consensual, narrative-style rope bondage. Perfect for fans who enjoy tight restraint, authentic reactions, and engaging plots.&lt;br /&gt;&lt;br /&gt;Browse our latest releases or message us with custom ideas. We appreciate your support of independent fetish creators!&lt;br /&gt;&lt;br /&gt;Enjoy the ties… and the tales. ????",
   "donate": false,
   "ga_tracking_id": null,
   "isChatEnabled": true,
@@ -411,6 +416,10 @@ exports[`single studio fetches with slug provided - TT 1`] = `
       "label": "Longest Clips",
       "value": "longest",
     },
+    {
+      "label": "Creator Favorites",
+      "value": "display_order_desc",
+    },
   ],
   "storeDefaultSorting": "recommended",
   "store_has_clips": true,
@@ -486,6 +495,11 @@ exports[`single studio fetches without slug provided - handles remix redirect 1`
       "id": 183,
       "link": "/studio/254031/tatti-roana-bondage/Cat183-cuckolding/Page1/recommended/Limit10",
       "name": "CUCKOLDING",
+    },
+    {
+      "id": 160,
+      "link": "/studio/254031/tatti-roana-bondage/Cat160-female-training/Page1/recommended/Limit10",
+      "name": "FEMALE TRAINING",
     },
     {
       "id": 1,
