@@ -152,6 +152,23 @@ describe('single clip', () => {
 		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
 	})
 
+	it('throws error if clip has been removed due to studio removal', () => {
+		const mockClient = getMockClient()
+		expect(() =>
+			getC4SClip(
+				{
+					id: 32768163,
+					slug: 'deep-throat-training-for-latex-jk-schoolgirls',
+					// studio was removed as far as I know
+					studioId: 401417,
+					language: 'en',
+				},
+				mockClient,
+			),
+		).toThrowError(C4SClipNotFoundError)
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
+
 	it('fetches clip that is under review', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SClip(

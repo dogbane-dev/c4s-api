@@ -35,12 +35,17 @@ const handleRedirect = async (
 		if (remixRedirect.match(/^\/studio\/\d+$/)) {
 			throw new C4SClipNotFoundError()
 		}
+		// redirecting to category page, means studio was not found due to removal
+		if (remixRedirect.match(/^\/clips\/category\/\d+\//)) {
+			throw new C4SClipNotFoundError()
+		}
 	}
 	if (schemaPath === '/{language}/studio/{studioId}/{studioSlug}') {
-		if (
-			remixRedirect === '/' ||
-			remixRedirect.match(/^\/clips\/category\/\d+\//)
-		) {
+		if (remixRedirect === '/') {
+			throw new C4SStudioNotFoundError()
+		}
+		// redirecting to category page, means studio was not found due to removal
+		if (remixRedirect.match(/^\/clips\/category\/\d+\//)) {
 			throw new C4SStudioNotFoundError()
 		}
 	}
