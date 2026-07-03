@@ -24,13 +24,20 @@ describe('studio clips', () => {
 			'Studio clip search response',
 		)
 
-		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			clipSearch
+		const {
+			clips,
+			onSaleClips,
+			followersCount,
+			clipsCount,
+			isCreatorOnline,
+			...staticDetails
+		} = clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -57,13 +64,20 @@ describe('studio clips', () => {
 			'Studio clip search response',
 		)
 
-		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			clipSearch
+		const {
+			clips,
+			onSaleClips,
+			followersCount,
+			clipsCount,
+			isCreatorOnline,
+			...staticDetails
+		} = clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -90,13 +104,20 @@ describe('studio clips', () => {
 			'Studio clip search response',
 		)
 
-		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			clipSearch
+		const {
+			clips,
+			onSaleClips,
+			followersCount,
+			clipsCount,
+			isCreatorOnline,
+			...staticDetails
+		} = clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()

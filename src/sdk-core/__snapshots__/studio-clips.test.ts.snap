@@ -122,7 +122,6 @@ exports[`studio clips fetches with all options provided - TRB 1`] = `
   "ga_tracking_id": null,
   "isChatEnabled": true,
   "isContentPreferenceLGBT": false,
-  "isCreatorOnline": false,
   "meta": {
     "author": "clips4sale.com",
     "copyright": "https://www.clips4sale.com 2026",
@@ -352,7 +351,6 @@ exports[`studio clips fetches with all options provided - TT 1`] = `
   "ga_tracking_id": null,
   "isChatEnabled": true,
   "isContentPreferenceLGBT": false,
-  "isCreatorOnline": false,
   "meta": {
     "author": "clips4sale.com",
     "copyright": "https://www.clips4sale.com 2026",
@@ -598,7 +596,6 @@ exports[`studio clips fetches all options + specific category - TT 1`] = `
   "ga_tracking_id": null,
   "isChatEnabled": true,
   "isContentPreferenceLGBT": false,
-  "isCreatorOnline": false,
   "meta": {
     "author": "clips4sale.com",
     "copyright": "https://www.clips4sale.com 2026",
