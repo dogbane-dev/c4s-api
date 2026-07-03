@@ -1,5 +1,6 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
+import { C4SApiError } from '../client/utils'
 import { type Language, parseLanguage, parseSlug } from '../shared/utils'
 
 type GetC4SStudioParams = {
@@ -32,7 +33,7 @@ const getC4SStudio = async (
 
 	// if (res.error) throw new Error(res.error.message);
 
-	if (!res.data) throw new Error('No data')
+	if (!res.data) throw new C4SApiError(res.response)
 
 	return res.data
 }

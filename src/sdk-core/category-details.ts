@@ -1,5 +1,6 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
+import { C4SApiError } from '../client/utils'
 import {
 	type Language,
 	parseLanguage,
@@ -34,7 +35,7 @@ const getC4SCategoryDetails = async (
 		},
 	})
 
-	if (!res.data) throw new Error('No data')
+	if (!res.data) throw new C4SApiError(res.response)
 
 	return res.data
 }

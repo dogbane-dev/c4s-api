@@ -32,3 +32,15 @@ export class C4SStudioNotFoundError extends Error {
 		super('Studio not found')
 	}
 }
+
+export class C4SApiError extends Error {
+	constructor(
+		responseOrMessage: Pick<Response, 'status' | 'statusText'> | string,
+	) {
+		super(
+			typeof responseOrMessage === 'string'
+				? responseOrMessage
+				: `Received response status ${responseOrMessage.status} ${responseOrMessage.statusText ? ` (${responseOrMessage.statusText})` : ''}`,
+		)
+	}
+}

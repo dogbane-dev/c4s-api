@@ -1,5 +1,6 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
+import { C4SApiError } from '../client/utils'
 import type { Language } from '../shared/utils'
 
 type GetC4SCategoriesParams = {
@@ -22,10 +23,10 @@ const getC4SCategories = async (
 		},
 	})
 
-	if (!res.data) throw new Error('No data')
+	if (!res.data) throw new C4SApiError(res.response)
 
 	if (res.data.code !== 'ok' || !res.data.success) {
-		throw new Error('Failed to fetch categories')
+		throw new C4SApiError('Failed to fetch categories')
 	}
 
 	return res.data
