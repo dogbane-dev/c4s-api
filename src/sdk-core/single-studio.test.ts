@@ -22,13 +22,20 @@ describe('single studio', () => {
 			'Studio response',
 		)
 
-		const { followersCount, clipsCount, clips, onSaleClips, ...staticDetails } =
-			studio
+		const {
+			followersCount,
+			clipsCount,
+			clips,
+			onSaleClips,
+			isCreatorOnline,
+			...staticDetails
+		} = studio
 
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -58,6 +65,7 @@ describe('single studio', () => {
 			clips,
 			onSaleClips,
 			otherStudios,
+			isCreatorOnline,
 			...staticDetails
 		} = studio
 
@@ -66,6 +74,7 @@ describe('single studio', () => {
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -93,6 +102,7 @@ describe('single studio', () => {
 			clips,
 			onSaleClips,
 			otherStudios,
+			isCreatorOnline,
 			...staticDetails
 		} = studio
 
@@ -101,6 +111,7 @@ describe('single studio', () => {
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
+		expect(isCreatorOnline).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -114,6 +125,22 @@ describe('single studio', () => {
 				{
 					id: 1, // not right / real
 					slug: 'tatti-roana-bondage',
+					language: 'en',
+				},
+				mockClient,
+			),
+		).toThrowError(C4SStudioNotFoundError)
+		expect(mockClient.fetch).toHaveBeenCalledTimes(1)
+	})
+
+	it('throws error if studio no longer exists', () => {
+		const mockClient = getMockClient()
+		expect(() =>
+			getC4SStudio(
+				// studio was removed as far as I can tell
+				{
+					id: 401417,
+					slug: 'orangeboys-bondage-studio',
 					language: 'en',
 				},
 				mockClient,

@@ -37,7 +37,10 @@ const handleRedirect = async (
 		}
 	}
 	if (schemaPath === '/{language}/studio/{studioId}/{studioSlug}') {
-		if (remixRedirect === '/') {
+		if (
+			remixRedirect === '/' ||
+			remixRedirect.match(/^\/clips\/category\/\d+\//)
+		) {
 			throw new C4SStudioNotFoundError()
 		}
 	}
