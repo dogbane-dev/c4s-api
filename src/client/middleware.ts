@@ -5,13 +5,16 @@ import {
 	parseRemixBody,
 } from './utils'
 
+const isResponseFromCurrentRealm = (value: unknown): boolean =>
+	value instanceof Response
+
 // recursively follow redirects
 const handleRedirect = async (
 	schemaPath: string,
 	request: Request,
 	response: Response,
 	fetch: typeof globalThis.fetch,
-) => {
+): Promise<Response | undefined> => {
 	const remixRedirect = response.headers.get('x-remix-redirect')
 	const remixStatus = response.headers.get('x-remix-status')
 
@@ -23,7 +26,7 @@ const handleRedirect = async (
 		!remixStatus ||
 		!redirectStatues.includes(remixStatus)
 	) {
-		return response
+		return
 	}
 
 	if (schemaPath === '/{language}/studio/{studioId}/{clipId}/{clipSlug}') {
@@ -55,7 +58,20 @@ const handleRedirect = async (
 	const newUrl = url.toString()
 	const newRequest = new Request(newUrl, request)
 	const newResponse = await fetch(newRequest)
-	return handleRedirect(schemaPath, newRequest, newResponse, fetch)
+	const redirectedResponse = await handleRedirect(
+		schemaPath,
+		newRequest,
+		newResponse,
+		fetch,
+	)
+
+	if (redirectedResponse) {
+		return redirectedResponse
+	}
+
+	return isResponseFromCurrentRealm(newResponse)
+		? newResponse
+		: new Response(newResponse.body, newResponse)
 }
 
 export const remixRedirectHandler: Middleware = {

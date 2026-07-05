@@ -66,7 +66,7 @@
 	},
 	"types": "./dist/index.d.ts",
 	"dependencies": {
-		"openapi-fetch": "^0.15.0"
+		"openapi-fetch": "^0.15.2"
 	},
 	"keywords": [
 		"clips4sale",
