@@ -32,14 +32,17 @@ import {
 	getC4STopClips,
 	getC4STopStudios,
 } from './sdk-extended'
-import type { Language } from './shared/utils'
+import type { C4SLanguage } from './shared/utils'
 
 interface C4SClientSDK {
 	getCategories: (
 		params: GetC4SCategoriesParams,
 	) => Promise<GetC4SCategoriesData>
 	getCategoryById: (id: number) => Promise<C4SCategory>
-	getCategoryByName: (name: string, language?: Language) => Promise<C4SCategory>
+	getCategoryByName: (
+		name: string,
+		language?: C4SLanguage,
+	) => Promise<C4SCategory>
 	getCategoryDetails: (
 		params: GetC4SCategoryDetailsParams,
 	) => Promise<GetC4SCategoryDetailsData>

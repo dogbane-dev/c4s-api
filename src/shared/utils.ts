@@ -15,15 +15,15 @@ export const DEFAULT_SEXUAL_PREFERENCES: number[] = [
 	SEXUAL_PREFERENCE_MAP.Trans,
 ]
 
-export const LANGUAGES = ['en', 'fr', 'de', 'pt', 'es', 'it'] as const
+export const C4S_LANGUAGES = ['en', 'fr', 'de', 'pt', 'es', 'it'] as const
 
-export type Language = (typeof LANGUAGES)[number]
+export type C4SLanguage = (typeof C4S_LANGUAGES)[number]
 
 // force undefined to be returned as a Language because path param is technically optional due to request rewrites
 export const parseLanguage = (
-	paramLanguage: Language | undefined,
-): Language => {
-	return (paramLanguage ?? '') as Language
+	paramLanguage: C4SLanguage | undefined,
+): C4SLanguage => {
+	return (paramLanguage ?? '') as C4SLanguage
 }
 
 // default slug is 'x' because slug is technically optional due to redirect handling but something must be passed

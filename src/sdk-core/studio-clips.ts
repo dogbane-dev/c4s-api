@@ -1,7 +1,7 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
-	type Language,
+	type C4SLanguage,
 	parseLanguage,
 	parseSlug,
 	parseStudioSearchSort,
@@ -16,7 +16,7 @@ type GetC4SStudioClipsParams = {
 	sort?: StudioSearchSortParam
 	search?: string
 	onlyClips?: boolean
-	language?: Language
+	language?: C4SLanguage
 }
 
 type GetC4SStudioClipsData =

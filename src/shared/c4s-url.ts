@@ -1,14 +1,14 @@
-import { LANGUAGES, type Language } from './utils'
+import { C4S_LANGUAGES, type C4SLanguage } from './utils'
 
 export type ParsedC4SClipUrl = {
-	language?: Language
+	language?: C4SLanguage
 	studioId: number
 	clipId: number
 	clipSlug?: string
 }
 
 export type ParsedC4SStudioUrl = {
-	language?: Language
+	language?: C4SLanguage
 	studioId: number
 	studioSlug?: string
 }
@@ -22,8 +22,8 @@ export class InvalidC4SUrlError extends Error {
 
 const C4S_HOSTNAMES = new Set(['clips4sale.com', 'www.clips4sale.com'])
 
-const isLanguage = (segment: string): segment is Language => {
-	return (LANGUAGES as readonly string[]).includes(segment)
+const isLanguage = (segment: string): segment is C4SLanguage => {
+	return (C4S_LANGUAGES as readonly string[]).includes(segment)
 }
 
 const parsePathId = (segment: string | undefined): number | null => {
@@ -35,7 +35,7 @@ const parsePathId = (segment: string | undefined): number | null => {
 
 const parseC4SUrlPath = (
 	value: string,
-): { language?: Language; segments: string[] } | null => {
+): { language?: C4SLanguage; segments: string[] } | null => {
 	let url: URL
 
 	try {

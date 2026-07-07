@@ -2,15 +2,15 @@ import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
 import {
+	type C4SLanguage,
 	type InferFromField,
-	type Language,
 	parseSexualPreferences,
 	type SexualPreference,
 } from '../shared/utils'
 
 type GetC4SCategorySeeMoreParams = {
 	type: 'top-stores' | 'top-clips' | 'recently-added-related-clips'
-	language?: Language
+	language?: C4SLanguage
 	id: number
 	sexualPreferences?: SexualPreference[]
 	page: number

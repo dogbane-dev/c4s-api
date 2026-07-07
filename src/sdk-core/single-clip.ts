@@ -2,13 +2,13 @@ import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
 import { parseC4SClipUrl } from '../shared/c4s-url'
-import { type Language, parseLanguage, parseSlug } from '../shared/utils'
+import { type C4SLanguage, parseLanguage, parseSlug } from '../shared/utils'
 
 type GetC4SClipParams = {
 	id: number
 	studioId: number
 	slug?: string
-	language?: Language
+	language?: C4SLanguage
 }
 
 type GetC4SClipData =

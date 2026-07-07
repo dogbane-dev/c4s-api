@@ -1,9 +1,9 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import {
+	type C4SLanguage,
 	type ClipSearchFilter,
 	type ClipSearchSortParam,
-	type Language,
 	parseClipSearchFilters,
 	parseClipSearchSort,
 	parseLanguage,
@@ -11,7 +11,7 @@ import {
 
 type SearchC4SClipsParams = {
 	search?: string
-	language?: Language
+	language?: C4SLanguage
 	filter?: ClipSearchFilter
 	page?: number
 	sort?: ClipSearchSortParam

@@ -2,7 +2,7 @@ import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
 import {
-	type Language,
+	type C4SLanguage,
 	parseLanguage,
 	parseSexualPreferences,
 	type SexualPreference,
@@ -10,7 +10,7 @@ import {
 
 type GetC4SCategoryDetailsParams = {
 	id: number
-	language?: Language
+	language?: C4SLanguage
 	sexualPreferences?: SexualPreference[]
 }
 

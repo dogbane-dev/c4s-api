@@ -1,10 +1,10 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
-import type { Language } from '../shared/utils'
+import type { C4SLanguage } from '../shared/utils'
 
 type GetC4SCategoriesParams = {
-	language?: Language
+	language?: C4SLanguage
 }
 
 type GetC4SCategoriesData =
@@ -36,7 +36,7 @@ type C4SCategory = GetC4SCategoriesData['categories'][number]
 
 const getC4SCategoryByName = async (
 	name: string,
-	language?: Language,
+	language?: C4SLanguage,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
 	const { categories } = await getC4SCategories({ language }, client)
@@ -49,7 +49,7 @@ const getC4SCategoryByName = async (
 
 const getC4SCategoryById = async (
 	id: number,
-	language?: Language,
+	language?: C4SLanguage,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
 	const { categories } = await getC4SCategories({ language }, client)

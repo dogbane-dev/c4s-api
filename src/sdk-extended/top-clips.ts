@@ -5,14 +5,14 @@ import {
 	getC4SCategorySeeMoreTopClips,
 } from '../sdk-core'
 import {
-	type Language,
+	type C4SLanguage,
 	type SexualPreference,
 	VALID_SEE_MORE_PAGES,
 } from '../shared/utils'
 
 type GetC4STopClipsParams = {
 	categoryId: number
-	language?: Language
+	language?: C4SLanguage
 	sexualPreferences?: SexualPreference[]
 }
 type GetC4STopClipsData = Array<
