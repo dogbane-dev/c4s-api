@@ -88,6 +88,7 @@ MIT
 TBD
 
 ## Future Work / Possible Contributions
+- possibly fix language handling - `parseLanguage` is a bit yucky
 - add endpoint(s) for performers
 - add endpoint(s) for store search 
 - add example responses, better notes & descriptions to all endpoints & schemas
