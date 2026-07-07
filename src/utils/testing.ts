@@ -52,6 +52,19 @@ export const getMockClient = (): MockedClient => {
 	return mockedClient as MockedClient
 }
 
+type MockedC4SMethod = (
+	...args: unknown[]
+) => Promise<{ data: unknown; response: Response }>
+type MockedC4SMethodClient = C4SClient & { GET: Mock<MockedC4SMethod> }
+export const getMockC4SMethodClient = (): MockedC4SMethodClient => {
+	const GET = mock(async () => ({
+		data: {},
+		response: new Response(),
+	}))
+
+	return { GET } as unknown as MockedC4SMethodClient
+}
+
 function cartesian(arrays: readonly unknown[][]): unknown[][] {
 	return arrays.reduce<unknown[][]>(
 		(acc, curr) => acc.flatMap((a) => curr.map((b) => [...a, b])),

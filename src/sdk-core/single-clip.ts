@@ -1,6 +1,7 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
+import { parseC4SClipUrl } from '../shared/c4s-url'
 import { type Language, parseLanguage, parseSlug } from '../shared/utils'
 
 type GetC4SClipParams = {
@@ -40,4 +41,25 @@ const getC4SClip = async (
 	return res.data
 }
 
-export { getC4SClip, type GetC4SClipParams, type GetC4SClipData }
+const getC4SClipByUrl = async (
+	url: string,
+	client?: C4SClient,
+): Promise<GetC4SClipData> => {
+	const parsed = parseC4SClipUrl(url)
+	return getC4SClip(
+		{
+			id: parsed.clipId,
+			studioId: parsed.studioId,
+			slug: parsed.clipSlug,
+			language: parsed.language,
+		},
+		client,
+	)
+}
+
+export {
+	getC4SClip,
+	getC4SClipByUrl,
+	type GetC4SClipParams,
+	type GetC4SClipData,
+}

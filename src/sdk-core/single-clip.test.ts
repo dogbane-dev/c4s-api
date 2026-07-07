@@ -1,10 +1,25 @@
 import { describe, expect, it } from 'bun:test'
 import { C4SClipNotFoundError, C4SStudioNotFoundError } from '../client/utils'
 import { SingleClipResponseSchema } from '../open-api/zod'
-import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SClip } from './single-clip'
+import {
+	expectMatchesSchema,
+	getMockC4SMethodClient,
+	getMockClient,
+} from '../utils/testing'
+import { getC4SClip, getC4SClipByUrl } from './single-clip'
 
 describe('single clip', () => {
+	it('fetches by URL', async () => {
+		const mockClient = getMockC4SMethodClient()
+
+		await getC4SClipByUrl(
+			'https://www.clips4sale.com/studio/28730/34039699/astrid-captured-in-her-bedroom-bondage-struggle-with-tight-tape-gag-full-hd-mp4',
+			mockClient,
+		)
+
+		expect(mockClient.GET).toHaveBeenCalledTimes(1)
+	})
+
 	it('fetches with slug provided', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SClip(

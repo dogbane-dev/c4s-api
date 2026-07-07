@@ -1,10 +1,25 @@
 import { describe, expect, it } from 'bun:test'
 import { C4SStudioNotFoundError } from '../client/utils'
 import { SingleStudioResponseSchema } from '../open-api/zod'
-import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SStudio } from './single-studio'
+import {
+	expectMatchesSchema,
+	getMockC4SMethodClient,
+	getMockClient,
+} from '../utils/testing'
+import { getC4SStudio, getC4SStudioByUrl } from './single-studio'
 
 describe('single studio', () => {
+	it('fetches by URL', async () => {
+		const mockClient = getMockC4SMethodClient()
+
+		await getC4SStudioByUrl(
+			'https://www.clips4sale.com/studio/28730/rf-studio-production',
+			mockClient,
+		)
+
+		expect(mockClient.GET).toHaveBeenCalledTimes(1)
+	})
+
 	it('fetches with slug provided - TRB', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SStudio(

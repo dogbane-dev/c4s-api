@@ -1,6 +1,7 @@
 import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
+import { parseC4SStudioUrl } from '../shared/c4s-url'
 import { type Language, parseLanguage, parseSlug } from '../shared/utils'
 
 type GetC4SStudioParams = {
@@ -38,4 +39,24 @@ const getC4SStudio = async (
 	return res.data
 }
 
-export { getC4SStudio, type GetC4SStudioParams, type GetC4SStudioData }
+const getC4SStudioByUrl = async (
+	url: string,
+	client?: C4SClient,
+): Promise<GetC4SStudioData> => {
+	const parsed = parseC4SStudioUrl(url)
+	return getC4SStudio(
+		{
+			id: parsed.studioId,
+			slug: parsed.studioSlug,
+			language: parsed.language,
+		},
+		client,
+	)
+}
+
+export {
+	getC4SStudio,
+	getC4SStudioByUrl,
+	type GetC4SStudioParams,
+	type GetC4SStudioData,
+}
