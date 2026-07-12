@@ -22,7 +22,7 @@ type GetC4SStudioClipsParams = {
 type GetC4SStudioClipsData =
 	paths['/{language}/studio/{studioId}/{studioSlug}/{category}/{page}/{sort}/Limit24/search/{search}']['get']['responses']['200']['content']['application/json']
 
-const getC4SStudioClips = async (
+const baseGetC4SStudioClips = async (
 	params: GetC4SStudioClipsParams,
 	client?: C4SClient,
 ): Promise<GetC4SStudioClipsData> => {
@@ -55,7 +55,14 @@ const getC4SStudioClips = async (
 	return res.data
 }
 
+const getC4SStudioClips = async (
+	params: GetC4SStudioClipsParams,
+): Promise<GetC4SStudioClipsData> => {
+	return baseGetC4SStudioClips(params, getC4SClient())
+}
+
 export {
+	baseGetC4SStudioClips,
 	getC4SStudioClips,
 	type GetC4SStudioClipsParams,
 	type GetC4SStudioClipsData,

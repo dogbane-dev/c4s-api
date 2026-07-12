@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'bun:test'
 import { CategoriesResponseSchema } from '../open-api/zod'
 import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SCategories } from './categories'
+import { baseGetC4SCategories } from './categories'
 
 describe('categories', () => {
 	it('fetches', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SCategories(undefined, mockClient)
+		const result = await baseGetC4SCategories(undefined, mockClient)
 
 		const catResponse = expectMatchesSchema(
 			result,
@@ -26,7 +26,7 @@ describe('categories', () => {
 
 	it('fetches - different language', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SCategories({ language: 'fr' }, mockClient)
+		const result = await baseGetC4SCategories({ language: 'fr' }, mockClient)
 
 		const catResponse = expectMatchesSchema(
 			result,

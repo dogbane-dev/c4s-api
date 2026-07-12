@@ -19,7 +19,7 @@ type GetC4SClipParams = {
 type GetC4SClipData =
 	paths['/{language}/studio/{studioId}/{clipId}/{clipSlug}']['get']['responses']['200']['content']['text/remix-deferred']
 
-const getC4SClip = async (
+const baseGetC4SClip = async (
 	params: GetC4SClipParams,
 	client?: C4SClient,
 ): Promise<GetC4SClipData> => {
@@ -46,12 +46,18 @@ const getC4SClip = async (
 	return res.data
 }
 
-const getC4SClipByUrl = async (
+const getC4SClip = async (
+	params: GetC4SClipParams,
+): Promise<GetC4SClipData> => {
+	return baseGetC4SClip(params, getC4SClient())
+}
+
+const baseGetC4SClipByUrl = async (
 	url: string,
 	client?: C4SClient,
 ): Promise<GetC4SClipData> => {
 	const parsed = parseC4SClipUrl(url)
-	return getC4SClip(
+	return baseGetC4SClip(
 		{
 			...parsed,
 			id: parsed.clipId,
@@ -60,12 +66,16 @@ const getC4SClipByUrl = async (
 	)
 }
 
-const getC4SClipById = async (
+const getC4SClipByUrl = async (url: string): Promise<GetC4SClipData> => {
+	return baseGetC4SClipByUrl(url, getC4SClient())
+}
+
+const baseGetC4SClipById = async (
 	id: number,
 	additionalParams?: Omit<GetC4SClipParams, 'id'>,
 	client?: C4SClient,
 ): Promise<GetC4SClipData> => {
-	return getC4SClip(
+	return baseGetC4SClip(
 		{
 			...additionalParams,
 			id,
@@ -74,7 +84,17 @@ const getC4SClipById = async (
 	)
 }
 
+const getC4SClipById = async (
+	id: number,
+	additionalParams?: Omit<GetC4SClipParams, 'id'>,
+): Promise<GetC4SClipData> => {
+	return baseGetC4SClipById(id, additionalParams, getC4SClient())
+}
+
 export {
+	baseGetC4SClip,
+	baseGetC4SClipById,
+	baseGetC4SClipByUrl,
 	getC4SClip,
 	getC4SClipById,
 	getC4SClipByUrl,

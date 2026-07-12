@@ -13,7 +13,7 @@ type GetC4SStudioParams = {
 type GetC4SStudioData =
 	paths['/{language}/studio/{studioId}/{studioSlug}']['get']['responses']['200']['content']['text/remix-deferred']
 
-const getC4SStudio = async (
+const baseGetC4SStudio = async (
 	params: GetC4SStudioParams,
 	client?: C4SClient,
 ): Promise<GetC4SStudioData> => {
@@ -39,12 +39,18 @@ const getC4SStudio = async (
 	return res.data
 }
 
-const getC4SStudioByUrl = async (
+const getC4SStudio = async (
+	params: GetC4SStudioParams,
+): Promise<GetC4SStudioData> => {
+	return baseGetC4SStudio(params, getC4SClient())
+}
+
+const baseGetC4SStudioByUrl = async (
 	url: string,
 	client?: C4SClient,
 ): Promise<GetC4SStudioData> => {
 	const parsed = parseC4SStudioUrl(url)
-	return getC4SStudio(
+	return baseGetC4SStudio(
 		{
 			id: parsed.studioId,
 			slug: parsed.studioSlug,
@@ -54,7 +60,13 @@ const getC4SStudioByUrl = async (
 	)
 }
 
+const getC4SStudioByUrl = async (url: string): Promise<GetC4SStudioData> => {
+	return baseGetC4SStudioByUrl(url, getC4SClient())
+}
+
 export {
+	baseGetC4SStudio,
+	baseGetC4SStudioByUrl,
 	getC4SStudio,
 	getC4SStudioByUrl,
 	type GetC4SStudioParams,

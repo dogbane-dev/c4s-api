@@ -7,7 +7,7 @@ import {
 } from '../open-api/zod'
 import { INVALID_SEE_MORE_PAGES, VALID_SEE_MORE_PAGES } from '../shared/utils'
 import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SCategorySeeMore } from './category-see-more'
+import { baseGetC4SCategorySeeMore } from './category-see-more'
 
 const variations = [
 	{
@@ -30,7 +30,7 @@ describe('category details', () => {
 			VALID_SEE_MORE_PAGES.forEach((page) => {
 				it(`fetches page ${page} (valid)`, async () => {
 					const mockClient = getMockClient()
-					const result = await getC4SCategorySeeMore(
+					const result = await baseGetC4SCategorySeeMore(
 						{
 							id: 4,
 							page,
@@ -62,7 +62,7 @@ describe('category details', () => {
 			INVALID_SEE_MORE_PAGES.forEach((page) => {
 				it(`fetches page ${page} (empty)`, async () => {
 					const mockClient = getMockClient()
-					const result = await getC4SCategorySeeMore(
+					const result = await baseGetC4SCategorySeeMore(
 						{
 							id: 4,
 							page,

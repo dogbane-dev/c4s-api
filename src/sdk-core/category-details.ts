@@ -17,7 +17,7 @@ type GetC4SCategoryDetailsParams = {
 type GetC4SCategoryDetailsData =
 	paths['/{language}/clips/category/{category}']['get']['responses']['200']['content']['application/json']
 
-const getC4SCategoryDetails = async (
+const baseGetC4SCategoryDetails = async (
 	params: GetC4SCategoryDetailsParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategoryDetailsData> => {
@@ -40,7 +40,14 @@ const getC4SCategoryDetails = async (
 	return res.data
 }
 
+const getC4SCategoryDetails = async (
+	params: GetC4SCategoryDetailsParams,
+): Promise<GetC4SCategoryDetailsData> => {
+	return baseGetC4SCategoryDetails(params, getC4SClient())
+}
+
 export {
+	baseGetC4SCategoryDetails,
 	getC4SCategoryDetails,
 	type GetC4SCategoryDetailsParams,
 	type GetC4SCategoryDetailsData,

@@ -6,7 +6,7 @@ import {
 	getMockClient,
 	prettyPrint,
 } from '../utils/testing'
-import { type SearchC4SClipsParams, searchC4SClips } from './search-clips'
+import { baseSearchC4SClips, type SearchC4SClipsParams } from './search-clips'
 
 const searchFilterSortCases = enumerateTestCases<SearchC4SClipsParams>({
 	language: ['en'], //
@@ -54,7 +54,7 @@ const spellcheckCases = enumerateTestCases<SearchC4SClipsParams>({
 describe('clip search', () => {
 	const testSearch = async (testCase: SearchC4SClipsParams) => {
 		const mockClient = getMockClient()
-		const result = await searchC4SClips(testCase, mockClient)
+		const result = await baseSearchC4SClips(testCase, mockClient)
 
 		const searchData = expectMatchesSchema(
 			result,

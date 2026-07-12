@@ -21,7 +21,7 @@ type SearchC4SClipsParams = {
 type SearchC4SClipsData =
 	paths['/{language}/clips/search/{search}/category/{category}/storesPage/{storePage}/clipsPage/{page}/sortstudios/{studioSort}/sortclips/{clipSort}/sortcategories/{categorySort}/filters/{filters}']['get']['responses']['200']['content']['application/json']
 
-const searchC4SClips = async (
+const baseSearchC4SClips = async (
 	params: SearchC4SClipsParams,
 	client?: C4SClient,
 ): Promise<SearchC4SClipsData> => {
@@ -56,4 +56,15 @@ const searchC4SClips = async (
 	return res.data
 }
 
-export { searchC4SClips, type SearchC4SClipsData, type SearchC4SClipsParams }
+const searchC4SClips = async (
+	params: SearchC4SClipsParams,
+): Promise<SearchC4SClipsData> => {
+	return baseSearchC4SClips(params, getC4SClient())
+}
+
+export {
+	baseSearchC4SClips,
+	searchC4SClips,
+	type SearchC4SClipsData,
+	type SearchC4SClipsParams,
+}

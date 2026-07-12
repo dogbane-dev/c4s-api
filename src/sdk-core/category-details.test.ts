@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'bun:test'
 import { CategoryInfoResponseSchema } from '../open-api/zod'
 import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SCategoryDetails } from './category-details'
+import { baseGetC4SCategoryDetails } from './category-details'
 
 describe('category details', () => {
 	it('fetches', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SCategoryDetails(
+		const result = await baseGetC4SCategoryDetails(
 			{
 				language: 'en',
 				id: 4,

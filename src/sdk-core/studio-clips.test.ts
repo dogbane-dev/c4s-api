@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'bun:test'
 import { StudioClipSearchResponseSchema } from '../open-api/zod'
 import { expectMatchesSchema, getMockClient } from '../utils/testing'
-import { getC4SStudioClips } from './studio-clips'
+import { baseGetC4SStudioClips } from './studio-clips'
 
 describe('studio clips', () => {
 	it('fetches with all options provided - TRB', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 254031,
 				language: 'en',
@@ -30,6 +30,7 @@ describe('studio clips', () => {
 			followersCount,
 			clipsCount,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = clipSearch
 
@@ -38,6 +39,7 @@ describe('studio clips', () => {
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -46,7 +48,7 @@ describe('studio clips', () => {
 
 	it('fetches with all options provided - TT', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 111172,
 				language: 'en',
@@ -70,6 +72,7 @@ describe('studio clips', () => {
 			followersCount,
 			clipsCount,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = clipSearch
 
@@ -78,6 +81,7 @@ describe('studio clips', () => {
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -86,7 +90,7 @@ describe('studio clips', () => {
 
 	it('fetches all options + specific category - TT', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 111172,
 				language: 'en',
@@ -110,6 +114,7 @@ describe('studio clips', () => {
 			followersCount,
 			clipsCount,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = clipSearch
 
@@ -118,6 +123,7 @@ describe('studio clips', () => {
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -126,7 +132,7 @@ describe('studio clips', () => {
 
 	it('fetches only clips with all options provided', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 254031,
 				language: 'en',
@@ -158,7 +164,7 @@ describe('studio clips', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 254031,
 				language: 'en',
@@ -175,13 +181,20 @@ describe('studio clips', () => {
 			'Studio clip search response',
 		)
 
-		const { clips, onSaleClips, followersCount, clipsCount, ...staticDetails } =
-			clipSearch
+		const {
+			clips,
+			onSaleClips,
+			followersCount,
+			clipsCount,
+			classicWidgetExperimentActive,
+			...staticDetails
+		} = clipSearch
 
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -192,7 +205,7 @@ describe('studio clips', () => {
 		const SEARCH = 'ball gag'
 
 		const mockClient = getMockClient()
-		const result = await getC4SStudioClips(
+		const result = await baseGetC4SStudioClips(
 			{
 				id: 254031,
 				language: 'en',
@@ -217,6 +230,7 @@ describe('studio clips', () => {
 			followersCount,
 			clipsCount,
 			keyword,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = clipSearch
 
@@ -226,6 +240,7 @@ describe('studio clips', () => {
 		expect(clipsCount).toBeNumber()
 		expect(clips).toBeArray()
 		expect(onSaleClips).toBeArray()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 

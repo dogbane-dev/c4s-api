@@ -6,13 +6,13 @@ import {
 	getMockC4SMethodClient,
 	getMockClient,
 } from '../utils/testing'
-import { getC4SClip, getC4SClipByUrl } from './single-clip'
+import { baseGetC4SClip, baseGetC4SClipByUrl } from './single-clip'
 
 describe('single clip', () => {
 	it('fetches by URL', async () => {
 		const mockClient = getMockC4SMethodClient()
 
-		await getC4SClipByUrl(
+		await baseGetC4SClipByUrl(
 			'https://www.clips4sale.com/studio/28730/34039699/astrid-captured-in-her-bedroom-bondage-struggle-with-tight-tape-gag-full-hd-mp4',
 			mockClient,
 		)
@@ -22,7 +22,7 @@ describe('single clip', () => {
 
 	it('fetches without studio ID by resolving the clip URL parts', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SClip(
+		const result = await baseGetC4SClip(
 			{
 				id: 29869933,
 				language: 'en',
@@ -41,7 +41,7 @@ describe('single clip', () => {
 	it('throws clip not found error when fetching without studio ID', async () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip(
+			baseGetC4SClip(
 				{
 					id: 123,
 					language: 'en',
@@ -55,7 +55,7 @@ describe('single clip', () => {
 
 	it('fetches with slug provided', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SClip(
+		const result = await baseGetC4SClip(
 			{
 				id: 29869933,
 				studioId: 254031,
@@ -94,7 +94,7 @@ describe('single clip', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SClip(
+		const result = await baseGetC4SClip(
 			{
 				id: 29869933,
 				studioId: 254031,
@@ -132,7 +132,7 @@ describe('single clip', () => {
 
 	it('fetches with slug provided without language - handles request rewrite', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SClip(
+		const result = await baseGetC4SClip(
 			{
 				id: 29869933,
 				studioId: 254031,
@@ -171,7 +171,7 @@ describe('single clip', () => {
 	it('throws error if clip is not found', () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip(
+			baseGetC4SClip(
 				{
 					id: 123,
 					slug: 'not-real',
@@ -187,7 +187,7 @@ describe('single clip', () => {
 	it('throws error if studio is not found', () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip(
+			baseGetC4SClip(
 				{
 					id: 29869933,
 					studioId: 1, // not right / real
@@ -203,7 +203,7 @@ describe('single clip', () => {
 	it('throws error if clip has been removed due to studio removal', () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SClip(
+			baseGetC4SClip(
 				{
 					id: 32768163,
 					slug: 'deep-throat-training-for-latex-jk-schoolgirls',
@@ -219,7 +219,7 @@ describe('single clip', () => {
 
 	it('fetches clip that is under review', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SClip(
+		const result = await baseGetC4SClip(
 			{
 				id: 20424263,
 				studioId: 96993,

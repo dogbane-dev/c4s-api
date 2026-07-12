@@ -10,7 +10,7 @@ type GetC4SCategoriesParams = {
 type GetC4SCategoriesData =
 	paths['/clips/ajax/categoriesdropdown']['get']['responses']['200']['content']['application/json']
 
-const getC4SCategories = async (
+const baseGetC4SCategories = async (
 	params?: GetC4SCategoriesParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData> => {
@@ -32,14 +32,20 @@ const getC4SCategories = async (
 	return res.data
 }
 
+const getC4SCategories = async (
+	params?: GetC4SCategoriesParams,
+): Promise<GetC4SCategoriesData> => {
+	return baseGetC4SCategories(params, getC4SClient())
+}
+
 type C4SCategory = GetC4SCategoriesData['categories'][number]
 
-const getC4SCategoryByName = async (
+const baseGetC4SCategoryByName = async (
 	name: string,
 	language?: C4SLanguage,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const { categories } = await getC4SCategories({ language }, client)
+	const { categories } = await baseGetC4SCategories({ language }, client)
 	const c = categories.find((c) => c.name === name)
 	if (!c) {
 		throw new Error(`Category ${name} not found`)
@@ -47,12 +53,19 @@ const getC4SCategoryByName = async (
 	return c
 }
 
-const getC4SCategoryById = async (
+const getC4SCategoryByName = async (
+	name: string,
+	language?: C4SLanguage,
+): Promise<GetC4SCategoriesData['categories'][number]> => {
+	return baseGetC4SCategoryByName(name, language, getC4SClient())
+}
+
+const baseGetC4SCategoryById = async (
 	id: number,
 	language?: C4SLanguage,
 	client?: C4SClient,
 ): Promise<GetC4SCategoriesData['categories'][number]> => {
-	const { categories } = await getC4SCategories({ language }, client)
+	const { categories } = await baseGetC4SCategories({ language }, client)
 	const c = categories.find((c) => c.id === id)
 	if (!c) {
 		throw new Error(`Category with ID=${id} not found`)
@@ -60,7 +73,17 @@ const getC4SCategoryById = async (
 	return c
 }
 
+const getC4SCategoryById = async (
+	id: number,
+	language?: C4SLanguage,
+): Promise<GetC4SCategoriesData['categories'][number]> => {
+	return baseGetC4SCategoryById(id, language, getC4SClient())
+}
+
 export {
+	baseGetC4SCategories,
+	baseGetC4SCategoryByName,
+	baseGetC4SCategoryById,
 	getC4SCategories,
 	getC4SCategoryByName,
 	getC4SCategoryById,

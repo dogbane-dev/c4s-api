@@ -408,7 +408,7 @@ export const SingleStudioResponseSchema = z.object({
 	store_has_clips: z.boolean(),
 	browseSimilarClipsLink: z.string(),
 
-	classicWidgetExperimentActive: z.boolean(),
+	classicWidgetExperimentActive: z.boolean().optional(),
 	similarStoreClips: z.array(z.any()),
 	bannerSrcset: z.array(SrcsetSchema),
 	description: z.string().nullable(),
@@ -542,7 +542,7 @@ export const StudioClipSearchResponseSchema =
 				bannerSrc: z.string(),
 				store_has_clips: z.boolean(),
 				browseSimilarClipsLink: z.string(),
-				classicWidgetExperimentActive: z.boolean(),
+				classicWidgetExperimentActive: z.boolean().optional(),
 				similarStoreClips: z.array(z.any()),
 				bannerSrcset: z.array(SrcsetSchema),
 				description: z.string().nullable(),

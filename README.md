@@ -89,9 +89,10 @@ TBD
 
 ## Future Work / Possible Contributions
 - possibly fix language handling - `parseLanguage` is a bit yucky
+  - this and the other request rewrite stuff is not great 
 - add endpoint(s) for performers
 - add endpoint(s) for store search 
 - add example responses, better notes & descriptions to all endpoints & schemas
-- document available exports and SDK
-- add jsdoc comments to all methods
+- document available exports and the SDK
+- add jsdoc comments to all the methods exported by this library with a description and info about the parameters
   

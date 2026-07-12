@@ -6,13 +6,13 @@ import {
 	getMockC4SMethodClient,
 	getMockClient,
 } from '../utils/testing'
-import { getC4SStudio, getC4SStudioByUrl } from './single-studio'
+import { baseGetC4SStudio, baseGetC4SStudioByUrl } from './single-studio'
 
 describe('single studio', () => {
 	it('fetches by URL', async () => {
 		const mockClient = getMockC4SMethodClient()
 
-		await getC4SStudioByUrl(
+		await baseGetC4SStudioByUrl(
 			'https://www.clips4sale.com/studio/28730/rf-studio-production',
 			mockClient,
 		)
@@ -22,7 +22,7 @@ describe('single studio', () => {
 
 	it('fetches with slug provided - TRB', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudio(
+		const result = await baseGetC4SStudio(
 			{
 				id: 254031,
 				language: 'en',
@@ -43,6 +43,7 @@ describe('single studio', () => {
 			clips,
 			onSaleClips,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = studio
 
@@ -51,6 +52,7 @@ describe('single studio', () => {
 		expect(followersCount).toBeNumber()
 		expect(clipsCount).toBeNumber()
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -59,7 +61,7 @@ describe('single studio', () => {
 
 	it('fetches with slug provided - TT', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudio(
+		const result = await baseGetC4SStudio(
 			{
 				id: 111172,
 				language: 'en',
@@ -81,6 +83,7 @@ describe('single studio', () => {
 			onSaleClips,
 			otherStudios,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = studio
 
@@ -90,6 +93,7 @@ describe('single studio', () => {
 		expect(clipsCount).toBeNumber()
 		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -98,7 +102,7 @@ describe('single studio', () => {
 
 	it('fetches without slug provided - handles remix redirect', async () => {
 		const mockClient = getMockClient()
-		const result = await getC4SStudio(
+		const result = await baseGetC4SStudio(
 			{
 				id: 254031,
 				language: 'en',
@@ -118,6 +122,7 @@ describe('single studio', () => {
 			onSaleClips,
 			otherStudios,
 			isCreatorOnline,
+			classicWidgetExperimentActive,
 			...staticDetails
 		} = studio
 
@@ -127,6 +132,7 @@ describe('single studio', () => {
 		expect(clipsCount).toBeNumber()
 		expect(otherStudios === undefined || Array.isArray(otherStudios)).toBe(true)
 		expect(isCreatorOnline).toBeBoolean()
+		expect(classicWidgetExperimentActive).toBeBoolean()
 
 		expect(staticDetails).toBeDefined()
 		expect(staticDetails).toMatchSnapshot()
@@ -136,7 +142,7 @@ describe('single studio', () => {
 	it('throws error if studio is not found', () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SStudio(
+			baseGetC4SStudio(
 				{
 					id: 1, // not right / real
 					slug: 'tatti-roana-bondage',
@@ -151,7 +157,7 @@ describe('single studio', () => {
 	it('throws error if studio no longer exists', () => {
 		const mockClient = getMockClient()
 		expect(() =>
-			getC4SStudio(
+			baseGetC4SStudio(
 				// studio was removed as far as I can tell
 				{
 					id: 401417,

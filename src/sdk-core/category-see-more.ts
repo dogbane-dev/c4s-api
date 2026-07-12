@@ -28,7 +28,7 @@ type GetC4SCategorySeeMoreStudio = InferFromField<
 	GetC4SCategorySeeMoreData['seeMoreExtra'][number]
 >
 
-const getC4SCategorySeeMore = async (
+const baseGetC4SCategorySeeMore = async (
 	params: GetC4SCategorySeeMoreParams,
 	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreData> => {
@@ -51,11 +51,17 @@ const getC4SCategorySeeMore = async (
 	return res.data
 }
 
-const getC4SCategorySeeMoreTopStores = async (
+const getC4SCategorySeeMore = async (
+	params: GetC4SCategorySeeMoreParams,
+): Promise<GetC4SCategorySeeMoreData> => {
+	return baseGetC4SCategorySeeMore(params, getC4SClient())
+}
+
+const baseGetC4SCategorySeeMoreTopStores = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreStudio[]> => {
-	const res = await getC4SCategorySeeMore(
+	const res = await baseGetC4SCategorySeeMore(
 		{
 			...params,
 			type: 'top-stores',
@@ -65,11 +71,17 @@ const getC4SCategorySeeMoreTopStores = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreStudio[]
 }
 
-const getC4SCategorySeeMoreTopClips = async (
+const getC4SCategorySeeMoreTopStores = async (
+	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+): Promise<GetC4SCategorySeeMoreStudio[]> => {
+	return baseGetC4SCategorySeeMoreTopStores(params, getC4SClient())
+}
+
+const baseGetC4SCategorySeeMoreTopClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
-	const res = await getC4SCategorySeeMore(
+	const res = await baseGetC4SCategorySeeMore(
 		{
 			...params,
 			type: 'top-clips',
@@ -79,11 +91,17 @@ const getC4SCategorySeeMoreTopClips = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 
-const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
+const getC4SCategorySeeMoreTopClips = async (
+	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+): Promise<GetC4SCategorySeeMoreClip[]> => {
+	return baseGetC4SCategorySeeMoreTopClips(params, getC4SClient())
+}
+
+const baseGetC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 	client?: C4SClient,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
-	const res = await getC4SCategorySeeMore(
+	const res = await baseGetC4SCategorySeeMore(
 		{
 			...params,
 			type: 'recently-added-related-clips',
@@ -93,7 +111,20 @@ const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 
+const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
+	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
+): Promise<GetC4SCategorySeeMoreClip[]> => {
+	return baseGetC4SCategorySeeMoreRecentlyAddedRelatedClips(
+		params,
+		getC4SClient(),
+	)
+}
+
 export {
+	baseGetC4SCategorySeeMore,
+	baseGetC4SCategorySeeMoreTopStores,
+	baseGetC4SCategorySeeMoreTopClips,
+	baseGetC4SCategorySeeMoreRecentlyAddedRelatedClips,
 	getC4SCategorySeeMore,
 	getC4SCategorySeeMoreTopStores,
 	getC4SCategorySeeMoreTopClips,

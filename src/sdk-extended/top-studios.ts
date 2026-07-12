@@ -1,4 +1,3 @@
-import type { C4SClient } from '../client'
 import {
 	type GetC4SCategoryDetailsData,
 	getC4SCategoryDetails,
@@ -21,29 +20,22 @@ type GetC4STopStudiosData = Array<
 
 const getC4STopStudios = async (
 	params: GetC4STopStudiosParams,
-	client?: C4SClient,
 ): Promise<GetC4STopStudiosData> => {
-	const details = await getC4SCategoryDetails(
-		{
-			id: params.categoryId,
-			language: params.language,
-			sexualPreferences: params.sexualPreferences,
-		},
-		client,
-	)
+	const details = await getC4SCategoryDetails({
+		id: params.categoryId,
+		language: params.language,
+		sexualPreferences: params.sexualPreferences,
+	})
 
 	let topStores: GetC4STopStudiosData = details.topStores
 
 	for (const page of VALID_SEE_MORE_PAGES) {
-		const result = await getC4SCategorySeeMoreTopStores(
-			{
-				id: params.categoryId,
-				page,
-				language: params.language,
-				sexualPreferences: params.sexualPreferences,
-			},
-			client,
-		)
+		const result = await getC4SCategorySeeMoreTopStores({
+			id: params.categoryId,
+			page,
+			language: params.language,
+			sexualPreferences: params.sexualPreferences,
+		})
 
 		const mapped: GetC4STopStudiosData = result.map((r) => {
 			const storeCatLink = `${r.link}/Cat${r.category.id}-${r.category.name.toUpperCase()}/Page1/C4SSort-recommended/Limit24`
