@@ -32,6 +32,19 @@ describe('C4S URL parsing', () => {
 			})
 		})
 
+		it('safely parses clip ID only short URLs', () => {
+			expect(
+				safeParseC4SClipUrl('https://t.clips4sale.com/z/c/33743089'),
+			).toEqual({
+				clipId: 33743089,
+			})
+			expect(
+				safeParseC4SClipUrl('https://l.clips4sale.com/clip/30150687'),
+			).toEqual({
+				clipId: 30150687,
+			})
+		})
+
 		it('returns null for invalid clip URLs', () => {
 			expect(safeParseC4SClipUrl('not a url')).toBeNull()
 			expect(
@@ -45,6 +58,12 @@ describe('C4S URL parsing', () => {
 			).toBeNull()
 			expect(
 				safeParseC4SClipUrl('https://clips4sale.com/studio/abc/34039699'),
+			).toBeNull()
+			expect(
+				safeParseC4SClipUrl('https://t.clips4sale.com/z/c/not-a-number'),
+			).toBeNull()
+			expect(
+				safeParseC4SClipUrl('https://l.clips4sale.com/studio/28730/34039699'),
 			).toBeNull()
 		})
 

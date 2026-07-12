@@ -1,11 +1,17 @@
 import { C4S_LANGUAGES, type C4SLanguage } from './utils'
 
-export type ParsedC4SClipUrl = {
+type ParsedC4SFullClipUrl = {
 	language?: C4SLanguage
 	studioId: number
 	clipId: number
 	clipSlug?: string
 }
+
+type ParsedC4SClipIdOnlyUrl = {
+	clipId: number
+}
+
+export type ParsedC4SClipUrl = ParsedC4SFullClipUrl | ParsedC4SClipIdOnlyUrl
 
 export type ParsedC4SStudioUrl = {
 	language?: C4SLanguage
@@ -21,6 +27,10 @@ export class InvalidC4SUrlError extends Error {
 }
 
 const C4S_HOSTNAMES = new Set(['clips4sale.com', 'www.clips4sale.com'])
+const C4S_CLIP_ID_ONLY_HOSTNAMES = new Set([
+	't.clips4sale.com',
+	'l.clips4sale.com',
+])
 
 const isLanguage = (segment: string): segment is C4SLanguage => {
 	return (C4S_LANGUAGES as readonly string[]).includes(segment)
@@ -65,7 +75,55 @@ const parseC4SUrlPath = (
 	return { segments }
 }
 
+const parseC4SClipIdOnlyUrl = (
+	value: string,
+): Pick<ParsedC4SClipUrl, 'clipId'> | null => {
+	let url: URL
+
+	try {
+		url = new URL(value)
+	} catch {
+		return null
+	}
+
+	if (url.protocol !== 'http:' && url.protocol !== 'https:') return null
+	if (!C4S_CLIP_ID_ONLY_HOSTNAMES.has(url.hostname)) return null
+
+	const pathname =
+		url.pathname.length > 1 && url.pathname.endsWith('/')
+			? url.pathname.slice(0, -1)
+			: url.pathname
+	const segments = pathname.split('/').slice(1)
+
+	if (segments.length === 0 || segments.some((segment) => segment === '')) {
+		return null
+	}
+
+	if (url.hostname === 't.clips4sale.com') {
+		const [zRoute, clipRoute, clipIdSegment] = segments
+		if (segments.length !== 3 || zRoute !== 'z' || clipRoute !== 'c') {
+			return null
+		}
+
+		const clipId = parsePathId(clipIdSegment)
+		return clipId === null ? null : { clipId }
+	}
+
+	if (url.hostname === 'l.clips4sale.com') {
+		const [clipRoute, clipIdSegment] = segments
+		if (segments.length !== 2 || clipRoute !== 'clip') return null
+
+		const clipId = parsePathId(clipIdSegment)
+		return clipId === null ? null : { clipId }
+	}
+
+	return null
+}
+
 export const safeParseC4SClipUrl = (value: string): ParsedC4SClipUrl | null => {
+	const clipIdOnly = parseC4SClipIdOnlyUrl(value)
+	if (clipIdOnly) return clipIdOnly
+
 	const parsed = parseC4SUrlPath(value)
 	if (!parsed) return null
 	if (parsed.segments.length < 3 || parsed.segments.length > 4) return null
