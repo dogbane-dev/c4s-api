@@ -536,7 +536,7 @@ export interface paths {
 							bannerSrc?: string
 							store_has_clips: boolean
 							browseSimilarClipsLink: string
-							classicWidgetExperimentActive: boolean
+							classicWidgetExperimentActive?: boolean
 							similarStoreClips: unknown[]
 							bannerSrcset: {
 								srcSet: string
