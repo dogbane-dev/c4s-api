@@ -40,6 +40,14 @@ const baseGetC4SCategoryDetails = async (
 	return res.data
 }
 
+/**
+ * Fetches the detail page data for a Clips4Sale category.
+ *
+ * @param params - Category request options, including category ID, optional
+ * language, and optional sexual preference filters.
+ * @returns Category page data such as metadata, top clips, top stores, and
+ * related sections.
+ */
 const getC4SCategoryDetails = async (
 	params: GetC4SCategoryDetailsParams,
 ): Promise<GetC4SCategoryDetailsData> => {

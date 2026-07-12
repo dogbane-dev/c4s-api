@@ -20,6 +20,13 @@ type GetC4SAllStudioClipsParams = Omit<
 }
 type GetC4SAllStudioClipsData = GetC4SStudioClipsData['clips']
 
+/**
+ * Fetches every available clip page for a Clips4Sale studio and combines them.
+ *
+ * @param params - Studio clip query options excluding page and `onlyClips`.
+ * Pass `onPage` to inspect accumulated results and stop pagination early.
+ * @returns A flat array of all fetched studio clip entries.
+ */
 const getC4SAllStudioClips = async (
 	params: GetC4SAllStudioClipsParams,
 ): Promise<GetC4SAllStudioClipsData> => {

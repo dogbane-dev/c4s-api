@@ -55,6 +55,14 @@ const baseGetC4SStudioClips = async (
 	return res.data
 }
 
+/**
+ * Fetches a paginated list of clips for a Clips4Sale studio.
+ *
+ * @param params - Studio clip query options, including studio ID, optional slug,
+ * page, category ID, sort order, search text, `onlyClips` flag, and language.
+ * @returns Studio clip search data, including clip entries and pagination or
+ * page metadata.
+ */
 const getC4SStudioClips = async (
 	params: GetC4SStudioClipsParams,
 ): Promise<GetC4SStudioClipsData> => {

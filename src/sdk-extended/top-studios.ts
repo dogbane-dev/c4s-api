@@ -18,6 +18,14 @@ type GetC4STopStudiosData = Array<
 	GetC4SCategoryDetailsData['topStores'][number]
 >
 
+/**
+ * Fetches all known top studios for a Clips4Sale category.
+ *
+ * @param params - Category request options, including category ID, optional
+ * language, and optional sexual preference filters.
+ * @returns A combined list of top studio entries from the category page and
+ * supported "see more" pages.
+ */
 const getC4STopStudios = async (
 	params: GetC4STopStudiosParams,
 ): Promise<GetC4STopStudiosData> => {

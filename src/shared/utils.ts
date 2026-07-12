@@ -20,6 +20,12 @@ export const C4S_LANGUAGES = ['en', 'fr', 'de', 'pt', 'es', 'it'] as const
 export type C4SLanguage = (typeof C4S_LANGUAGES)[number]
 
 // force undefined to be returned as a Language because path param is technically optional due to request rewrites
+/**
+ * Normalizes an optional language into the internal path parameter value.
+ *
+ * @param paramLanguage - Optional Clips4Sale language code.
+ * @returns The provided language, or an empty path value typed as a language.
+ */
 export const parseLanguage = (
 	paramLanguage: C4SLanguage | undefined,
 ): C4SLanguage => {
@@ -27,15 +33,34 @@ export const parseLanguage = (
 }
 
 // force undefined to be returned as "''" as a number because path param is technically optional due to request rewrites (I manually will fetch studio id)
+/**
+ * Normalizes an optional studio ID into the internal path parameter value.
+ *
+ * @param paramStudioId - Optional studio ID.
+ * @returns The provided studio ID, or an empty path value typed as a number.
+ */
 export const parseStudioId = (paramStudioId: number | undefined): number => {
 	return (paramStudioId ?? '') as number
 }
 
 // default slug is 'x' because slug is technically optional due to redirect handling but something must be passed
+/**
+ * Normalizes an optional slug into the internal path parameter value.
+ *
+ * @param paramSlug - Optional Clips4Sale slug.
+ * @returns The provided slug, or the placeholder slug used for redirect handling.
+ */
 export const parseSlug = (paramSlug: string | undefined): string => {
 	return paramSlug ?? 'x'
 }
 
+/**
+ * Converts sexual preference names into Clips4Sale numeric filter IDs.
+ *
+ * @param preferences - Optional sexual preference names. When omitted, the
+ * library default preferences are used.
+ * @returns Sorted numeric Clips4Sale sexual preference IDs.
+ */
 export const parseSexualPreferences = (
 	preferences: SexualPreference[] | undefined,
 ): number[] => {
@@ -71,6 +96,12 @@ const STUDIO_SEARCH_SORT_MAP = {
 } as const
 export type StudioSearchSortParam = keyof typeof STUDIO_SEARCH_SORT_MAP
 
+/**
+ * Converts a studio clip sort option into the Clips4Sale API sort value.
+ *
+ * @param sort - Optional public studio search sort option.
+ * @returns The Clips4Sale studio search sort value.
+ */
 export const parseStudioSearchSort = (
 	sort: StudioSearchSortParam | undefined,
 ): C4SStudioSearchSort => {
@@ -92,6 +123,12 @@ const CLIP_SEARCH_SORT_MAP = {
 
 export type ClipSearchSortParam = keyof typeof CLIP_SEARCH_SORT_MAP
 
+/**
+ * Converts a clip search sort option into the Clips4Sale API sort value.
+ *
+ * @param sort - Optional public clip search sort option.
+ * @returns The Clips4Sale clip search sort value.
+ */
 export const parseClipSearchSort = (
 	sort: ClipSearchSortParam | undefined,
 ): SearchC4SSort => {
@@ -147,6 +184,13 @@ const filterKeyMap: Record<keyof ClipSearchFilter, string> = {
 const FILTER_DELIMITER = '-'
 const FILTER_VALUE_DELIMITER = '_and_'
 
+/**
+ * Converts public clip search filters into the Clips4Sale path filter string.
+ *
+ * @param filters - Optional clip search filters for dates, formats,
+ * resolutions, sexual preferences, prices, categories, or performers.
+ * @returns Encoded Clips4Sale search filter path segment.
+ */
 export const parseClipSearchFilters = (
 	filters: ClipSearchFilter | undefined,
 ): string => {

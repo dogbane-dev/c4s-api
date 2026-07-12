@@ -32,6 +32,12 @@ const baseGetC4SCategories = async (
 	return res.data
 }
 
+/**
+ * Fetches the Clips4Sale category dropdown data.
+ *
+ * @param params - Optional category request options, including response language.
+ * @returns Category dropdown metadata and the list of available categories.
+ */
 const getC4SCategories = async (
 	params?: GetC4SCategoriesParams,
 ): Promise<GetC4SCategoriesData> => {
@@ -53,6 +59,13 @@ const baseGetC4SCategoryByName = async (
 	return c
 }
 
+/**
+ * Finds a Clips4Sale category by its exact display name.
+ *
+ * @param name - Exact category name to find.
+ * @param language - Optional language used when fetching the category list.
+ * @returns The matching category entry.
+ */
 const getC4SCategoryByName = async (
 	name: string,
 	language?: C4SLanguage,
@@ -73,6 +86,13 @@ const baseGetC4SCategoryById = async (
 	return c
 }
 
+/**
+ * Finds a Clips4Sale category by numeric category ID.
+ *
+ * @param id - Category ID to find.
+ * @param language - Optional language used when fetching the category list.
+ * @returns The matching category entry.
+ */
 const getC4SCategoryById = async (
 	id: number,
 	language?: C4SLanguage,

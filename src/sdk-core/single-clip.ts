@@ -46,6 +46,14 @@ const baseGetC4SClip = async (
 	return res.data
 }
 
+/**
+ * Fetches a single Clips4Sale clip by clip ID and optional studio context.
+ *
+ * @param params - Clip request options, including clip ID, optional studio ID,
+ * optional clip slug, and optional language.
+ * @returns Single clip detail data, including clip metadata, media, studio data,
+ * and related page sections.
+ */
 const getC4SClip = async (
 	params: GetC4SClipParams,
 ): Promise<GetC4SClipData> => {
@@ -66,6 +74,12 @@ const baseGetC4SClipByUrl = async (
 	)
 }
 
+/**
+ * Fetches a single Clips4Sale clip from a full or short Clips4Sale clip URL.
+ *
+ * @param url - Clips4Sale clip URL to parse and request.
+ * @returns Single clip detail data for the parsed clip URL.
+ */
 const getC4SClipByUrl = async (url: string): Promise<GetC4SClipData> => {
 	return baseGetC4SClipByUrl(url, getC4SClient())
 }
@@ -84,6 +98,14 @@ const baseGetC4SClipById = async (
 	)
 }
 
+/**
+ * Fetches a single Clips4Sale clip by clip ID.
+ *
+ * @param id - Clip ID to fetch.
+ * @param additionalParams - Optional studio ID, clip slug, and language context
+ * for the request.
+ * @returns Single clip detail data for the requested clip ID.
+ */
 const getC4SClipById = async (
 	id: number,
 	additionalParams?: Omit<GetC4SClipParams, 'id'>,

@@ -22,7 +22,15 @@ export type ParsedC4SStudioUrl = {
 	studioSlug?: string
 }
 
+/**
+ * Error thrown when a value is not a recognized Clips4Sale URL.
+ */
 export class InvalidC4SUrlError extends Error {
+	/**
+	 * Creates an invalid Clips4Sale URL error.
+	 *
+	 * @param value - URL or identifier that could not be parsed.
+	 */
 	constructor(value: string) {
 		super(`Invalid Clips4Sale URL: ${value}`)
 		this.name = 'InvalidC4SUrlError'
@@ -125,6 +133,12 @@ const parseC4SClipIdOnlyUrl = (
 	return null
 }
 
+/**
+ * Safely parses a Clips4Sale clip URL into its URL parts.
+ *
+ * @param value - Full Clips4Sale clip URL or supported short clip URL.
+ * @returns Parsed clip URL parts, or `null` when the URL is not recognized.
+ */
 export const safeParseC4SClipUrl = (value: string): ParsedC4SClipUrl | null => {
 	const clipIdOnly = parseC4SClipIdOnlyUrl(value)
 	if (clipIdOnly) return clipIdOnly
@@ -148,12 +162,28 @@ export const safeParseC4SClipUrl = (value: string): ParsedC4SClipUrl | null => {
 	}
 }
 
+/**
+ * Parses a Clips4Sale clip URL into its URL parts.
+ *
+ * @param value - Full Clips4Sale clip URL or supported short clip URL.
+ * @returns Parsed clip URL parts.
+ * @throws InvalidC4SUrlError when the URL is not recognized.
+ */
 export const parseC4SClipUrl = (value: string): ParsedC4SClipUrl => {
 	const parsed = safeParseC4SClipUrl(value)
 	if (!parsed) throw new InvalidC4SUrlError(value)
 	return parsed
 }
 
+/**
+ * Resolves a Clips4Sale clip ID to the full clip URL parts by following the
+ * Clips4Sale short-link redirect.
+ *
+ * @param clipId - Clip ID to resolve.
+ * @returns Parsed full clip URL parts, including studio ID and clip ID.
+ * @throws InvalidC4SUrlError when the ID or redirect target is invalid.
+ * @throws C4SClipNotFoundError when Clips4Sale reports that the clip does not exist.
+ */
 export const getC4SClipUrlFromId = async (
 	clipId: number,
 ): Promise<C4SClipUrlParts> => {
@@ -188,6 +218,13 @@ export const getC4SClipUrlFromId = async (
 	return parsed
 }
 
+/**
+ * Safely parses a Clips4Sale studio URL into its URL parts.
+ *
+ * @param value - Clips4Sale studio URL, including studio URLs inferred from clip
+ * URLs.
+ * @returns Parsed studio URL parts, or `null` when the URL is not recognized.
+ */
 export const safeParseC4SStudioUrl = (
 	value: string,
 ): ParsedC4SStudioUrl | null => {
@@ -219,6 +256,14 @@ export const safeParseC4SStudioUrl = (
 	}
 }
 
+/**
+ * Parses a Clips4Sale studio URL into its URL parts.
+ *
+ * @param value - Clips4Sale studio URL, including studio URLs inferred from clip
+ * URLs.
+ * @returns Parsed studio URL parts.
+ * @throws InvalidC4SUrlError when the URL is not recognized.
+ */
 export const parseC4SStudioUrl = (value: string): ParsedC4SStudioUrl => {
 	const parsed = safeParseC4SStudioUrl(value)
 	if (!parsed) throw new InvalidC4SUrlError(value)

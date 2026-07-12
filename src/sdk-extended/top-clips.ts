@@ -27,6 +27,14 @@ type GetC4STopClipsData = Array<
 	>
 >
 
+/**
+ * Fetches all known top clips for a Clips4Sale category.
+ *
+ * @param params - Category request options, including category ID, optional
+ * language, and optional sexual preference filters.
+ * @returns A combined list of top clip entries from the category page and
+ * supported "see more" pages.
+ */
 const getC4STopClips = async (
 	params: GetC4STopClipsParams,
 ): Promise<GetC4STopClipsData> => {

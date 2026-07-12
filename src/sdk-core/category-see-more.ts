@@ -51,6 +51,13 @@ const baseGetC4SCategorySeeMore = async (
 	return res.data
 }
 
+/**
+ * Fetches an additional "see more" page for a category section.
+ *
+ * @param params - Section request options, including category ID, section type,
+ * page number, optional language, and optional sexual preference filters.
+ * @returns Raw "see more" response data for the requested category section.
+ */
 const getC4SCategorySeeMore = async (
 	params: GetC4SCategorySeeMoreParams,
 ): Promise<GetC4SCategorySeeMoreData> => {
@@ -71,6 +78,13 @@ const baseGetC4SCategorySeeMoreTopStores = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreStudio[]
 }
 
+/**
+ * Fetches an additional "top stores" page for a category.
+ *
+ * @param params - Category ID, page number, optional language, and optional
+ * sexual preference filters.
+ * @returns The additional top store entries for the requested category page.
+ */
 const getC4SCategorySeeMoreTopStores = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 ): Promise<GetC4SCategorySeeMoreStudio[]> => {
@@ -91,6 +105,13 @@ const baseGetC4SCategorySeeMoreTopClips = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 
+/**
+ * Fetches an additional "top clips" page for a category.
+ *
+ * @param params - Category ID, page number, optional language, and optional
+ * sexual preference filters.
+ * @returns The additional top clip entries for the requested category page.
+ */
 const getC4SCategorySeeMoreTopClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {
@@ -111,6 +132,13 @@ const baseGetC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
 	return res.seeMoreExtra as GetC4SCategorySeeMoreClip[]
 }
 
+/**
+ * Fetches an additional "recently added related clips" page for a category.
+ *
+ * @param params - Category ID, page number, optional language, and optional
+ * sexual preference filters.
+ * @returns The additional related clip entries for the requested category page.
+ */
 const getC4SCategorySeeMoreRecentlyAddedRelatedClips = async (
 	params: Omit<GetC4SCategorySeeMoreParams, 'type'>,
 ): Promise<GetC4SCategorySeeMoreClip[]> => {

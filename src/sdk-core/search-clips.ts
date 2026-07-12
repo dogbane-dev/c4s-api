@@ -56,6 +56,14 @@ const baseSearchC4SClips = async (
 	return res.data
 }
 
+/**
+ * Searches Clips4Sale clips by text, filters, sorting, and page.
+ *
+ * @param params - Search options, including optional search text, language,
+ * filters, page, sort order, and spellcheck disabling.
+ * @returns Clip search results, matching stores and categories, active filters,
+ * and search metadata.
+ */
 const searchC4SClips = async (
 	params: SearchC4SClipsParams,
 ): Promise<SearchC4SClipsData> => {
