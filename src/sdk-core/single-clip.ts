@@ -60,8 +60,23 @@ const getC4SClipByUrl = async (
 	)
 }
 
+const getC4SClipById = async (
+	id: number,
+	additionalParams?: Omit<GetC4SClipParams, 'id'>,
+	client?: C4SClient,
+): Promise<GetC4SClipData> => {
+	return getC4SClip(
+		{
+			...additionalParams,
+			id,
+		},
+		client,
+	)
+}
+
 export {
 	getC4SClip,
+	getC4SClipById,
 	getC4SClipByUrl,
 	type GetC4SClipParams,
 	type GetC4SClipData,
