@@ -84,7 +84,7 @@ describe('C4S URL parsing', () => {
 
 		it('resolves full clip URL parts from a short clip URL redirect', async () => {
 			const parts = await getC4SClipUrlFromId(29869933)
-			expect(parts).resolves.toEqual({
+			expect(parts).toEqual({
 				clipId: 29869933,
 				studioId: 254031,
 				clipSlug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
