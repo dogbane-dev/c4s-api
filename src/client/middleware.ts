@@ -1,4 +1,5 @@
 import type { Middleware } from 'openapi-fetch'
+import { getC4SClipUrlFromId } from '../shared/c4s-url'
 import {
 	C4SClipNotFoundError,
 	C4SStudioNotFoundError,
@@ -94,7 +95,7 @@ export const remixParseHandler: Middleware = {
 }
 
 export const requestRewriteHandler: Middleware = {
-	async onRequest({ request, schemaPath }) {
+	async onRequest({ request, schemaPath, params }) {
 		const url = new URL(request.url)
 
 		let pathname = url.pathname
@@ -140,6 +141,28 @@ export const requestRewriteHandler: Middleware = {
 					'',
 				)
 			}
+		}
+
+		// no studio id provided so need to find it and parse ourselves
+		if (
+			schemaPath === '/{language}/studio/{studioId}/{clipId}/{clipSlug}' &&
+			pathname.match(/\/studio\/\//)
+		) {
+			if (
+				!params.path ||
+				!('clipId' in params.path) ||
+				typeof params.path.clipId !== 'number'
+			) {
+				return
+			}
+			const { studioId, clipSlug } = await getC4SClipUrlFromId(
+				params.path.clipId,
+			)
+
+			if (clipSlug) {
+				pathname = pathname.replace(/\/x$/, `/${clipSlug}`)
+			}
+			pathname = pathname.replace(/\/studio\/\//, `/studio/${studioId}/`)
 		}
 
 		// pathname was not changed, return to just continue with original request

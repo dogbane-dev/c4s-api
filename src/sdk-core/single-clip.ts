@@ -2,11 +2,16 @@ import { type C4SClient, getC4SClient } from '../client/client'
 import type { paths } from '../client/paths.generated'
 import { C4SApiError } from '../client/utils'
 import { parseC4SClipUrl } from '../shared/c4s-url'
-import { type C4SLanguage, parseLanguage, parseSlug } from '../shared/utils'
+import {
+	type C4SLanguage,
+	parseLanguage,
+	parseSlug,
+	parseStudioId,
+} from '../shared/utils'
 
 type GetC4SClipParams = {
 	id: number
-	studioId: number
+	studioId?: number
 	slug?: string
 	language?: C4SLanguage
 }
@@ -24,7 +29,7 @@ const getC4SClip = async (
 		params: {
 			path: {
 				clipId: params.id,
-				studioId: params.studioId,
+				studioId: parseStudioId(params.studioId),
 				clipSlug: parseSlug(params.slug),
 				language: parseLanguage(params.language),
 			},
@@ -48,10 +53,8 @@ const getC4SClipByUrl = async (
 	const parsed = parseC4SClipUrl(url)
 	return getC4SClip(
 		{
+			...parsed,
 			id: parsed.clipId,
-			studioId: parsed.studioId,
-			slug: parsed.clipSlug,
-			language: parsed.language,
 		},
 		client,
 	)

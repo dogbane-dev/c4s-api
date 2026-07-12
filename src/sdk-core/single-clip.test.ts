@@ -20,6 +20,39 @@ describe('single clip', () => {
 		expect(mockClient.GET).toHaveBeenCalledTimes(1)
 	})
 
+	it('fetches without studio ID by resolving the clip URL parts', async () => {
+		const mockClient = getMockClient()
+		const result = await getC4SClip(
+			{
+				id: 29869933,
+				language: 'en',
+			},
+			mockClient,
+		)
+
+		const clip = expectMatchesSchema(
+			result,
+			SingleClipResponseSchema,
+			'Clip response',
+		)
+		expect(clip).toBeDefined()
+	})
+
+	it('throws clip not found error when fetching without studio ID', async () => {
+		const mockClient = getMockClient()
+		expect(() =>
+			getC4SClip(
+				{
+					id: 123,
+					language: 'en',
+				},
+				mockClient,
+			),
+		).toThrowError(C4SClipNotFoundError)
+		// client's fetch not called
+		expect(mockClient.fetch).toHaveBeenCalledTimes(0)
+	})
+
 	it('fetches with slug provided', async () => {
 		const mockClient = getMockClient()
 		const result = await getC4SClip(

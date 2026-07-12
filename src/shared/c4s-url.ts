@@ -1,3 +1,4 @@
+import { C4SClipNotFoundError } from '../client'
 import { C4S_LANGUAGES, type C4SLanguage } from './utils'
 
 type ParsedC4SFullClipUrl = {
@@ -6,6 +7,8 @@ type ParsedC4SFullClipUrl = {
 	clipId: number
 	clipSlug?: string
 }
+
+export type C4SClipUrlParts = ParsedC4SFullClipUrl
 
 type ParsedC4SClipIdOnlyUrl = {
 	clipId: number
@@ -31,6 +34,8 @@ const C4S_CLIP_ID_ONLY_HOSTNAMES = new Set([
 	't.clips4sale.com',
 	'l.clips4sale.com',
 ])
+const C4S_SHORT_CLIP_BASE_URL = 'https://t.clips4sale.com/z/c'
+const REDIRECT_STATUS_CODES = new Set([301, 302, 303, 307, 308])
 
 const isLanguage = (segment: string): segment is C4SLanguage => {
 	return (C4S_LANGUAGES as readonly string[]).includes(segment)
@@ -146,6 +151,40 @@ export const safeParseC4SClipUrl = (value: string): ParsedC4SClipUrl | null => {
 export const parseC4SClipUrl = (value: string): ParsedC4SClipUrl => {
 	const parsed = safeParseC4SClipUrl(value)
 	if (!parsed) throw new InvalidC4SUrlError(value)
+	return parsed
+}
+
+export const getC4SClipUrlFromId = async (
+	clipId: number,
+): Promise<C4SClipUrlParts> => {
+	if (!Number.isSafeInteger(clipId) || clipId < 1) {
+		throw new InvalidC4SUrlError(`Bad clip id "${clipId}"`)
+	}
+
+	const shortUrl = `${C4S_SHORT_CLIP_BASE_URL}/${clipId}`
+	const response = await fetch(shortUrl, {
+		redirect: 'manual',
+	})
+
+	if (!REDIRECT_STATUS_CODES.has(response.status)) {
+		throw new InvalidC4SUrlError(shortUrl)
+	}
+
+	const location = response.headers.get('location')
+	if (!location) {
+		throw new InvalidC4SUrlError(shortUrl)
+	}
+
+	// for some reason this is the exact redirect when a clip id DNE using the short base url
+	if (location === 'https://www.clips4sale.com/?cflsid=1') {
+		throw new C4SClipNotFoundError()
+	}
+
+	const parsed = safeParseC4SClipUrl(location)
+	if (!parsed || !('studioId' in parsed) || parsed.clipId !== clipId) {
+		throw new InvalidC4SUrlError(location)
+	}
+
 	return parsed
 }
 

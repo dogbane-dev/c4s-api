@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'bun:test'
 import {
+	getC4SClipUrlFromId,
 	InvalidC4SUrlError,
 	parseC4SClipUrl,
 	parseC4SStudioUrl,
@@ -78,6 +79,15 @@ describe('C4S URL parsing', () => {
 				language: 'en',
 				studioId: 28730,
 				clipId: 34039699,
+			})
+		})
+
+		it('resolves full clip URL parts from a short clip URL redirect', async () => {
+			const parts = await getC4SClipUrlFromId(29869933)
+			expect(parts).resolves.toEqual({
+				clipId: 29869933,
+				studioId: 254031,
+				clipSlug: 'tatti-swallows-intruder-cum-then-fucked-again-4k',
 			})
 		})
 	})

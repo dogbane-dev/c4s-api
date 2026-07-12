@@ -26,6 +26,11 @@ export const parseLanguage = (
 	return (paramLanguage ?? '') as C4SLanguage
 }
 
+// force undefined to be returned as "''" as a number because path param is technically optional due to request rewrites (I manually will fetch studio id)
+export const parseStudioId = (paramStudioId: number | undefined): number => {
+	return (paramStudioId ?? '') as number
+}
+
 // default slug is 'x' because slug is technically optional due to redirect handling but something must be passed
 export const parseSlug = (paramSlug: string | undefined): string => {
 	return paramSlug ?? 'x'

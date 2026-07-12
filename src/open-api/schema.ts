@@ -3,8 +3,8 @@
 import { z } from 'zod'
 import { createDocument } from 'zod-openapi'
 import {
+	C4S_LANGUAGES,
 	CLIP_SEARCH_SORTS,
-	LANGUAGES,
 	SEXUAL_PREFERENCE_MAP,
 	STUDIO_CLIPS_PER_PAGE,
 	STUDIO_SEARCH_SORTS,
@@ -39,7 +39,7 @@ const studioSlug = z.string().meta({
 	example: 'something-here',
 })
 
-const language = z.enum(LANGUAGES).meta({
+const language = z.enum(C4S_LANGUAGES).meta({
 	description:
 		'The language of the returned data. If omitted, the language will be automatically determined by location of the request.',
 	example: 'en',
